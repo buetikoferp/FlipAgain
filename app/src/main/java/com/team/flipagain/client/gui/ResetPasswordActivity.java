@@ -1,13 +1,15 @@
-package com.team.flipagain;
+package com.team.flipagain.client.gui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CreateCardsActivity extends AppCompatActivity {
+import com.team.flipagain.R;
+
+public class ResetPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_cards);
+        setContentView(R.layout.activity_reset_password);
     }
 }
