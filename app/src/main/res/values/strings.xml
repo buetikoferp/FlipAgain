@@ -3,6 +3,20 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login_screen">LoginScreenActivity</string>
 
+    //Strings of Saved Bundles Activity
+
+    <string name="createCards_txt_question">Enter your Question here</string>
+    <string name="createCards_txt_solution">Enter your Solution here</string>
+    <string name="createCards_btn_addBundle">Add to Bundle</string>
+    <string name="createCards_btn_newBundle">New Bundle</string>
+    <string name="createCards_btn_save">Save</string>
+
+    //Strings of Saved Bundles Activity
+
+    <string name="savedBundles_btn_delete">Delete</string>
+    <string name="savedBundles_btn_learning">Start learning</string>
+
+
     //Strings of Main Screen activity
 
     <string name="mainScreen_btn_profile">Profile</string>

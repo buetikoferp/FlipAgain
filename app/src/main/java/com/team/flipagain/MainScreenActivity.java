@@ -1,5 +1,6 @@
 package com.team.flipagain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -18,6 +20,25 @@ public class MainScreenActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Button Listener to SavedBundlesActivity
+        Button savedBundles = (Button) findViewById(R.id.mainScreen_btn_savedBundles);
+        savedBundles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainScreenActivity.this, SavedBundlesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Button Listener to Create Cards Activity
+        Button createCards = (Button) findViewById(R.id.mainScreen_btn_create);
+        createCards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainScreenActivity.this, CreateCardsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

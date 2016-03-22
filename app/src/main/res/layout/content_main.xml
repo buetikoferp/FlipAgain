@@ -31,13 +31,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/mainScreen_btn_profile"
-                android:enabled="false" />
+                android:enabled="false"
+                android:id="@+id/mainScreen_btn_profile" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/mainScreen_btn_savedBundles" />
+                android:text="@string/mainScreen_btn_savedBundles"
+                android:id="@+id/mainScreen_btn_savedBundles" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,13 +52,15 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/mainScreen_btn_createdCards" />
+                android:text="@string/mainScreen_btn_createdCards"
+                android:id="@+id/mainScreen_btn_createdCards" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/mainScreen_btn_create" />
+                android:text="@string/mainScreen_btn_create"
+                android:id="@+id/mainScreen_btn_create" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,14 +73,16 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/mainScreen_btn_getCards" />
+                android:text="@string/mainScreen_btn_getCards"
+                android:id="@+id/mainScreen_btn_getCards" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/mainScreen_btn_friends"
-                android:enabled="false" />
+                android:enabled="false"
+                android:id="@+id/mainScreen_btn_friends" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +95,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/mainScreen_btn_achievements"
-                android:enabled="false" />
+                android:enabled="false"
+                android:id="@+id/mainScreen_btn_achievements" />
 
         </LinearLayout>
 
