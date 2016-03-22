@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".client.gui.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainScreenActivity"
+            android:name=".client.gui.MainScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             android:name=".LoginActivity"
@@ -31,12 +31,12 @@
             android:parentActivityName=".MainScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.team.flipagain.MainScreenActivity" />
+                android:value=".client.gui.MainScreenActivity" />
         </activity>
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".client.gui.CreateAccountActivity" />
+        <activity android:name=".client.gui.ResetPasswordActivity" />
         <activity android:name=".SavedBundlesActivity" />
-        <activity android:name=".CreateCardsActivity"></activity>
+        <activity android:name=".client.gui.CreateCardsActivity"></activity>
     </application>
 
 </manifest>
