@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        // Button Listener to CreateAccountActivity
+        // Button Listener to CreateAccountActivity kak
         Button createAccount = (Button) findViewById(R.id.login_btn_createAccount);
         createAccount.setOnClickListener(new View.OnClickListener(){
             @Override
