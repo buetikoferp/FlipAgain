@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui;
+package com.team.flipagain.client.gui.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -3,40 +3,51 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login_screen">LoginScreenActivity</string>
 
+    //Strings of Card Solution Activity
+
+    <string name="cardSolution_btn_nextQuestion">nächste Frage</string>
+    <string name="cardSolution_btn_unsure">unsicher</string>
+    <string name="cardSolution_btn_true">richtig</string>
+    <string name="cardSolution_btn_false">falsch</string>
+
+    //Strings of Card Question Activity
+
+    <string name="cardQuestion_btn_getSolution">Lösung</string>
+
     //Strings of Get Cards Activity
 
-    <string name="getCards_btn_getBundle">get Bundle</string>
+    <string name="getCards_btn_getBundle">Download</string>
 
     //Strings of Create Bundle Activity
 
-    <string name="createBundle_btn_save">Save</string>
-    <string name="createBundle_spinner_fieldOfStudy">Select Field of Study</string>
-    <string name="createBundle_spinner_modul">Select module</string>
-    <string name="createBundle_spinner_bundle">Select bundle</string>
+    <string name="createBundle_btn_save">Speichern</string>
+    <string name="createBundle_spinner_fieldOfStudy">Wähle Studienrichtung</string>
+    <string name="createBundle_spinner_modul">Wähle Modul</string>
+    <string name="createBundle_spinner_bundle">Wähle Bundle</string>
 
     //Strings of Saved Bundles Activity
 
-    <string name="createCards_txt_question">Enter your Question here</string>
-    <string name="createCards_txt_solution">Enter your Solution here</string>
-    <string name="createCards_btn_addBundle">Add to Bundle</string>
-    <string name="createCards_btn_newBundle">New Bundle</string>
-    <string name="createCards_btn_save">Save</string>
+    <string name="createCards_txt_question">Geben Sie Ihre Frage hier ein</string>
+    <string name="createCards_txt_solution">Geben Sie Ihre Lösung hier ein</string>
+    <string name="createCards_btn_addBundle">zu Bundle hinzufügen</string>
+    <string name="createCards_btn_newBundle">Neues Bundle</string>
+    <string name="createCards_btn_save">Speichern</string>
 
     //Strings of Saved Bundles Activity
 
-    <string name="savedBundles_btn_delete">Delete</string>
-    <string name="savedBundles_btn_learning">Start learning</string>
+    <string name="savedBundles_btn_delete">Löschen</string>
+    <string name="savedBundles_btn_learning">Start</string>
 
 
     //Strings of Main Screen activity
 
-    <string name="mainScreen_btn_profile">Profile</string>
-    <string name="mainScreen_btn_friends">Friends</string>
-    <string name="mainScreen_btn_achievements">Achievements</string>
-    <string name="mainScreen_btn_savedBundles">Learn</string>
-    <string name="mainScreen_btn_create">Create</string>
-    <string name="mainScreen_btn_getCards">Get Cards</string>
-    <string name="mainScreen_btn_createdCards">Created Cards</string>
+    <string name="mainScreen_btn_profile">Profil</string>
+    <string name="mainScreen_btn_friends">Freunde</string>
+    <string name="mainScreen_btn_achievements">Erfolge</string>
+    <string name="mainScreen_btn_savedBundles">Lernen</string>
+    <string name="mainScreen_btn_CardCreator">Karten erstellen</string>
+    <string name="mainScreen_btn_getCards">Neue Karten</string>
+    <string name="mainScreen_btn_createdCards">Eigene Karten</string>
 
 
     //Strings of Login activity

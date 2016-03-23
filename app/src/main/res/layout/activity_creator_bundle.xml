@@ -7,12 +7,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.team.flipagain.client.gui.CreateBundleActivity">
+    tools:context=".client.gui.mainScreen.cardCreator.BundleCreatorActivity">
 
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createBundle_spinner_fieldOfStudy"
+        android:id="@+id/creatorBundle_spinner_fieldOfStudy"
         android:spinnerMode="dropdown"
         android:hint="@string/createBundle_spinner_fieldOfStudy"
         android:layout_alignParentTop="true"
@@ -21,26 +21,26 @@
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createBundle_spinner_module"
+        android:id="@+id/creatorBundle_spinner_module"
         android:spinnerMode="dropdown"
         android:hint="@string/createBundle_spinner_modul"
-        android:layout_below="@+id/createBundle_spinner_fieldOfStudy"
+        android:layout_below="@+id/creatorBundle_spinner_fieldOfStudy"
         android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createBundle_spinner_bundle"
+        android:id="@+id/creatorBundle_spinner_bundle"
         android:spinnerMode="dropdown"
         android:hint="@string/createBundle_spinner_bundle"
-        android:layout_below="@+id/createBundle_spinner_module"
+        android:layout_below="@+id/creatorBundle_spinner_module"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/createBundle_btn_save"
-        android:id="@+id/createBundle_btn_save"
+        android:id="@+id/creatorBundle_btn_save"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:clickable="false"

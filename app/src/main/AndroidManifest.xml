@@ -14,8 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".client.gui.LoginActivity"
-            android:label="@string/app_name">
+            android:name=".client.gui.login.LoginActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,30 +25,51 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".client.gui.MainScreenActivity"
+            android:name=".client.gui.mainScreen.MainScreenActivity"
+            android:configChanges="orientation"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".MainScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".client.gui.MainScreenActivity" />
+                android:value=".client.gui.mainScreen.MainScreenActivity" />
         </activity>
         <activity
-            android:name=".client.gui.CreateAccountActivity"
-            android:parentActivityName=".client.gui.LoginActivity" />
+            android:name=".client.gui.login.CreateAccountActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".client.gui.login.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.ResetPasswordActivity"
-            android:parentActivityName=".client.gui.LoginActivity" />
+            android:name=".client.gui.login.ResetPasswordActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".client.gui.login.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.SavedBundlesActivity"
-            android:parentActivityName=".client.gui.MainScreenActivity" />
+            android:name=".client.gui.mainScreen.cardScreen.CardOverviewActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.CreateCardsActivity"
-            android:parentActivityName=".client.gui.MainScreenActivity" />
-        <activity android:name=".client.gui.CreateBundleActivity" />
-        <activity android:name=".client.gui.GetCardsActivity"></activity>
+            android:name=".client.gui.mainScreen.cardCreator.CardCreatorActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".client.gui.mainScreen.cardCreator.BundleCreatorActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".client.gui.mainScreen.cardGetter.CardGetterActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".client.gui.mainScreen.cardCreator.CardCreatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".client.gui.mainScreen.cardScreen.CardQuestionActivity"
+            android:parentActivityName=".client.gui.mainScreen.cardScreen.CardOverviewActivity"/>
+        <activity
+            android:name=".client.gui.mainScreen.cardScreen.CardSolutionActivity"
+            android:parentActivityName=".client.gui.mainScreen.cardScreen.CardQuestionActivity"></activity>
     </application>
 
 </manifest>

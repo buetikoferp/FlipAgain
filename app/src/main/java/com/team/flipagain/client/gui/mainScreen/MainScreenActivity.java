@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui;
+package com.team.flipagain.client.gui.mainScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.team.flipagain.R;
+import com.team.flipagain.client.gui.mainScreen.cardCreator.CardCreatorActivity;
+import com.team.flipagain.client.gui.mainScreen.cardGetter.CardGetterActivity;
+import com.team.flipagain.client.gui.mainScreen.cardScreen.CardOverviewActivity;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -20,25 +23,39 @@ public class MainScreenActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Button Listener to SavedBundlesActivity
-        Button savedBundles = (Button) findViewById(R.id.mainScreen_btn_savedBundles);
+        // Button Listener to CardOverviewActivity
+        Button savedBundles = (Button) findViewById(R.id.mainScreen_btn_startLearning);
         savedBundles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainScreenActivity.this, SavedBundlesActivity.class);
+                Intent intent = new Intent(MainScreenActivity.this, CardOverviewActivity.class);
                 startActivity(intent);
             }
         });
 
         // Button Listener to Create Cards Activity
-        Button createCards = (Button) findViewById(R.id.mainScreen_btn_create);
+        Button createCards = (Button) findViewById(R.id.mainScreen_btn_cardCreator);
         createCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainScreenActivity.this, CreateCardsActivity.class);
+                Intent intent = new Intent(MainScreenActivity.this, CardCreatorActivity.class);
                 startActivity(intent);
             }
         });
+
+        // Button Listener to Get Cards Activity
+        Button getCards = (Button) findViewById(R.id.mainScreen_btn_getNewCards);
+        getCards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainScreenActivity.this, CardGetterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
 
     }
 

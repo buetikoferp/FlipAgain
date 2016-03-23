@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".client.gui.SavedBundlesActivity">
+    tools:context=".client.gui.mainScreen.cardGetter.CardGetterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,27 +18,20 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/savedBundles_btn_learning"
-            android:id="@+id/getCards_btn_getBundle"
+            android:text="@string/getCards_btn_getBundle"
+            android:id="@+id/cardOverview_btn_start"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/savedBundles_btn_delete"
-            android:id="@+id/savedBundles_btn_delete"
-            android:layout_above="@+id/getCards_btn_getBundle"
             android:layout_centerHorizontal="true"
             android:enabled="false" />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/savedBundles_list_bundles"
+            android:id="@+id/cardGetter_list_bundles"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_above="@+id/savedBundles_btn_delete"
-            android:choiceMode="singleChoice" />
+            android:choiceMode="singleChoice"
+            android:layout_above="@+id/cardOverview_btn_start" />
     </RelativeLayout>
+
 </RelativeLayout>

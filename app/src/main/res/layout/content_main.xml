@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".client.gui.MainScreenActivity"
+    tools:context=".client.gui.mainScreen.MainScreenActivity"
     tools:showIn="@layout/activity_main">
     <View android:id="@+id/strut"
         android:layout_width="0dp"
@@ -39,7 +39,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/mainScreen_btn_savedBundles"
-                android:id="@+id/mainScreen_btn_savedBundles" />
+                android:id="@+id/mainScreen_btn_startLearning" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,14 +53,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/mainScreen_btn_createdCards"
-                android:id="@+id/mainScreen_btn_createdCards" />
+                android:id="@+id/mainScreen_btn_ownCards"
+                android:enabled="false" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/mainScreen_btn_create"
-                android:id="@+id/mainScreen_btn_create" />
+                android:text="@string/mainScreen_btn_CardCreator"
+                android:id="@+id/mainScreen_btn_cardCreator" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/mainScreen_btn_getCards"
-                android:id="@+id/mainScreen_btn_getCards" />
+                android:id="@+id/mainScreen_btn_getNewCards" />
 
             <Button
                 android:layout_width="0dip"

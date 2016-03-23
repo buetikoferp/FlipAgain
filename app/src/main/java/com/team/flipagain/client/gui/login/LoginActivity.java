@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui;
+package com.team.flipagain.client.gui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
+import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 import java.util.ArrayList;
 import java.util.List;

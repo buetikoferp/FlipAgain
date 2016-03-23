@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Bundle {
     private int bundleId;
+
     private User user;
 
     public ArrayList<Card> getCardList() {
@@ -23,6 +24,10 @@ public class Bundle {
         this.modul = modul;
     }
 
+    /**
+     * return the bundleId
+     * @return int
+     */
     public int getBundleId() {
         return bundleId;
     }

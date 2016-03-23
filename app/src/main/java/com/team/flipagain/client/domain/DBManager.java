@@ -31,6 +31,7 @@ public class DBManager {
         connectionProps.put("password", this.password);
 
         if (this.dbms.equals("mysql")) {
+
             conn = DriverManager.getConnection(
                     "jdbc:" + this.dbms + "://" +
                             this.serverName +
