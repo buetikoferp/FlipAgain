@@ -33,10 +33,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".client.gui.MainScreenActivity" />
         </activity>
-        <activity android:name=".client.gui.CreateAccountActivity" />
-        <activity android:name=".client.gui.ResetPasswordActivity" />
-        <activity android:name=".SavedBundlesActivity" />
-        <activity android:name=".client.gui.CreateCardsActivity"></activity>
+        <activity
+            android:name=".client.gui.CreateAccountActivity"
+            android:parentActivityName=".client.gui.LoginActivity" />
+        <activity
+            android:name=".client.gui.ResetPasswordActivity"
+            android:parentActivityName=".client.gui.LoginActivity" />
+        <activity
+            android:name=".client.gui.SavedBundlesActivity"
+            android:parentActivityName=".client.gui.MainScreenActivity" />
+        <activity
+            android:name=".client.gui.CreateCardsActivity"
+            android:parentActivityName=".client.gui.MainScreenActivity" />
+        <activity android:name=".client.gui.CreateBundleActivity" />
+        <activity android:name=".client.gui.GetCardsActivity"></activity>
     </application>
 
 </manifest>

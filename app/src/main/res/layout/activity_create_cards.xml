@@ -17,33 +17,48 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:orientation="horizontal"
-            android:layout_weight="1" >
+            android:layout_weight="0.5" >
 
 
-            <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/createCards_scrollV_question"
-                android:layout_weight="1" >
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-
-                    android:ems="10"
-                    android:id="@+id/createCards_txtf_question"
-                    android:layout_weight="1"
-                    android:hint="@string/createCards_txt_question" />
-            </ScrollView>
-
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/createCards_spinner_bundlelist"
+                android:spinnerMode="dropdown"
+                android:layout_above="@+id/createCards_btn_save"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/createCards_btn_save"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:orientation="horizontal"
-            android:layout_weight="1" >
+            android:layout_weight="2" >
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/createCards_scrollV_question">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:inputType="textMultiLine"
+
+                    android:ems="10"
+                    android:id="@+id/createCards_txtf_question"
+                    android:hint="@string/createCards_txt_question" />
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="2" >
 
 
             <ScrollView
@@ -68,36 +83,35 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:orientation="horizontal"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:layout_gravity="bottom">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/createCards_btn_addBundle"
-                    android:id="@+id/createCards_btn_addBundle"
-                    android:layout_above="@+id/createCards_btn_newBundle"
-                    android:layout_alignParentStart="true" />
-
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/createCards_btn_newBundle"
-                    android:id="@+id/createCards_btn_newBundle"
-                    android:layout_above="@+id/createCards_btn_save"
-                    android:layout_centerHorizontal="true" />
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom">
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/createCards_btn_save"
                     android:id="@+id/createCards_btn_save"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignStart="@+id/createCards_btn_newBundle" />
+                    android:enabled="false"
+                    android:layout_weight="1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/createCards_btn_newBundle"
+                    android:id="@+id/createCards_btn_newBundle"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:layout_below="@+id/createCards_btn_save"
+                    android:layout_alignParentStart="true" />
+
             </RelativeLayout>
         </LinearLayout>
 

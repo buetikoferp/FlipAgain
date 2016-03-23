@@ -3,6 +3,17 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login_screen">LoginScreenActivity</string>
 
+    //Strings of Get Cards Activity
+
+    <string name="getCards_btn_getBundle">get Bundle</string>
+
+    //Strings of Create Bundle Activity
+
+    <string name="createBundle_btn_save">Save</string>
+    <string name="createBundle_spinner_fieldOfStudy">Select Field of Study</string>
+    <string name="createBundle_spinner_modul">Select module</string>
+    <string name="createBundle_spinner_bundle">Select bundle</string>
+
     //Strings of Saved Bundles Activity
 
     <string name="createCards_txt_question">Enter your Question here</string>

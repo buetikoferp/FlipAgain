@@ -7,35 +7,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".client.gui.ResetPasswordActivity">
+    tools:context="com.team.flipagain.client.gui.CreateBundleActivity">
 
-    <EditText
+    <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/resetPassword_txtf_email"
-        android:hint="E-Mail"
+        android:id="@+id/createBundle_spinner_fieldOfStudy"
+        android:spinnerMode="dropdown"
+        android:hint="@string/createBundle_spinner_fieldOfStudy"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/resetPassword_txtf_username"
-        android:hint="Username"
-        android:layout_below="@+id/resetPassword_txtf_email"
+        android:id="@+id/createBundle_spinner_module"
+        android:spinnerMode="dropdown"
+        android:hint="@string/createBundle_spinner_modul"
+        android:layout_below="@+id/createBundle_spinner_fieldOfStudy"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/createBundle_spinner_bundle"
+        android:spinnerMode="dropdown"
+        android:hint="@string/createBundle_spinner_bundle"
+        android:layout_below="@+id/createBundle_spinner_module"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Reset Password"
-        android:id="@+id/resetPassword_btn_resetPw"
+        android:text="@string/createBundle_btn_save"
+        android:id="@+id/createBundle_btn_save"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:clickable="false"
         android:enabled="false" />
-
 </RelativeLayout>

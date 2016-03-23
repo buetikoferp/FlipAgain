@@ -94,7 +94,8 @@
             android:text="@string/login_btn_forgotMyPassword"
             android:id="@+id/login_btn_forgotPassword"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:enabled="true" />
 
         <Button
             android:layout_width="fill_parent"
