@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.team.flipagain.R;
 
-public class BundleCreatActivity extends AppCompatActivity {
+public class BundleCreatorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.team.flipagain.R;
 
-public class CardCreatActivity extends AppCompatActivity {
+public class CardCreatorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class CardCreatActivity extends AppCompatActivity {
         createBundle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CardCreatActivity.this, BundleCreatActivity.class);
+                Intent intent = new Intent(CardCreatorActivity.this, BundleCreatorActivity.class);
                 startActivity(intent);
             }
         });
