@@ -1,4 +1,4 @@
-package com.team.flipagain.client.application.mobile;
+package com.team.flipagain.client.application;
 
 
 import android.content.Context;

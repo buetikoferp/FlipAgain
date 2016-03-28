@@ -1,23 +1,14 @@
 package com.team.flipagain.client.gui.mainScreen.cardScreen;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.mobile.ListHandler;
-import com.team.flipagain.client.gui.mainScreen.cardGetter.CardGetterActivity;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.team.flipagain.client.application.ListHandler;
 
 public class CardOverviewActivity extends AppCompatActivity {
 
