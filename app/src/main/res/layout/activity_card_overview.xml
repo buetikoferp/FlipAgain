@@ -40,5 +40,6 @@
             android:layout_centerHorizontal="true"
             android:layout_above="@+id/cardOverview_btn_delete"
             android:choiceMode="singleChoice" />
+
     </RelativeLayout>
 </RelativeLayout>

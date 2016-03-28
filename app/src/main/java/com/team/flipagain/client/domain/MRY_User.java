@@ -5,24 +5,15 @@ import java.util.ArrayList;
 /**
  * Created by Raffaele on 22.03.2016.
  */
-public class User {
-
+public class MRY_User {
+    //ATRIBUT
     private int userId;
     private String username;
     private String password;
     private String email;
-    private ArrayList<Bundle> bundleList;
+    private ArrayList<MRY_Bundle> bundleList;
 
-    public ArrayList<Bundle> getBundleList() {
-        return bundleList;
-    }
-
-    public ArrayList<Card> getCardList() {
-        return cardList;
-    }
-
-    private ArrayList<Card> cardList;
-
+    //GETTER + SETTER
     public int getUserId() {
         return userId;
     }
@@ -55,5 +46,11 @@ public class User {
         this.email = email;
     }
 
+    public ArrayList<MRY_Bundle> getBundleList() {
+        return bundleList;
+    }
 
+    public void setBundleList(ArrayList<MRY_Bundle> bundleList) {
+        this.bundleList = bundleList;
+    }
 }

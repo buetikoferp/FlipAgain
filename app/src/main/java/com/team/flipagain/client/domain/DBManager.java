@@ -1,50 +1,63 @@
 package com.team.flipagain.client.domain;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Properties;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Raffaele on 23.03.2016.
+ * Created by delay on 27.03.2016.
  */
-public class DBManager {
-
-
-    private String dbms;
-    private String userName;
-    private String password;
-    private String serverName;
-    private String portNumber;
-    private String dbName;
-
+public class DBManager extends SQLiteOpenHelper {
     /**
-     * Create connection with Database
-     * @return connection
-     * @throws SQLException
+     * NAME OF DATABASE
      */
-    public Connection getConnection() throws SQLException {
+    private static final String DATABASE_NAME = "flipAgain.db";
+    private static final int DATABASE_VERSION = 1;
 
-        Connection conn = null;
-        Properties connectionProps = new Properties();
-        connectionProps.put("user", this.userName);
-        connectionProps.put("password", this.password);
+    private static DBManager sINSTANCE;
+    private static Object sLOCK = "";
 
-        if (this.dbms.equals("mysql")) {
 
-            conn = DriverManager.getConnection(
-                    "jdbc:" + this.dbms + "://" +
-                            this.serverName +
-                            ":" + this.portNumber + "/",
-                    connectionProps);
-        } else if (this.dbms.equals("derby")) {
-            conn = DriverManager.getConnection(
-                    "jdbc:" + this.dbms + ":" +
-                            this.dbName +
-                            ";create=true",
-                    connectionProps);
+    public static DBManager getInstance(Context context){
+        if( sINSTANCE == null ) {
+            synchronized(sLOCK) {
+                if( sINSTANCE == null ) {
+                    sINSTANCE = new DBManager(context.getApplicationContext());
+                }
+            }
         }
-        System.out.println("Connected to database");
-        return conn;
+        return sINSTANCE;
+    }
+
+    private DBManager(Context context) {
+        super(
+                context,
+                DATABASE_NAME,
+                null,
+                DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TBL_FieldOfStudy.SQL_CREATE);
+        db.execSQL(TBL_User.SQL_CREATE);
+        db.execSQL(TBL_Module.SQL_CREATE);
+        db.execSQL(TBL_Bundle.SQL_CREATE);
+        db.execSQL(TBL_Card.SQL_CREATE);
+        
+        db.execSQL(TBL_FieldOfStudy.STMT_FIELDOFSTUDY_INSERT);
+
+        //insert default values
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(TBL_FieldOfStudy.SQL_DROP);
+        db.execSQL(TBL_User.SQL_DROP);
+        db.execSQL(TBL_Module.SQL_DROP);
+        db.execSQL(TBL_Bundle.SQL_DROP);
+        db.execSQL(TBL_Card.SQL_DROP);
+        onCreate(db);
     }
 }

@@ -15,7 +15,7 @@ public class CardQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_question);
 
-        // Button Listener to Card Solution Activity
+        // Button Listener to TBL_Card Solution Activity
         Button getSolution = (Button) findViewById(R.id.cardQuestion_btn_getSolution);
         getSolution.setOnClickListener(new View.OnClickListener() {
             @Override
