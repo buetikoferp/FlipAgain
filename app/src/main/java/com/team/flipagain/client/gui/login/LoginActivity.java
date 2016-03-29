@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
+import com.team.flipagain.client.application.ApplicationInterface;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>  {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -100,6 +101,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 startActivity(intent);
             }
+        });
+
+        // Button Listener to singIn
+        Button singIn = (Button) findViewById(R.id.email_sign_in_button);
+        singIn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                ApplicationInterface login;
+                EditText etUsername = (EditText)findViewById(R.id.email);
+                String username = etUsername.getText().toString();
+              //  if(login.getAuthorization(username,null)){
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                startActivity(intent);}
+               // else{
+
+                //}
+           // }
         });
 
 
