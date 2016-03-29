@@ -10,5 +10,5 @@ public interface ApplicationInterface {
      * @param password
      * @return
      */
-   public boolean login(String username, String password);
+   public boolean getAuthorization(String username, String password);
 }

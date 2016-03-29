@@ -1,8 +1,14 @@
 package com.team.flipagain.client.domain;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by delay on 27.03.2016.
@@ -44,12 +50,18 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(TBL_Module.SQL_CREATE);
         db.execSQL(TBL_Bundle.SQL_CREATE);
         db.execSQL(TBL_Card.SQL_CREATE);
-        
-        db.execSQL(TBL_FieldOfStudy.STMT_FIELDOFSTUDY_INSERT);
 
         //insert default values
-
+        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("Informatik"));
+        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("Wing"));
+        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("Maschinenbau"));
+        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("Raumplanung"));
+        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("Elektrotechnik"));
     }
+
+
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
