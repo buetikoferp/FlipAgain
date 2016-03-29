@@ -33,6 +33,7 @@ import android.widget.TextView;
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.ApplicationInterface;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.client.messaging.ClientSender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,16 +109,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         singIn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                ApplicationInterface login;
+                ApplicationInterface login = new ClientSender();
+
+                // get User String
                 EditText etUsername = (EditText)findViewById(R.id.email);
                 String username = etUsername.getText().toString();
-              //  if(login.getAuthorization(username,null)){
+                // get Password String
+                EditText etPassword = (EditText)findViewById(R.id.password);
+                String password = etPassword.getText().toString();
+
+                if(login.getAuthorization(username , password)){
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);}
-               // else{
+                else{
 
-                //}
-           // }
+                }
+            }
         });
 
 
