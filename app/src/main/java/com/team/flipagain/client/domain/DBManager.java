@@ -44,7 +44,8 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(TBL_Module.SQL_CREATE);
         db.execSQL(TBL_Bundle.SQL_CREATE);
         db.execSQL(TBL_Card.SQL_CREATE);
-        
+
+
         db.execSQL(TBL_FieldOfStudy.STMT_FIELDOFSTUDY_INSERT);
 
         //insert default values

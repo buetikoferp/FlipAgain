@@ -17,6 +17,7 @@ public class TBL_FieldOfStudy {
      * Attribute
      */
     public static final String name = "name";
+    public static final String value = "2";
     /**
      * SQL Anweisung zur Schemadefintion
      */
@@ -45,7 +46,7 @@ public class TBL_FieldOfStudy {
     public static final String STMT_FIELDOFSTUDY_INSERT =
             "INSERT INTO " + TABLE_NAME +
                     "(name) " +
-                    "VALUES (?)";
+                    "VALUES (" + value+");";
 
     /**
      * SQL STATEMENT DELETE BUNDLE BY NAME
