@@ -348,12 +348,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
 
-        private ApplicationInterface login = new ClientSender();
+       // private ApplicationInterface login = new ClientSender();
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
-            boolean a = login.getAuthorization(email, password);
+          //  boolean a = login.getAuthorization(email, password);
         }
 
         @Override
@@ -376,7 +376,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override
