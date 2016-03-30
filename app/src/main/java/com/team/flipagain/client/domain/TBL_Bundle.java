@@ -25,13 +25,13 @@ public final class TBL_Bundle {
     /**
      * SQL Anweisung zur Schemadefintion
      */
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
-                    bundleID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-                    name + " TEXT NOT NULL UNIQUE," +
-                    userID + " INTEGER REFERENCES user," +
-                    moduleID + " INTEGER REFERENCES module" +
+       public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
+            bundleID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, " +
+            name + " TEXT NOT NULL UNIQUE," +
+            userID + " INTEGER REFERENCES user," +
+            moduleID + " INTEGER REFERENCES module" +
 
-                    ";";
+            ";";
 
     /**
      * Standart-Sortierreihenfolge für die Tabelle
