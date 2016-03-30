@@ -7,10 +7,9 @@ import com.team.flipagain.client.application.ApplicationInterface;
  */
 public class LoginHandler implements ApplicationInterface {
 
+
     @Override
-    public boolean login(String username, String password) {
-
-
-        return false;
+    public boolean getAuthorization(String username, String password) {
+        return true;
     }
 }
