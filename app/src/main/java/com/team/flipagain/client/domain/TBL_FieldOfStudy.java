@@ -16,20 +16,24 @@ public class TBL_FieldOfStudy {
     /**
      * Attribute
      */
-    public static final String name = "name";
+    public static final String nameOfStudy = "nameofstudy";
     /**
      * SQL Anweisung zur Schemadefintion
+     *
+     * create table songs(
+     id integer  primary key autoincrement,
+     title varchar(20) not null,
+     artist int references artist x
      */
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
-            studyID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-            name + " TEXT NOT NULL UNIQUE" +
-            ";";
+            studyID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            nameOfStudy + " TEXT NOT NULL UNIQUE )";
 
     /**
-     * Standart-Sortierreihenfolge für die Tabelle
+     * Standart-Sortierreihenfolge für die Tabelle x
      */
     public static final String DEFAULT_SORT_ORDER =
-            name;
+            nameOfStudy;
 
     /**
      * SQL Anweisung zum loeschen der Tabelle
@@ -44,7 +48,7 @@ public class TBL_FieldOfStudy {
      */
     public static String STMT_FieldOfStudyInsert(String name){
         return "INSERT INTO " + TABLE_NAME +
-                "(name) " + "VALUES (" + name + ")";
+                "( " +nameOfStudy + " ) " + "VALUES (" + name + ")";
     }
 
     /**

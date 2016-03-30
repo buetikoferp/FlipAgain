@@ -40,7 +40,7 @@ public class MRY_FieldOfStudy {
      */
     public long insertFieldOfStudy(String name){
         final ContentValues data = new ContentValues();
-            data.put(TBL_FieldOfStudy.name, name);
+            data.put(TBL_FieldOfStudy.nameOfStudy, name);
 
         final SQLiteDatabase dbCon = db.getWritableDatabase();
 
@@ -48,6 +48,16 @@ public class MRY_FieldOfStudy {
             final long id = dbCon.insertOrThrow(TBL_FieldOfStudy.TABLE_NAME,null, data);
             Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
             return id;
+        }finally {
+            dbCon.close();
+        }
+    }
+
+    public void getOrInsertName(){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+
+        try{
+            dbCon.execSQL("insert into fieldofstudy(name) values ('Peter Pan')");
         }finally {
             dbCon.close();
         }

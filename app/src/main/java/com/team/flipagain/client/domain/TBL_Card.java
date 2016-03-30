@@ -32,7 +32,7 @@ public class TBL_Card {
             answer + " TEXT NOT NULL," +
             rating + " INTEGER," +
             bundleID + " INTEGER REFERENCES bundle" +
-            ";";
+            ")";
 
     /**
      * Standart-Sortierreihenfolge für die Tabelle

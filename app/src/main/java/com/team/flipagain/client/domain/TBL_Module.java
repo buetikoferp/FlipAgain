@@ -28,7 +28,7 @@ public class TBL_Module {
             moduleID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
             name + " TEXT NOT NULL UNIQUE," +
             studyID + " INTEGER REFERENCES user" +
-            ";";
+            ")";
 
     /**
      * Standart-Sortierreihenfolge für die Tabelle

@@ -27,7 +27,7 @@ public class TBL_User {
             name + " TEXT NOT NULL UNIQUE," +
             email + " TEXT NOT NULL UNIQUE," +
             password + " TEXT NOT NULL" +
-            ";";
+            ")";
 
     /**
      * Standart-Sortierreihenfolge für die Tabelle
