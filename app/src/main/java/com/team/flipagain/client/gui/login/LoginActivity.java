@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "foo@example.com:hello", "bar@example.com:world" , "f@f.f:raffi"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -103,32 +103,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
             }
         });
-
-        // Button Listener to singIn
-        Button singIn = (Button) findViewById(R.id.email_sign_in_button);
-        singIn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                ApplicationInterface login = new ClientSender();
-
-                // get User String
-                EditText etUsername = (EditText)findViewById(R.id.email);
-                String username = etUsername.getText().toString();
-                // get Password String
-                EditText etPassword = (EditText)findViewById(R.id.password);
-                String password = etPassword.getText().toString();
-
-                if(login.getAuthorization(username , password)){
-                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                startActivity(intent);}
-                else{
-
-                }
-            }
-        });
-
-
-
 
 
         // Set up the login form.
@@ -374,9 +348,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
 
+        private ApplicationInterface login = new ClientSender();
+
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            boolean a = login.getAuthorization(email, password);
         }
 
         @Override
@@ -399,7 +376,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override
@@ -409,6 +386,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 finish();
+                Intent myIntent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                LoginActivity.this.startActivity(myIntent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
