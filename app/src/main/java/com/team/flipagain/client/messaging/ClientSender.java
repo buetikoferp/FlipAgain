@@ -44,6 +44,6 @@ public class ClientSender implements ApplicationInterface{
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 }
