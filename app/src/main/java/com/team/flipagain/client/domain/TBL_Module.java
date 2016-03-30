@@ -20,7 +20,7 @@ public class TBL_Module {
     /**
      * Foreign keys
      */
-    private static final String studyID = "studyID";
+    private static final String studyID = "rowStudyID";
     /**
      * SQL Anweisung zur Schemadefintion
      */

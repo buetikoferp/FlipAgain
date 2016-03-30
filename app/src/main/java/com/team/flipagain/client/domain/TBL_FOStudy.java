@@ -3,7 +3,7 @@ package com.team.flipagain.client.domain;
 /**
  * Created by delay on 28.03.2016.
  */
-public class TBL_FieldOfStudy {
+public class TBL_FOStudy {
     /**
      * Name der Datenbanktabelle
      */
@@ -11,12 +11,12 @@ public class TBL_FieldOfStudy {
     /**
      * PrimaryKey
      */
-    private static final String studyID = "studyID";
+    public static final String rowStudyID = "rowStudyID";
 
     /**
      * Attribute
      */
-    public static final String nameOfStudy = "nameofstudy";
+    public static final String rowNameOfStudy = "nameofstudy";
     /**
      * SQL Anweisung zur Schemadefintion
      *
@@ -26,14 +26,14 @@ public class TBL_FieldOfStudy {
      artist int references artist x
      */
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
-            studyID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            nameOfStudy + " TEXT NOT NULL UNIQUE )";
+            rowStudyID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            rowNameOfStudy + " TEXT NOT NULL UNIQUE )";
 
     /**
      * Standart-Sortierreihenfolge für die Tabelle x
      */
     public static final String DEFAULT_SORT_ORDER =
-            nameOfStudy;
+            rowNameOfStudy;
 
     /**
      * SQL Anweisung zum loeschen der Tabelle
@@ -48,7 +48,7 @@ public class TBL_FieldOfStudy {
      */
     public static String STMT_FieldOfStudyInsert(String name){
         return "INSERT INTO " + TABLE_NAME +
-                "( " +nameOfStudy + " ) " + "VALUES (" + name + ")";
+                "( " + rowNameOfStudy + " ) " + "VALUES (" + name + ")";
     }
 
     /**

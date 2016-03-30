@@ -9,7 +9,7 @@ public class MRY_Module {
     private String moduleName;
 
     //REFERENCE
-    private MRY_FieldOfStudy fieldOfStudy;
+    private DBManager fieldOfStudy;
 
     //GETTER SETTER
     public int getModuleId() {
@@ -28,11 +28,11 @@ public class MRY_Module {
         this.moduleName = moduleName;
     }
 
-    public MRY_FieldOfStudy getFieldOfStudy() {
+    public DBManager getFieldOfStudy() {
         return fieldOfStudy;
     }
 
-    public void setFieldOfStudy(MRY_FieldOfStudy fieldOfStudy) {
+    public void setFieldOfStudy(DBManager fieldOfStudy) {
         this.fieldOfStudy = fieldOfStudy;
     }
 }

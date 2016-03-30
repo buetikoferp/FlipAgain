@@ -1,87 +1,89 @@
 package com.team.flipagain.client.domain;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by delay on 27.03.2016.
+ * Created by Raffaele on 23.03.2016.
  */
-public class DBManager extends SQLiteOpenHelper {
+public class DBManager {
     private String TAG = "DBMANAGER";
+    private FieldOfStudy fieldOfStudy;
+
+
+    // DBMANAGER
+    private Database db;
+
+    //CONSTRUCTOR
+    public DBManager(Context context){
+        db = Database.getInstance(context);
+        open();
+
+    }
+
     /**
-     * NAME OF DATABASE
+     * Erzeugung ohne Context nicht moeglich Singleton!
      */
-    private static final String DATABASE_NAME = "flipAgain.db";
-    private static final int DATABASE_VERSION = 1;
-
-    private static DBManager sINSTANCE;
-    private static Object sLOCK = "";
+    @SuppressWarnings("nope unused")
+    private DBManager(){}
 
 
-    public static DBManager getInstance(Context context){
-        if( sINSTANCE == null ) {
-            synchronized(sLOCK) {
-                if( sINSTANCE == null ) {
-                    sINSTANCE = new DBManager(context.getApplicationContext());
-                }
-            }
+
+    /**
+     * Diese Methode erstellt neue Studiengaenge.
+     * @param name
+     * @return autogenerierte rowStudyID
+     */
+    public long insertFieldOfStudy(String name){
+        final ContentValues data = new ContentValues();
+            data.put(TBL_FOStudy.rowNameOfStudy, name);
+
+        final SQLiteDatabase dbCon = db.getWritableDatabase();
+
+        try{
+            final long id = dbCon.insertOrThrow(TBL_FOStudy.TABLE_NAME,null, data);
+            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+            return id;
+        }finally {
+            dbCon.close();
         }
-        return sINSTANCE;
     }
 
-    private DBManager(Context context) {
-        super(
-                context,
-                DATABASE_NAME,
-                null,
-                DATABASE_VERSION);
+    public ArrayList<FieldOfStudy> getSomeShitFromDatabase(String tableName, String rowName, String rowID ){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+
+        Cursor c = dbCon.rawQuery("SELECT " + rowName +"," + rowID + " FROM " + tableName ,null );
+        try{
+            while(c.moveToNext()){
+                int studyID = c.getInt(c.getColumnIndex(rowID));
+                String name = c.getString(c.getColumnIndex(rowName));
+                new FieldOfStudy(studyID,name);
+            }
+        }finally {
+            dbCon.close();
+        }
+
+        return fieldOfStudy.getFieldOfStudyList();
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String TABLE_NAME = "test";
-        String moduleID = "testID";
-        String name = "name";
-
-
-        db.execSQL(TBL_FieldOfStudy.SQL_CREATE);
-        Log.d(TAG, " Created FOS");
-        db.execSQL(TBL_User.SQL_CREATE);
-        Log.d(TAG, " Created USER");
-        db.execSQL(TBL_Module.SQL_CREATE);
-        Log.d(TAG, " Created Module");
-        db.execSQL(TBL_Bundle.SQL_CREATE);
-        Log.d(TAG, " Created Bundle");
-        db.execSQL(TBL_Card.SQL_CREATE);
-        Log.d(TAG, " Created Card");
-
-        //insert default values
-        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("'Informatik'"));
-        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("'Wing'"));
-        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("'Maschinenbau'"));
-        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("'Raumplanung'"));
-        db.execSQL(TBL_FieldOfStudy.STMT_FieldOfStudyInsert("'Elektrotechnik'"));
+    private void open() {
+        db.getReadableDatabase();
+        Log.d(TAG,"Datenbank FlipAgain geoeffnet");
 
     }
 
-
-
-
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(TBL_FieldOfStudy.SQL_DROP);
-        db.execSQL(TBL_User.SQL_DROP);
-        db.execSQL(TBL_Module.SQL_DROP);
-        db.execSQL(TBL_Bundle.SQL_DROP);
-        db.execSQL(TBL_Card.SQL_DROP);
-        onCreate(db);
+    private void close(){
+        db.close();
+        Log.d(TAG, "Datenbank FlipAgain geschlossen");
     }
+
+
+    //GETTER + SETTER
+
+
 }
