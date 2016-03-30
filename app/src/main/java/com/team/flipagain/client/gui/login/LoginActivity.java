@@ -103,7 +103,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
             }
         });
+        // Button Listener to singIn
+        Button singIn = (Button) findViewById(R.id.email_sign_in_button);
+        singIn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                ApplicationInterface login = new ClientSender();
 
+                // get User String
+                EditText etUsername = (EditText)findViewById(R.id.email);
+                String username = etUsername.getText().toString();
+                // get Password String
+                EditText etPassword = (EditText)findViewById(R.id.password);
+                String password = etPassword.getText().toString();
+
+                if(login.getAuthorization(username , password)){
+                    Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                    startActivity(intent);}
+                else{
+
+                }
+            }
+        });
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -353,7 +374,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
-         //   boolean a = login.getAuthorization(email, password);
+            boolean a = login.getAuthorization(email, password);
         }
 
         @Override
@@ -376,7 +397,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
-            return false;
+            return true;
         }
 
         @Override
