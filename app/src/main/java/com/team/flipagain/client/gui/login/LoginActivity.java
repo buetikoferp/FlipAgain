@@ -129,19 +129,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        ApplicationInterface login = new ClientSender();
-
-        // get User String
-        EditText etUsername = (EditText)findViewById(R.id.email);
-        String username = etUsername.getText().toString();
-        // get Password String
-        EditText etPassword = (EditText)findViewById(R.id.password);
-        String password = etPassword.getText().toString();
-
-        if(login.getAuthorization(username , password)){
-            Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-            startActivity(intent);}
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
