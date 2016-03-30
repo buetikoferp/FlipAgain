@@ -12,6 +12,7 @@ android {
         exclude 'META-INF/NOTICE.txt'
     }
 
+
     defaultConfig {
         applicationId "com.team.flipagain"
         minSdkVersion 19
