@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.team.flipagain.R;
 import com.team.flipagain.client.domain.DBManager;
 import com.team.flipagain.client.domain.DomainInterface;
+import com.team.flipagain.client.domain.TBL_Bundle;
 import com.team.flipagain.client.domain.TBL_FOStudy;
 import com.team.flipagain.client.domain.TBL_Module;
 
@@ -50,6 +51,19 @@ public class ListHandler extends AppCompatActivity {
                 R.layout.list_item_card_overview,
                 R.id.list_item_card_overview_textview,
                 ModuleList);
+
+        return studyAdapter;
+
+    }
+
+    public ArrayAdapter getBundleAdapter(String moduleName){
+        List<String> bundleList = manager.getNamesofSelectedTable(TBL_Bundle.getTableName(), TBL_Bundle.getName(), TBL_Bundle.getBundleID(), moduleName);
+
+        ArrayAdapter<String> studyAdapter = new ArrayAdapter<String>(
+                context,
+                R.layout.list_item_card_overview,
+                R.id.list_item_card_overview_textview,
+                bundleList);
 
         return studyAdapter;
 

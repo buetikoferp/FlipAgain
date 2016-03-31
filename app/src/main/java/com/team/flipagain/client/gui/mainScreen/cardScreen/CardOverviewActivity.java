@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,7 +17,7 @@ import com.team.flipagain.client.domain.DBManager;
 
 public class CardOverviewActivity extends AppCompatActivity {
 
-
+    private String TAG = "CARDOVERVIEW";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,32 +36,58 @@ public class CardOverviewActivity extends AppCompatActivity {
             }
         });
 
-        setFieldOfStudyAdapter();
+        setListviewAdapter();
 
     }
 
 
-    public  void setFieldOfStudyAdapter(){
+    public  void setListviewAdapter(){
         Context list = findViewById(R.id.cardOverview_list_bundles).getContext();
-        ListHandler listHandler = new ListHandler(list, new DBManager(list));
+        final ListHandler listHandler = new ListHandler(list, new DBManager(list));
 
-        ListView fieldOfStudyListView = (ListView) findViewById(R.id.cardOverview_list_bundles);
-        fieldOfStudyListView.setAdapter(listHandler.getFieldOfStudyAdapter());
 
-        fieldOfStudyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ListView cardOverviewListView = (ListView) findViewById(R.id.cardOverview_list_bundles);
+        cardOverviewListView.setAdapter(listHandler.getFieldOfStudyAdapter());
+
+        cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            int count = 1;
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-               String s = parent.getSelectedItem().toString();
-                Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position+"," +s , Toast.LENGTH_LONG)
-                        .show();
+                String name = parent.getAdapter().getItem(position).toString();
+
+                if(count > 2){
+                    count = 1;
+                }
+                switch (count){
+
+                    case 1:
+                        cardOverviewListView.setAdapter(listHandler.getModuleAdapter(name));
+                        count++;
+                        Log.d(TAG, " CASE 1 MODULE " + count);
+                        break;
+                    case 2:
+                        cardOverviewListView.setAdapter(listHandler.getBundleAdapter(name));
+                        count++;
+                        Log.d(TAG, " CASE 2 BUNDLE " + count);
+                        break;
+                    default:
+                        break;
+                }
+
 
             }
+
         });
+
+
+
+
 
 
     }
 
-    
+
+
+
 }

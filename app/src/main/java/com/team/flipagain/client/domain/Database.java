@@ -52,7 +52,7 @@ public class Database extends SQLiteOpenHelper {
         Log.d(TAG, " Created USER");
         db.execSQL(TBL_Module.SQL_CREATE);
         Log.d(TAG, " Created Module");
-       // db.execSQL(TBL_Bundle.SQL_CREATE);
+        db.execSQL(TBL_Bundle.SQL_CREATE);
         Log.d(TAG, " Created Bundle");
        // db.execSQL(TBL_Card.SQL_CREATE);
         Log.d(TAG, " Created Card");
@@ -68,13 +68,23 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL((TBL_Module.STMT_ModuleInsert("'Informationsicherheit'" , "'1'")));
         db.execSQL((TBL_Module.STMT_ModuleInsert("'prog1'" , "'1'")));
         db.execSQL((TBL_Module.STMT_ModuleInsert("'Wirtschaft'" , "'2'")));
-        db.execSQL((TBL_Module.STMT_ModuleInsert("'Physik'" , "'2'")));
-        db.execSQL((TBL_Module.STMT_ModuleInsert("'Physik'" , "'3'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Wirtschaftsprojekt'" , "'2'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'How Engine works'" , "'3'")));
         db.execSQL((TBL_Module.STMT_ModuleInsert("'Gegend beobachten'" , "'4'")));
         db.execSQL((TBL_Module.STMT_ModuleInsert("'Stecker einstecken'" , "'5'")));
 
         //insert default bundles
-
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'CIA Fragen'","'1'" , "'1'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul infsi Fragen'","'1'" , "'1'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Generics Fragen'","'1'" , "'2'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul prog1 Fragen'","'1'" , "'2'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul programieren1 Fragen'","'1'" , "'2'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul Wirtschaft Fragen'","'1'" , "'3'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul Wirtschaftprojekt Fragen'","'1'" , "'4'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'how engine works fragen'","'1'" , "'5'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'how engine works fragen1'","'1'" , "'5'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Wie wird beobachtet'","'1'" , "'6'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'ohne Kurzschluss'","'1'" , "'7'"));
     }
 
 

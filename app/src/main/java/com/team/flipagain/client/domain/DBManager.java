@@ -15,6 +15,7 @@ public class DBManager {
     private String TAG = "DBMANAGER";
     private ArrayList<Object> fieldOfStudyList = new ArrayList<>();
     private ArrayList<Object> moduleList = new ArrayList<>();
+    private ArrayList<Object> bundleList = new ArrayList<>();
 
     // DBMANAGER
     private Database db;
@@ -83,7 +84,7 @@ public class DBManager {
 
             case "module":
 
-                Cursor b = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + " WHERE " + WHEREname, null);
+                Cursor b = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + ", fieldofstudy"+ " WHERE fieldofstudy.nameofstudy  =" + "'" + WHEREname +"'  AND fieldofstudy.rowStudyID =" +tableName +".rowStudyID" , null);
                 try{
                     while(b.moveToNext()){
                         int moduleID = b.getInt(b.getColumnIndex(rowID));
@@ -95,6 +96,22 @@ public class DBManager {
                 }
 
                 return getNamesOfClass(moduleList, "Module");
+
+
+            case "bundle":
+
+                Cursor c = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + ", module"+ " WHERE module.rowName  =" + "'" + WHEREname +"'  AND module.rowModuleID =" +tableName +".moduleID" , null);
+                try{
+                    while(c.moveToNext()){
+                        int bundleID = c.getInt(c.getColumnIndex(rowID));
+                        String name = c.getString(c.getColumnIndex(rowName));
+                        bundleList.add(new Bundle(bundleID,name));
+                    }
+                }finally {
+                    dbCon.close();
+                }
+
+                return getNamesOfClass(bundleList, "Bundle");
 
             default:
                 return null;

@@ -7,7 +7,7 @@ public final class TBL_Bundle {
     /**
      * Name der Datenbanktabelle
      */
-    public static final String TABLE_NAME = "bundle";
+    private static final String TABLE_NAME = "bundle";
     /**
      * PrimaryKey
      */
@@ -31,7 +31,7 @@ public final class TBL_Bundle {
             userID + " INTEGER REFERENCES user," +
             moduleID + " INTEGER REFERENCES module" +
 
-            ";";
+            ")";
 
     /**
      * Standart-Sortierreihenfolge für die Tabelle
@@ -48,13 +48,16 @@ public final class TBL_Bundle {
                     TABLE_NAME;
 
     /**
-     * SQL STATEMENT INSERT NEW BUNDLE
+     *
+     * @param bundleName
+     * @param user_ID
+     * @param module_ID
+     * @return SQL String
      */
-    public static final String STMT_BUNDLE_INSERT =
-            "INSERT INTO " + TABLE_NAME +
-                    " (name) " +
-                    "VALUES (?)";
-
+    public static String STMT_BundleInsert(String bundleName , String user_ID ,String module_ID){
+        return "INSERT INTO " + TABLE_NAME +
+                "( " +name+ "," +userID+ "," +moduleID+ " ) " + "VALUES (" + bundleName + ", " +user_ID+", " + module_ID + ")";
+    }
     /**
      * SQL STATEMENT DELETE BUNDLE BY NAME
      */
@@ -63,8 +66,23 @@ public final class TBL_Bundle {
                     " WHERE name = ?";
 
 
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
 
+    public static String getBundleID() {
+        return bundleID;
+    }
 
+    public static String getName() {
+        return name;
+    }
 
+    public static String getUserID() {
+        return userID;
+    }
 
+    public static String getModuleID() {
+        return moduleID;
+    }
 }
