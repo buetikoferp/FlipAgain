@@ -3,15 +3,16 @@ package com.team.flipagain.client.domain;
 /**
  * Created by Raffaele on 23.03.2016.
  */
-public class MRY_Module {
+public class Module {
     //ATTRIBUT
     private int moduleId;
     private String moduleName;
 
-    //REFERENCE
-    private DBManager fieldOfStudy;
+    public Module(int moduleId, String moduleName){
+        this.moduleId = moduleId;
+        this.moduleName = moduleName;
+    }
 
-    //GETTER SETTER
     public int getModuleId() {
         return moduleId;
     }
@@ -26,13 +27,5 @@ public class MRY_Module {
 
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
-    }
-
-    public DBManager getFieldOfStudy() {
-        return fieldOfStudy;
-    }
-
-    public void setFieldOfStudy(DBManager fieldOfStudy) {
-        this.fieldOfStudy = fieldOfStudy;
     }
 }

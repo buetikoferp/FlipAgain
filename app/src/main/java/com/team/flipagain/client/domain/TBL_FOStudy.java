@@ -7,16 +7,16 @@ public class TBL_FOStudy {
     /**
      * Name der Datenbanktabelle
      */
-    public static final String TABLE_NAME = "fieldofstudy";
+    private static final String TABLE_NAME = "fieldofstudy";
     /**
      * PrimaryKey
      */
-    public static final String rowStudyID = "rowStudyID";
+    private static final String rowStudyID = "rowStudyID";
 
     /**
      * Attribute
      */
-    public static final String rowNameOfStudy = "nameofstudy";
+    private static final String rowNameOfStudy = "nameofstudy";
     /**
      * SQL Anweisung zur Schemadefintion
      *
@@ -59,9 +59,16 @@ public class TBL_FOStudy {
                     " WHERE name = ?";
 
 
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
 
+    public static String getRowStudyID() {
+        return rowStudyID;
+    }
 
-
-
+    public static String getRowNameOfStudy() {
+        return rowNameOfStudy;
+    }
 }
 

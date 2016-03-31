@@ -48,9 +48,9 @@ public class Database extends SQLiteOpenHelper {
 
         db.execSQL(TBL_FOStudy.SQL_CREATE);
         Log.d(TAG, " Created FOS");
-       // db.execSQL(TBL_User.SQL_CREATE);
+       //db.execSQL(TBL_User.SQL_CREATE);
         Log.d(TAG, " Created USER");
-       // db.execSQL(TBL_Module.SQL_CREATE);
+        db.execSQL(TBL_Module.SQL_CREATE);
         Log.d(TAG, " Created Module");
        // db.execSQL(TBL_Bundle.SQL_CREATE);
         Log.d(TAG, " Created Bundle");
@@ -63,6 +63,17 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(TBL_FOStudy.STMT_FieldOfStudyInsert("'Maschinenbau'"));
         db.execSQL(TBL_FOStudy.STMT_FieldOfStudyInsert("'Raumplanung'"));
         db.execSQL(TBL_FOStudy.STMT_FieldOfStudyInsert("'Elektrotechnik'"));
+
+        //insert default values
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Informationsicherheit'" , "'1'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'prog1'" , "'1'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Wirtschaft'" , "'2'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Physik'" , "'2'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Physik'" , "'3'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Gegend beobachten'" , "'4'")));
+        db.execSQL((TBL_Module.STMT_ModuleInsert("'Stecker einstecken'" , "'5'")));
+
+        //insert default bundles
 
     }
 

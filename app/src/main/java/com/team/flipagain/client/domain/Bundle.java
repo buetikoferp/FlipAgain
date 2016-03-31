@@ -5,22 +5,22 @@ import java.util.ArrayList;
 /**
  * Created by Raffaele on 23.03.2016.
  */
-public class MRY_Bundle {
+public class Bundle {
 
     private int bundleId;
     private String name;
 
-    private MRY_User user;
-    private MRY_Module module;
-    private ArrayList<MRY_Card> CardList;
+    private User user;
+    private Module module;
+    private ArrayList<Card> CardList;
 
  // GETTER
 
-    public ArrayList<MRY_Card> getCardList() {
+    public ArrayList<Card> getCardList() {
         return CardList;
     }
 
-    public MRY_Module getModule() {
+    public Module getModule() {
         return module;
     }
 
@@ -28,7 +28,7 @@ public class MRY_Bundle {
         return bundleId;
     }
 
-    public MRY_User getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -38,7 +38,7 @@ public class MRY_Bundle {
 
  // SETTER
 
-    public void setModule(MRY_Module module) {
+    public void setModule(Module module) {
         this.module = module;
     }
 
@@ -48,12 +48,12 @@ public class MRY_Bundle {
     }
 
 
-    public void setUser(MRY_User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
 
-    public void setCardList(ArrayList<MRY_Card> cardList) {
+    public void setCardList(ArrayList<Card> cardList) {
         CardList = cardList;
     }
 

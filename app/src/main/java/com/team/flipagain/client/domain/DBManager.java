@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class DBManager {
     private String TAG = "DBMANAGER";
-    private FieldOfStudy fieldOfStudy;
-
+    private ArrayList<Object> fieldOfStudyList = new ArrayList<>();
+    private ArrayList<Object> moduleList = new ArrayList<>();
 
     // DBMANAGER
     private Database db;
@@ -41,12 +41,12 @@ public class DBManager {
      */
     public long insertFieldOfStudy(String name){
         final ContentValues data = new ContentValues();
-            data.put(TBL_FOStudy.rowNameOfStudy, name);
+            data.put(TBL_FOStudy.getRowNameOfStudy(), name);
 
         final SQLiteDatabase dbCon = db.getWritableDatabase();
 
         try{
-            final long id = dbCon.insertOrThrow(TBL_FOStudy.TABLE_NAME,null, data);
+            final long id = dbCon.insertOrThrow(TBL_FOStudy.getTableName(),null, data);
             Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
             return id;
         }finally {
@@ -54,21 +54,84 @@ public class DBManager {
         }
     }
 
-    public ArrayList<FieldOfStudy> getSomeShitFromDatabase(String tableName, String rowName, String rowID ){
+    /**
+     *
+     * @param tableName
+     * @param rowName
+     * @param rowID
+     * @param WHEREname
+     * @return
+     */
+    public ArrayList<String> getNamesofSelectedTable(String tableName, String rowName, String rowID , String WHEREname){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
 
-        Cursor c = dbCon.rawQuery("SELECT " + rowName +"," + rowID + " FROM " + tableName ,null );
-        try{
-            while(c.moveToNext()){
-                int studyID = c.getInt(c.getColumnIndex(rowID));
-                String name = c.getString(c.getColumnIndex(rowName));
-                new FieldOfStudy(studyID,name);
-            }
-        }finally {
-            dbCon.close();
+        switch (tableName){
+            case "fieldofstudy":
+
+                Cursor a = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName, null);
+                try{
+                    while(a.moveToNext()){
+                        int studyID = a.getInt(a.getColumnIndex(rowID));
+                        String name = a.getString(a.getColumnIndex(rowName));
+                        fieldOfStudyList.add(new FieldOfStudy(studyID,name));
+                    }
+                }finally {
+                    dbCon.close();
+                }
+
+                return getNamesOfClass(fieldOfStudyList, "FieldOfStudy");
+
+            case "module":
+
+                Cursor b = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + " WHERE " + WHEREname, null);
+                try{
+                    while(b.moveToNext()){
+                        int moduleID = b.getInt(b.getColumnIndex(rowID));
+                        String name = b.getString(b.getColumnIndex(rowName));
+                        moduleList.add(new Module(moduleID,name));
+                    }
+                }finally {
+                    dbCon.close();
+                }
+
+                return getNamesOfClass(moduleList, "Module");
+
+            default:
+                return null;
         }
 
-        return fieldOfStudy.getFieldOfStudyList();
+
+    }
+
+
+    private ArrayList<String> getNamesOfClass(ArrayList<Object> object, String instance){
+        ArrayList<String> names = new ArrayList<>();
+        if(object != null){
+            switch(instance){
+                case "FieldOfStudy":
+                      for(Object objects : object ){
+                        FieldOfStudy study = (FieldOfStudy)objects;
+                         names.add(study.getName());
+                      }
+                        break;
+                case "Module":
+                    for(Object objects : object ){
+                        Module module = (Module)objects;
+                        names.add(module.getModuleName());
+                    }
+                        break;
+                default:
+                    Log.d(TAG, instance);
+
+            }
+        }else{
+            return null;
+        }
+
+
+
+
+        return names;
     }
 
     private void open() {
@@ -83,7 +146,7 @@ public class DBManager {
     }
 
 
-    //GETTER + SETTER
+
 
 
 }

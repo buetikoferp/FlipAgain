@@ -3,21 +3,21 @@ package com.team.flipagain.client.domain;
 /**
  * Created by Raffaele on 23.03.2016.
  */
-public class MRY_Card {
+public class Card {
     // ATTRIBUT
     private int cardId;
     private String question;
     private String answer;
 
     //REFERENCE
-    private MRY_Bundle bundle;
+    private Bundle bundle;
 
     //GETTER SETTER
-    public MRY_Bundle getBundle() {
+    public Bundle getBundle() {
         return bundle;
     }
 
-    public void setBundle(MRY_Bundle bundle) {
+    public void setBundle(Bundle bundle) {
         this.bundle = bundle;
     }
 
