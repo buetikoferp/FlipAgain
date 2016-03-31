@@ -1,9 +1,11 @@
 package com.team.flipagain.client.messaging;
 
+import com.rabbitmq.client.BasicProperties;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.team.flipagain.client.application.ApplicationInterface;
+import com.team.flipagain.server.domain.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,25 +22,27 @@ public class ClientSender implements ApplicationInterface{
 
     private final static String QUEUE_NAME = "flipChannel";
 
-    public void send(String username, String password) throws IOException, TimeoutException {
+
+
+    public void send(User u) throws IOException, TimeoutException {
         ConnectionFactory clientFactory = new ConnectionFactory();
         clientFactory.setHost("localhost");
         Connection clientConn = clientFactory.newConnection();
         Channel clientChannel = clientConn.createChannel();
 
         clientChannel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        String message = username+password;
-        clientChannel.basicPublish("", QUEUE_NAME, null, message.getBytes());
 
-        System.out.println(" [x] Sent '" + message + "'");
+       // clientChannel.basicPublish("", QUEUE_NAME, null, u.getBytes());
+
+        System.out.println(" [x] Sent '" + u + "'");
         clientChannel.close();
         clientConn.close();
     }
 
     @Override
-    public boolean getAuthorization(String username, String password) {
+    public boolean getAuthorization(User u) {
         try {
-            send(username, password);
+            send(u);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {

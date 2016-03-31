@@ -1,17 +1,23 @@
 package com.team.flipagain.client.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Raffaele on 22.03.2016.
  */
-public class User {
-    //ATRIBUT
+public class User implements Serializable{
+    //ATTRIBUT
     private int userId;
     private String username;
     private String password;
     private String email;
     private ArrayList<Bundle> bundleList;
+
+
+
+    private boolean isAuthorized = false;
+
 
     //GETTER + SETTER
     public int getUserId() {
@@ -52,5 +58,13 @@ public class User {
 
     public void setBundleList(ArrayList<Bundle> bundleList) {
         this.bundleList = bundleList;
+    }
+
+    public boolean isAuthorized() {
+        return isAuthorized;
+    }
+
+    public void setIsAuthorized(boolean isAuthorized) {
+        this.isAuthorized = isAuthorized;
     }
 }
