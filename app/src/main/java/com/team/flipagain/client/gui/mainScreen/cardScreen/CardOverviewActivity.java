@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -56,21 +57,22 @@ public class CardOverviewActivity extends AppCompatActivity {
                                     int position, long id) {
                 String name = parent.getAdapter().getItem(position).toString();
 
-                if(count > 2){
-                    count = 1;
-                }
                 switch (count){
 
                     case 1:
                         cardOverviewListView.setAdapter(listHandler.getModuleAdapter(name));
-                        count++;
+                        count = 2;
                         Log.d(TAG, " CASE 1 MODULE " + count);
                         break;
                     case 2:
                         cardOverviewListView.setAdapter(listHandler.getBundleAdapter(name));
-                        count++;
+                        count = 3;
                         Log.d(TAG, " CASE 2 BUNDLE " + count);
                         break;
+                   // case 3:
+                   //     cardOverviewListView.setAdapter(listHandler.getCardAdapter(name));
+                   //     count = -1;
+                   //     break;
                     default:
                         break;
                 }
@@ -86,7 +88,6 @@ public class CardOverviewActivity extends AppCompatActivity {
 
 
     }
-
 
 
 

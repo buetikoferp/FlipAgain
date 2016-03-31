@@ -78,6 +78,7 @@ public class DBManager {
                     }
                 }finally {
                     dbCon.close();
+                    a.close();
                 }
 
                 return getNamesOfClass(fieldOfStudyList, "FieldOfStudy");
@@ -93,22 +94,25 @@ public class DBManager {
                     }
                 }finally {
                     dbCon.close();
+                    b.close();
                 }
 
                 return getNamesOfClass(moduleList, "Module");
 
 
             case "bundle":
-
+                Log.d(TAG , " Kommt in Case bundle, tablename = " +tableName + " Wherename " + WHEREname);
                 Cursor c = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + ", module"+ " WHERE module.rowName  =" + "'" + WHEREname +"'  AND module.rowModuleID =" +tableName +".moduleID" , null);
                 try{
                     while(c.moveToNext()){
                         int bundleID = c.getInt(c.getColumnIndex(rowID));
                         String name = c.getString(c.getColumnIndex(rowName));
+                        Log.d(TAG, " created name "+name+ "   created id " + bundleID);
                         bundleList.add(new Bundle(bundleID,name));
                     }
                 }finally {
                     dbCon.close();
+                    c.close();
                 }
 
                 return getNamesOfClass(bundleList, "Bundle");
@@ -137,6 +141,13 @@ public class DBManager {
                         names.add(module.getModuleName());
                     }
                         break;
+
+                case "Bundle":
+                    for(Object objects : object ){
+                        Bundle bundle = (Bundle)objects;
+                        names.add(bundle.getName());
+                    }
+                    break;
                 default:
                     Log.d(TAG, instance);
 

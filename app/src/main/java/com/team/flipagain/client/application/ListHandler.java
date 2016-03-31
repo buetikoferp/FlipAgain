@@ -34,38 +34,38 @@ public class ListHandler extends AppCompatActivity {
     public ArrayAdapter getFieldOfStudyAdapter(){
         List<String> ListFieldOfStudy = manager.getNamesofSelectedTable(TBL_FOStudy.getTableName(), TBL_FOStudy.getRowNameOfStudy(), TBL_FOStudy.getRowStudyID(),null);
 
-        ArrayAdapter<String> studyAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context,
                 R.layout.list_item_card_overview,
                 R.id.list_item_card_overview_textview,
                 ListFieldOfStudy);
 
-        return studyAdapter;
+        return adapter;
 
     }
     public ArrayAdapter getModuleAdapter(String fieldOfStudyName){
         List<String> ModuleList = manager.getNamesofSelectedTable(TBL_Module.getTableName(), TBL_Module.getRowName(), TBL_Module.getRowModuleID(), fieldOfStudyName);
 
-        ArrayAdapter<String> studyAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context,
                 R.layout.list_item_card_overview,
                 R.id.list_item_card_overview_textview,
                 ModuleList);
 
-        return studyAdapter;
+        return adapter;
 
     }
 
     public ArrayAdapter getBundleAdapter(String moduleName){
         List<String> bundleList = manager.getNamesofSelectedTable(TBL_Bundle.getTableName(), TBL_Bundle.getName(), TBL_Bundle.getBundleID(), moduleName);
 
-        ArrayAdapter<String> studyAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context,
                 R.layout.list_item_card_overview,
                 R.id.list_item_card_overview_textview,
                 bundleList);
 
-        return studyAdapter;
+        return adapter;
 
     }
 }

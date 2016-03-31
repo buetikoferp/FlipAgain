@@ -23,23 +23,15 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/savedBundles_btn_delete"
-            android:id="@+id/cardOverview_btn_delete"
-            android:layout_above="@+id/cardOverview_btn_start"
-            android:layout_centerHorizontal="true"
-            android:enabled="false" />
-
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cardOverview_list_bundles"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_above="@+id/cardOverview_btn_delete"
-            android:choiceMode="singleChoice" />
+            android:choiceMode="singleChoice"
+            android:layout_above="@+id/cardOverview_btn_start"
+            android:listSelector="@color/colorSelectedButton"/>
 
     </RelativeLayout>
 </RelativeLayout>
