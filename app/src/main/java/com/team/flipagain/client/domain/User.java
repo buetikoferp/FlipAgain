@@ -5,13 +5,13 @@ import java.util.ArrayList;
 /**
  * Created by Raffaele on 22.03.2016.
  */
-public class MRY_User {
+public class User {
     //ATRIBUT
     private int userId;
     private String username;
     private String password;
     private String email;
-    private ArrayList<MRY_Bundle> bundleList;
+    private ArrayList<Bundle> bundleList;
 
     //GETTER + SETTER
     public int getUserId() {
@@ -46,11 +46,11 @@ public class MRY_User {
         this.email = email;
     }
 
-    public ArrayList<MRY_Bundle> getBundleList() {
+    public ArrayList<Bundle> getBundleList() {
         return bundleList;
     }
 
-    public void setBundleList(ArrayList<MRY_Bundle> bundleList) {
+    public void setBundleList(ArrayList<Bundle> bundleList) {
         this.bundleList = bundleList;
     }
 }
