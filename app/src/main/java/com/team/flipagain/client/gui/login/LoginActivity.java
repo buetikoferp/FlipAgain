@@ -33,7 +33,7 @@ import android.widget.TextView;
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.ApplicationInterface;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
-import com.team.flipagain.client.messaging.ClientSender;
+
 
 import java.util.ArrayList;
 import java.util.List;

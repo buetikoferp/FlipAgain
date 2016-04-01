@@ -7,7 +7,7 @@ public class TBL_Card {
     /**
      * Name der Datenbanktabelle
      */
-    public static final String TABLE_NAME = "card";
+    private static final String TABLE_NAME = "card";
     /**
      * PrimaryKey
      */
@@ -49,12 +49,17 @@ public class TBL_Card {
                     TABLE_NAME;
 
     /**
-     * SQL STATEMENT INSERT
+     *
+     * @param question
+     * @param answer
+     * @param rating
+     * @param bundleID
+     * @return
      */
-    public static final String STMT_MODULE_INSERT =
-            "INSERT INTO " + TABLE_NAME +
-                    "(question, answer, bundleID) " +
-                    "VALUES (?,?,?)";
+    public static String STMT_CardInsert( String question, String  answer , String rating , String bundleID){
+        return "INSERT INTO " + TABLE_NAME +
+                "(" +getQuestion() + ", "+ getAnswer() + ", " + getRating()+ ", " + getBundleID() + "  ) " + "VALUES ('"+question+ "', '"+ answer+ "', '"+rating+ "' , '" + bundleID + "')";
+    }
 
     /**
      * SQL STATEMENT DELETE
@@ -64,9 +69,27 @@ public class TBL_Card {
                     " WHERE cardID = ?";
 
 
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
 
+    public static String getCardID() {
+        return cardID;
+    }
 
+    public static String getQuestion() {
+        return question;
+    }
 
+    public static String getAnswer() {
+        return answer;
+    }
 
+    public static String getRating() {
+        return rating;
+    }
 
+    public static String getBundleID() {
+        return bundleID;
+    }
 }

@@ -21,7 +21,8 @@
             android:text="@string/savedBundles_btn_learning"
             android:id="@+id/cardOverview_btn_start"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:enabled="false" />
 
         <ListView
             android:layout_width="wrap_content"

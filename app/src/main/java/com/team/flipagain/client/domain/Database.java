@@ -54,7 +54,7 @@ public class Database extends SQLiteOpenHelper {
         Log.d(TAG, " Created Module");
         db.execSQL(TBL_Bundle.SQL_CREATE);
         Log.d(TAG, " Created Bundle");
-       // db.execSQL(TBL_Card.SQL_CREATE);
+        db.execSQL(TBL_Card.SQL_CREATE);
         Log.d(TAG, " Created Card");
 
         //insert default values
@@ -81,10 +81,52 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul programieren1 Fragen'","'1'" , "'2'"));
         db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul Wirtschaft Fragen'","'1'" , "'3'"));
         db.execSQL(TBL_Bundle.STMT_BundleInsert("'Modul Wirtschaftprojekt Fragen'","'1'" , "'4'"));
-        db.execSQL(TBL_Bundle.STMT_BundleInsert("'how engine works fragen'","'1'" , "'5'"));
-        db.execSQL(TBL_Bundle.STMT_BundleInsert("'how engine works fragen1'","'1'" , "'5'"));
-        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Wie wird beobachtet'","'1'" , "'6'"));
-        db.execSQL(TBL_Bundle.STMT_BundleInsert("'ohne Kurzschluss'","'1'" , "'7'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'how engine works fragen'", "'1'", "'5'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'how engine works fragen1'", "'1'", "'5'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'Wie wird beobachtet'", "'1'", "'6'"));
+        db.execSQL(TBL_Bundle.STMT_BundleInsert("'ohne Kurzschluss'", "'1'", "'7'"));
+
+        //insert default bundles
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?9", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?9", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?10", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?11", " Das funktioniert so", "0", "4"));
+
+
+
+
     }
 
 

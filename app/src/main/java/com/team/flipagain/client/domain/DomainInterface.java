@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface DomainInterface {
 
     //DBMANAGER
+    public ArrayList<Object> getClassListofSelectedTable(String tableName, String WHEREname);
 
-    public ArrayList<String> getNamesofSelectedTable(String tableName, String rowName, String rowID);
+
 }

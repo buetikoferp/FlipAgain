@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by delay on 28.03.2016.
  */
-public class ListHandler extends AppCompatActivity {
+public class ListHandler extends AppCompatActivity  {
 
     private Context context;
     private DBManager manager;
@@ -68,4 +68,6 @@ public class ListHandler extends AppCompatActivity {
         return adapter;
 
     }
+
+
 }

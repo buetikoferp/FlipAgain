@@ -8,40 +8,43 @@ public class Card {
     private int cardId;
     private String question;
     private String answer;
+    private int rating;
 
-    //REFERENCE
-    private Bundle bundle;
+    /**
+     *
+     * @param cardId
+     * @param question
+     * @param answer
+     * @param rating
+     */
+    Card(int cardId, String question, String answer, int rating){
+        this.cardId = cardId;
+        this.question = question;
+        this.answer = answer;
+        this.rating = rating;
+    }
 
     //GETTER SETTER
-    public Bundle getBundle() {
-        return bundle;
-    }
-
-    public void setBundle(Bundle bundle) {
-        this.bundle = bundle;
-    }
 
     public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+
 
     public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
+
 
     public int getCardId() {
         return cardId;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+
+
+    public int getRating() {
+        return rating;
     }
 }
