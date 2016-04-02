@@ -23,14 +23,14 @@
     <string name="createBundle_btn_save">Speichern</string>
     <string name="createBundle_spinner_fieldOfStudy">Wähle Studienrichtung</string>
     <string name="createBundle_spinner_modul">Wähle Modul</string>
-    <string name="createBundle_spinner_bundle">Wähle Bundle</string>
+    <string name="createBundle_txtF_bundle">Name des Bundles eingeben</string>
 
     //Strings of Saved Bundles Activity
 
     <string name="createCards_txt_question">Geben Sie Ihre Frage hier ein</string>
     <string name="createCards_txt_solution">Geben Sie Ihre Lösung hier ein</string>
     <string name="createCards_btn_addBundle">zu Bundle hinzufügen</string>
-    <string name="createCards_btn_newBundle">Neues Bundle</string>
+    <string name="createCards_btn_newBundle">Neues Bundle erstellen</string>
     <string name="createCards_btn_save">Speichern</string>
 
     //Strings of Saved Bundles Activity

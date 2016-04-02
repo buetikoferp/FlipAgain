@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.ApplicationInterface;
-import com.team.flipagain.client.application.CardHandler;
 
 public class CardSolutionActivity extends AppCompatActivity implements CardScreenInterface {
 
@@ -29,8 +26,8 @@ public class CardSolutionActivity extends AppCompatActivity implements CardScree
 
     private void handleAnswer(){
         TextView textView = (TextView)findViewById(R.id.cardSolution_txtV_solution);
-        textView.setText(applicationInterface.getAnswer());
-        if(applicationInterface.isLastCard()){
+        textView.setText(CARD_HANDLER_INTERFACE.getAnswer());
+        if(CARD_HANDLER_INTERFACE.isLastCard()){
             Button changeToFinish = (Button) findViewById(R.id.cardSolution_btn_nextQuestion);
             changeToFinish.setText("Karten abschliessen");
 
@@ -59,7 +56,7 @@ public class CardSolutionActivity extends AppCompatActivity implements CardScree
     }
     @Override
     public void onBackPressed() {
-        if(applicationInterface.goBackToQuestion()){
+        if(CARD_HANDLER_INTERFACE.goBackToQuestion()){
             Intent intent = new Intent(CardSolutionActivity.this, CardQuestionActivity.class);
             startActivity(intent);
         }else{

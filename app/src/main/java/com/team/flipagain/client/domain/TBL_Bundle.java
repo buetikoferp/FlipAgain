@@ -27,7 +27,7 @@ public final class TBL_Bundle {
      */
        public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
             bundleID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-            name + " TEXT NOT NULL UNIQUE," +
+            name + " TEXT NOT NULL," +
             userID + " INTEGER REFERENCES user," +
             moduleID + " INTEGER REFERENCES module" +
 

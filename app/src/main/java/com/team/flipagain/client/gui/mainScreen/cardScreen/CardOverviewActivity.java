@@ -13,11 +13,12 @@ import android.widget.Toast;
 
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.ListHandler;
+import com.team.flipagain.client.application.ListHandlerInterface;
 import com.team.flipagain.client.domain.DBManager;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 public class CardOverviewActivity extends AppCompatActivity implements CardScreenInterface{
-   // private ApplicationInterface applicationInterface = new CardHandler();
+   // private CardHandlerInterface CARD_HANDLER_INTERFACE = new CardHandler();
     private String TAG = "CARDOVERVIEW";
 
 
@@ -32,7 +33,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
             @Override
             public void onClick(View v) {
                 Intent question = new Intent(CardOverviewActivity.this, CardQuestionActivity.class);
-                if (applicationInterface.bundleSelected()) {
+                if (CARD_HANDLER_INTERFACE.bundleSelected()) {
 
                     startActivity(question);
                 }else{
@@ -51,14 +52,14 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
 
     private   void setListviewAdapter(final int numberOfCase, String name){
         final Context list = findViewById(R.id.cardOverview_list_bundles).getContext();
-        final ListHandler listHandler = new ListHandler(list, new DBManager(list));
+        ListHandlerInterface listHandlerInterface = new ListHandler(list);
         final ListView cardOverviewListView = (ListView) findViewById(R.id.cardOverview_list_bundles);
 
         int count = numberOfCase;
 
         switch (count) {
             case 1:
-                cardOverviewListView.setAdapter(listHandler.getFieldOfStudyAdapter());
+                cardOverviewListView.setAdapter(listHandlerInterface.getFieldOfStudyAdapter());
 
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -71,7 +72,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                 });
                 break;
             case 2:
-                cardOverviewListView.setAdapter(listHandler.getModuleAdapter(name));
+                cardOverviewListView.setAdapter(listHandlerInterface.getModuleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
@@ -83,7 +84,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                 });
                 break;
             case 3:
-                cardOverviewListView.setAdapter(listHandler.getBundleAdapter(name));
+                cardOverviewListView.setAdapter(listHandlerInterface.getBundleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
@@ -103,7 +104,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
     }
 
     private void startCardHandler(String selectedItem, Context context){
-        applicationInterface.fillUpList(selectedItem, context);
+        CARD_HANDLER_INTERFACE.fillUpList(selectedItem, context);
 
 
     }

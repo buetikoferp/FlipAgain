@@ -11,6 +11,7 @@ public interface DomainInterface {
 
     //DBMANAGER
     public ArrayList<Object> getClassListofSelectedTable(String tableName, String WHEREname);
+    public void insertBundle(String bundleName , String moduleName);
 
 
 }

@@ -38,134 +38,32 @@ public class DBManager implements DomainInterface{
 
 
 
-    /**
-     * Diese Methode erstellt neue Studiengaenge.
-     * @param name
-     * @return autogenerierte rowStudyID
-     */
-    public long insertFieldOfStudy(String name){
-        final ContentValues data = new ContentValues();
-            data.put(TBL_FOStudy.getRowNameOfStudy(), name);
-
+    public void insertBundle(String bundleName , String moduleName){
         final SQLiteDatabase dbCon = db.getWritableDatabase();
+        Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + " WHERE " + TBL_Module.getRowName() + " = " + "'" + moduleName + "'", null);
+        int moduleID;
+        try {
+            cursor.moveToFirst();
+            moduleID = cursor.getInt(cursor.getColumnIndex(TBL_Module.getRowModuleID()));
 
-        try{
-            final long id = dbCon.insertOrThrow(TBL_FOStudy.getTableName(),null, data);
+
+            final ContentValues data = new ContentValues();
+            data.put(TBL_Bundle.getName(), bundleName);
+            //data.put(TBL_Bundle.getUserID(), USERID!!!);                                                  Hier muss dann noch die UserID hiinzugefügt werden
+            data.put(TBL_Bundle.getModuleID(), moduleID);
+
+            final long id = dbCon.insertOrThrow(TBL_Bundle.getTableName(),null, data);
             Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
-            return id;
         }finally {
             dbCon.close();
+            cursor.close();
         }
     }
 
-    /**
-     *
-     * @param tableName
-     * @param rowName
-     * @param rowID
-     * @param WHEREname
-     * @return
-     */
-
-
-    public ArrayList<String> getNamesofSelectedTable(String tableName, String rowName, String rowID , String WHEREname){
-        final SQLiteDatabase dbCon = db.getReadableDatabase();
-
-        switch (tableName){
-            case "fieldofstudy":
-
-                Cursor a = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName, null);
-                try{
-                    while(a.moveToNext()){
-                        int studyID = a.getInt(a.getColumnIndex(rowID));
-                        String name = a.getString(a.getColumnIndex(rowName));
-                        fieldOfStudyList.add(new FieldOfStudy(studyID,name));
-                    }
-                }finally {
-                    dbCon.close();
-                    a.close();
-                }
-
-                return getNamesOfClass(fieldOfStudyList, "FieldOfStudy");
-
-            case "module":
-
-                Cursor b = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + ", fieldofstudy"+ " WHERE fieldofstudy.nameofstudy  =" + "'" + WHEREname +"'  AND fieldofstudy.rowStudyID =" +tableName +".rowStudyID" , null);
-                try{
-                    while(b.moveToNext()){
-                        int moduleID = b.getInt(b.getColumnIndex(rowID));
-                        String name = b.getString(b.getColumnIndex(rowName));
-                        moduleList.add(new Module(moduleID,name));
-                    }
-                }finally {
-                    dbCon.close();
-                    b.close();
-                }
-
-                return getNamesOfClass(moduleList, "Module");
-
-
-            case "bundle":
-                Log.d(TAG , " Kommt in Case bundle, tablename = " +tableName + " Wherename " + WHEREname);
-                Cursor c = dbCon.rawQuery("SELECT " + rowName + "," + rowID + " FROM " + tableName + ", module"+ " WHERE module.rowName  =" + "'" + WHEREname +"'  AND module.rowModuleID =" +tableName +".moduleID" , null);
-                try{
-                    while(c.moveToNext()){
-                        int bundleID = c.getInt(c.getColumnIndex(rowID));
-                        String name = c.getString(c.getColumnIndex(rowName));
-                        Log.d(TAG, " created name "+name+ "   created id " + bundleID);
-                        bundleList.add(new Bundle(bundleID,name));
-                    }
-                }finally {
-                    dbCon.close();
-                    c.close();
-                }
-
-                return getNamesOfClass(bundleList, "Bundle");
-
-            default:
-                return null;
-        }
-
-
-    }
-
-
-    private ArrayList<String> getNamesOfClass(ArrayList<Object> object, String instance){
-        ArrayList<String> names = new ArrayList<>();
-        if(object != null){
-            switch(instance){
-                case "FieldOfStudy":
-                      for(Object objects : object ){
-                        FieldOfStudy study = (FieldOfStudy)objects;
-                         names.add(study.getName());
-                      }
-                        break;
-                case "Module":
-                    for(Object objects : object ){
-                        Module module = (Module)objects;
-                        names.add(module.getModuleName());
-                    }
-                        break;
-
-                case "Bundle":
-                    for(Object objects : object ){
-                        Bundle bundle = (Bundle)objects;
-                        names.add(bundle.getName());
-                    }
-                    break;
-                default:
-                    Log.d(TAG, instance);
-
-            }
-        }else{
-            return null;
-        }
 
 
 
 
-        return names;
-    }
 
     private void open() {
         db.getReadableDatabase();
@@ -229,7 +127,7 @@ public class DBManager implements DomainInterface{
                         int bundleID = c.getInt(c.getColumnIndex( TBL_Bundle.getBundleID()));
                         String name = c.getString(c.getColumnIndex(TBL_Bundle.getName()));
                         Log.d(TAG, " created name " + name + "   created id " + bundleID);
-                        bundleList.add(new Bundle(bundleID, name));
+                        bundleList.add(new Bundle(bundleID, name, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
                     }
                 } finally {
                     dbCon.close();

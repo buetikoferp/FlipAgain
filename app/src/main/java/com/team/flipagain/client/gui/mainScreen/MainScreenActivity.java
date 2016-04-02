@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.team.flipagain.R;
+import com.team.flipagain.client.gui.login.LoginActivity;
 import com.team.flipagain.client.gui.mainScreen.cardCreator.CardCreatorActivity;
 import com.team.flipagain.client.gui.mainScreen.cardGetter.CardGetterActivity;
 import com.team.flipagain.client.gui.mainScreen.cardScreen.CardOverviewActivity;
@@ -66,7 +67,10 @@ public class MainScreenActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

@@ -1,36 +1,36 @@
 package com.team.flipagain.client.application;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.team.flipagain.R;
 import com.team.flipagain.client.domain.Card;
 import com.team.flipagain.client.domain.DBManager;
 import com.team.flipagain.client.domain.DomainInterface;
-import com.team.flipagain.client.gui.mainScreen.cardScreen.CardOverviewActivity;
-import com.team.flipagain.client.gui.mainScreen.cardScreen.CardQuestionActivity;
 import com.team.flipagain.server.domain.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Anthony Delay on 01.04.2016.
  */
-public class CardHandler extends AppCompatActivity implements ApplicationInterface  {
+public class CardHandler extends AppCompatActivity implements CardHandlerInterface {
     private String TAG = "CARDHANDLER";
     private ArrayList<Object> cardList = new ArrayList<>();
 
+
+    public int getCardNr() {
+        return cardNr;
+    }
+
+    public int getCardMax() {
+        return cardMax;
+    }
 
     private int cardMax;
     private int cardNr = 0;

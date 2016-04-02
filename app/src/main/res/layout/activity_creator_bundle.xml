@@ -9,33 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".client.gui.mainScreen.cardCreator.BundleCreatorActivity">
 
-    <Spinner
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/creatorBundle_spinner_fieldOfStudy"
-        android:spinnerMode="dropdown"
-        android:hint="@string/createBundle_spinner_fieldOfStudy"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/creatorBundle_spinner_module"
-        android:spinnerMode="dropdown"
-        android:hint="@string/createBundle_spinner_modul"
-        android:layout_below="@+id/creatorBundle_spinner_fieldOfStudy"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/creatorBundle_spinner_bundle"
-        android:spinnerMode="dropdown"
-        android:hint="@string/createBundle_spinner_bundle"
-        android:layout_below="@+id/creatorBundle_spinner_module"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -45,4 +18,31 @@
         android:layout_centerHorizontal="true"
         android:clickable="false"
         android:enabled="false" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/creatorBundle_txtF_bundlename">
+
+    </ScrollView>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/creatorBundle_listView"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/colorSelectedButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/creatorBundle_txtF_bundlename" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/creatorBundle_txtF_bundlename"
+        android:layout_above="@+id/creatorBundle_btn_save"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/createBundle_txtF_bundle"/>
 </RelativeLayout>

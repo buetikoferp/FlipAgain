@@ -31,7 +31,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.ApplicationInterface;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 
@@ -348,7 +347,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
 
-       // private ApplicationInterface login = new ClientSender();
+       // private CardHandlerInterface login = new ClientSender();
 
         UserLoginTask(String email, String password) {
             mEmail = email;
