@@ -87,16 +87,16 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(TBL_Bundle.STMT_BundleInsert("'ohne Kurzschluss'", "'1'", "'7'"));
 
         //insert default bundles
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " Das funktioniert so", "0", "1"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " 1Das funktioniert so CIA Fragen", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " 2Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " 3Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " 4Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " 5Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " 6Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " 7Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " 8Das funktioniert so", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?9", " 9Das funktioniert so (Letzte Karte)", "0", "1"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so Modul infsi Fragen", "0", "2"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "2"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "2"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "2"));
@@ -104,15 +104,15 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "2"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "2"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " Das funktioniert so", "0", "2"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?9", " Das funktioniert so", "0", "2"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?9", " Das funktioniert so  (Letzte Karte)", "0", "2"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so Generics Fragen", "0", "3"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "3"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "3"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "3"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?5", " Das funktioniert so", "0", "3"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?6", " Das funktioniert so", "0", "3"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so", "0", "3"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?7", " Das funktioniert so  (Letzte Karte)", "0", "3"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?1", " Das funktioniert so Modul prog1 Fragen", "0", "4"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?2", " Das funktioniert so", "0", "4"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?3", " Das funktioniert so", "0", "4"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?4", " Das funktioniert so", "0", "4"));
@@ -122,7 +122,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?8", " Das funktioniert so", "0", "4"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?9", " Das funktioniert so", "0", "4"));
         db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?10", " Das funktioniert so", "0", "4"));
-        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?11", " Das funktioniert so", "0", "4"));
+        db.execSQL(TBL_Card.STMT_CardInsert("Wie funktioniert das?11", " Das funktioniert so  (Letzte Karte)", "0", "4"));
 
 
 

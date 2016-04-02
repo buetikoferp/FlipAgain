@@ -29,6 +29,7 @@ public class MainScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainScreenActivity.this, CardOverviewActivity.class);
+                intent.putExtra("case", 1);
                 startActivity(intent);
             }
         });

@@ -49,7 +49,9 @@ public class CardHandler extends AppCompatActivity implements ApplicationInterfa
         DomainInterface domainInterface = new DBManager(context);
         cardList = domainInterface.getClassListofSelectedTable("card", nameOfBundle);
         cardMax = cardList.size();
+        cardNr = 0;
     }
+
 
     public boolean bundleSelected(){
         if(cardList.isEmpty()){
@@ -68,12 +70,43 @@ public class CardHandler extends AppCompatActivity implements ApplicationInterfa
 
     @Override
     public String getAnswer() {
-        Card card = (Card) cardList.get(cardNr);
-        Log.d(TAG , "Antwort = " + card.getAnswer() + " cardMax = "  + cardMax);
-        if(cardNr < cardMax){
+
+        if(cardNr <= cardMax){
+            Card card = (Card) cardList.get(cardNr);
+            Log.d(TAG , "Antwort = " + card.getAnswer() + " cardMax = "  + cardMax + " cardNR = " + cardNr);
+            cardNr++;
             return card.getAnswer();
         }else{
-            return "Fehler";
+
+            /**
+             *  Möglichkeit einer Statistik o.ä.
+             */
+            return "fehler";
+        }
+    }
+
+    @Override
+    public boolean isLastCard() {
+        if(cardMax == cardNr){
+            try{
+                return true;
+            }finally {
+                cardNr = 0;
+            }
+        }else{
+            return false;
+        }
+    }
+
+
+
+    @Override
+    public boolean goBackToQuestion() {
+        if(cardNr > 0 ){
+            cardNr--;
+            return true;
+        }else{
+            return false;
         }
     }
 

@@ -12,14 +12,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.ApplicationInterface;
-import com.team.flipagain.client.application.CardHandler;
 import com.team.flipagain.client.application.ListHandler;
-import com.team.flipagain.client.domain.Card;
 import com.team.flipagain.client.domain.DBManager;
-
-import java.io.Serializable;
-import java.lang.ref.Reference;
+import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 public class CardOverviewActivity extends AppCompatActivity implements CardScreenInterface{
    // private ApplicationInterface applicationInterface = new CardHandler();
@@ -47,62 +42,76 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
 
         });
 
-        setListviewAdapter();
+        int numberOfCase = getIntent().getIntExtra("case", 1);
+        Log.d(TAG,"numberOfCase = " + numberOfCase);
+        setListviewAdapter(numberOfCase, null);
 
     }
+    
 
-
-
-    private   void setListviewAdapter(){
+    private   void setListviewAdapter(final int numberOfCase, String name){
         final Context list = findViewById(R.id.cardOverview_list_bundles).getContext();
         final ListHandler listHandler = new ListHandler(list, new DBManager(list));
-
-
         final ListView cardOverviewListView = (ListView) findViewById(R.id.cardOverview_list_bundles);
-        cardOverviewListView.setAdapter(listHandler.getFieldOfStudyAdapter());
 
-        cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            int count = 1;
-            Button button = (Button) findViewById(R.id.cardOverview_btn_start);
+        int count = numberOfCase;
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+        switch (count) {
+            case 1:
+                cardOverviewListView.setAdapter(listHandler.getFieldOfStudyAdapter());
 
-                String name = parent.getAdapter().getItem(position).toString();
+                cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
 
-                switch (count) {
+                        String name = parent.getAdapter().getItem(position).toString();
+                        setListviewAdapter(2, name);
+                    }
+                });
+                break;
+            case 2:
+                cardOverviewListView.setAdapter(listHandler.getModuleAdapter(name));
+                cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
 
-                    case 1:
-                        cardOverviewListView.setAdapter(listHandler.getModuleAdapter(name));
-                        count = 2;
-                        Log.d(TAG, " CASE 1 MODULE " + count);
-                        break;
-                    case 2:
-                        cardOverviewListView.setAdapter(listHandler.getBundleAdapter(name));
-                        count = 3;
-                        Log.d(TAG, " CASE 2 BUNDLE " + count);
-                        break;
-                    case 3:
+                        String name = parent.getAdapter().getItem(position).toString();
+                        setListviewAdapter(3, name);
+                    }
+                });
+                break;
+            case 3:
+                cardOverviewListView.setAdapter(listHandler.getBundleAdapter(name));
+                cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
 
+                        String name = parent.getAdapter().getItem(position).toString();
+                        Button button = (Button) findViewById(R.id.cardOverview_btn_start);
                         button.setEnabled(true);
                         startCardHandler(name, list);
-                        count = -1;
-                        break;
-                    default:
-                        break;
-                }
-
-
-            }
-
-        });
+                    }
+                });
+                break;
+            default:
+                break;
+        }
 
     }
+
     private void startCardHandler(String selectedItem, Context context){
         applicationInterface.fillUpList(selectedItem, context);
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CardOverviewActivity.this, MainScreenActivity.class);
+        startActivity(intent);
     }
 
 }

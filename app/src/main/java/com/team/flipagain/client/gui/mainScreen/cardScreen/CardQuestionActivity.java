@@ -11,7 +11,7 @@ import com.team.flipagain.R;
 import com.team.flipagain.client.application.ApplicationInterface;
 import com.team.flipagain.client.application.CardHandler;
 
-public class CardQuestionActivity extends AppCompatActivity implements CardScreenInterface  {
+public class  CardQuestionActivity extends AppCompatActivity implements CardScreenInterface  {
 
 
     @Override
@@ -23,6 +23,7 @@ public class CardQuestionActivity extends AppCompatActivity implements CardScree
 
         TextView textView = (TextView)findViewById(R.id.cardQuestion_txt_question);
         textView.setText(applicationInterface.getQuestion());
+
         // Button Listener to TBL_Card Solution Activity
         Button getSolution = (Button) findViewById(R.id.cardQuestion_btn_getSolution);
         getSolution.setOnClickListener(new View.OnClickListener() {
@@ -36,5 +37,15 @@ public class CardQuestionActivity extends AppCompatActivity implements CardScree
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if(applicationInterface.goBackToQuestion()){
+        Intent intent = new Intent(CardQuestionActivity.this, CardQuestionActivity.class);
+        startActivity(intent);}else{
+            Intent intent = new Intent(CardQuestionActivity.this, CardOverviewActivity.class);
+            intent.putExtra("case", 1);
+            startActivity(intent);
+        }
 
+    }
 }

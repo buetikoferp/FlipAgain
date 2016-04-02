@@ -22,6 +22,9 @@ public interface ApplicationInterface{
     public boolean bundleSelected();
     public String getQuestion();
     public String getAnswer();
+    public boolean isLastCard();
+    public boolean goBackToQuestion();
+
 
 
 

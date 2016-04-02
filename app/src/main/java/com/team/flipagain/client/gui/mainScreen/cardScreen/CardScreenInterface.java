@@ -8,6 +8,4 @@ import com.team.flipagain.client.application.CardHandler;
  */
 public interface CardScreenInterface {
     ApplicationInterface applicationInterface = new CardHandler();
-
-    // public ApplicationInterface setApplicationInterface(ApplicationInterface applicationInterface);
 }
