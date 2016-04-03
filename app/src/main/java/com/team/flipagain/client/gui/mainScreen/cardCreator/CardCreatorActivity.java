@@ -29,7 +29,7 @@ public class CardCreatorActivity extends AppCompatActivity {
         Button selectBundle = (Button) findViewById(R.id.creatorCards_btn_selectBundle);
         String nameOfModule = (String)getIntent().getStringExtra("nameOfBundle");
         if(!nameOfModule.equals("start")){
-            selectBundle.setText("Gewähltes Bundle: "+nameOfModule);
+            selectBundle.setText("Gewähltes Bundle: \n "+nameOfModule);
         }
 
         selectBundle.setOnClickListener(new View.OnClickListener() {
