@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
@@ -16,6 +17,9 @@ public class CardSolutionActivity extends AppCompatActivity implements CardScree
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_solution);
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.cardSolution_progressBar);
+        progressBar.setMax(CARD_HANDLER_INTERFACE.getCardMax() - 1);
+        progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
 
 
 

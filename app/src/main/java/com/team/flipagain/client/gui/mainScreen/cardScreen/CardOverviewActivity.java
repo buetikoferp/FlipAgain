@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.flipagain.R;
@@ -54,11 +55,12 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
         final Context list = findViewById(R.id.cardOverview_list_bundles).getContext();
         ListHandlerInterface listHandlerInterface = new ListHandler(list);
         final ListView cardOverviewListView = (ListView) findViewById(R.id.cardOverview_list_bundles);
-
+        TextView title = (TextView)findViewById(R.id.cardOverview_txtV_title);
         int count = numberOfCase;
 
         switch (count) {
             case 1:
+                title.setText("Studiengänge:");
                 cardOverviewListView.setAdapter(listHandlerInterface.getFieldOfStudyAdapter());
 
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,6 +74,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                 });
                 break;
             case 2:
+                title.setText("Module:");
                 cardOverviewListView.setAdapter(listHandlerInterface.getModuleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -84,6 +87,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                 });
                 break;
             case 3:
+                title.setText("Bundle:");
                 cardOverviewListView.setAdapter(listHandlerInterface.getBundleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
