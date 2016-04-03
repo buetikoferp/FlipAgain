@@ -89,6 +89,7 @@ public class BundleCreatorActivity extends AppCompatActivity {
 
                         }else{
                             listHandlerInterface.createNewBundle(save.getText().toString(),nameofModule);
+                            intent.putExtra("nameOfBundle" , save.getText().toString() );
                             startActivity(intent);
                         }
                     }

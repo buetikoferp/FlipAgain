@@ -5,8 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.team.flipagain.R;
+import com.team.flipagain.client.application.CardHandler;
+import com.team.flipagain.client.application.CardHandlerInterface;
 
 public class CardCreatorActivity extends AppCompatActivity {
 
@@ -27,9 +31,9 @@ public class CardCreatorActivity extends AppCompatActivity {
 
         // Button Listener to select Bundle Activity
         Button selectBundle = (Button) findViewById(R.id.creatorCards_btn_selectBundle);
-        String nameOfModule = (String)getIntent().getStringExtra("nameOfBundle");
-        if(!nameOfModule.equals("start")){
-            selectBundle.setText("Gewähltes Bundle: \n "+nameOfModule);
+        final String nameOfBundle = (String)getIntent().getStringExtra("nameOfBundle");
+        if(!nameOfBundle.equals("start")){
+            selectBundle.setText("Gewähltes Bundle: \n "+nameOfBundle);
         }
 
         selectBundle.setOnClickListener(new View.OnClickListener() {
@@ -39,5 +43,34 @@ public class CardCreatorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Button Listener to save Card
+        final EditText question = (EditText)findViewById(R.id.creatorCards_txtf_question);
+        final EditText solution = (EditText)findViewById(R.id.creatorCards_txtf_solution);
+
+
+        final Button save = (Button) findViewById(R.id.creatorCards_btn_save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nameOfBundle.equals("start")){
+                    Toast.makeText(save.getContext(), "Bitte wählen Sie ein Bundle", Toast.LENGTH_LONG).show();
+                }
+                else if(question.getText().toString().isEmpty()){
+                    Toast.makeText(save.getContext(), "Bitte geben Sie eine Frage ein", Toast.LENGTH_LONG).show();
+                }
+                else if(solution.getText().toString().isEmpty()){
+                    Toast.makeText(save.getContext(), "Bitte geben Sie eine Lösung ein", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(save.getContext(), "Die Karte wurde erstellt und dem Bundle: \"" +nameOfBundle + "\" hinzugefügt" , Toast.LENGTH_LONG).show();
+                    CardHandlerInterface cardHandlerInterface = new CardHandler();
+                    cardHandlerInterface.addNewCard(nameOfBundle,question.getText().toString(),solution.getText().toString() ,save.getContext());
+                    question.setText("");
+                    solution.setText("");
+                }
+
+            }
+        });
+
     }
 }

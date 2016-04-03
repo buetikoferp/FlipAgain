@@ -28,6 +28,12 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
         return cardNr;
     }
 
+    @Override
+    public void addNewCard(String bundle, String question, String solution, Context context) {
+        DomainInterface domainInterface = new DBManager(context);
+        domainInterface.insertCard(bundle,question,solution);
+    }
+
     public int getCardMax() {
         return cardMax;
     }

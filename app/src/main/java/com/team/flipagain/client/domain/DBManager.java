@@ -60,9 +60,32 @@ public class DBManager implements DomainInterface{
         }
     }
 
+    @Override
+    public void insertCard(String nameOfBundle, String question, String solution) {
+        final SQLiteDatabase dbCon = db.getWritableDatabase();
+        Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + " WHERE " + TBL_Bundle.getName() + " = " + "'" + nameOfBundle + "'", null);
+        int bundleID;
+        try {
+            cursor.moveToFirst();
+            bundleID = cursor.getInt(cursor.getColumnIndex(TBL_Bundle.getBundleID()));
 
 
+            final ContentValues data = new ContentValues();
+            data.put(TBL_Card.getQuestion(), question);
+            data.put(TBL_Card.getAnswer(), solution);
+            data.put(TBL_Card.getBundleID(), bundleID);
 
+            /**
+             * HIER MUSS NOCH EIN CARD Obj erstellt werden und dem Server geschickt werden.
+             */
+
+            final long id = dbCon.insertOrThrow(TBL_Card.getTableName(),null, data);
+            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+        }finally {
+            dbCon.close();
+            cursor.close();
+        }
+    }
 
 
     private void open() {
