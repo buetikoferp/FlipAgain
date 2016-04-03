@@ -24,5 +24,20 @@ public class CardCreatorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Button Listener to select Bundle Activity
+        Button selectBundle = (Button) findViewById(R.id.creatorCards_btn_selectBundle);
+        String nameOfModule = (String)getIntent().getStringExtra("nameOfBundle");
+        if(!nameOfModule.equals("start")){
+            selectBundle.setText("Gewähltes Bundle: "+nameOfModule);
+        }
+
+        selectBundle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CardCreatorActivity.this, SelectBundleActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

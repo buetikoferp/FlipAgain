@@ -17,18 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:orientation="horizontal"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.5"
+            android:weightSum="1">
 
 
-            <Spinner
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/creatorCards_spinner_bundleList"
-                android:spinnerMode="dropdown"
-                android:layout_above="@+id/creatorCards_btn_save"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/creatorCards_btn_save"
-                android:layout_weight="1" />
+                android:text="Wähle Bundle aus"
+                android:id="@+id/creatorCards_btn_selectBundle"
+                android:layout_weight="0.96" />
         </LinearLayout>
 
         <LinearLayout
