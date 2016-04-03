@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.CardHandler;
 import com.team.flipagain.client.application.CardHandlerInterface;
+import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 public class CardCreatorActivity extends AppCompatActivity {
 
@@ -72,5 +73,10 @@ public class CardCreatorActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CardCreatorActivity.this, MainScreenActivity.class);
+        startActivity(intent);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.ListHandler;
 import com.team.flipagain.client.application.ListHandlerInterface;
+import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 public class SelectBundleActivity extends AppCompatActivity {
     private String TAG = "SELECTBUNDLE";
@@ -78,5 +79,11 @@ public class SelectBundleActivity extends AppCompatActivity {
                 break;
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SelectBundleActivity.this, CardCreatorActivity.class);
+        intent.putExtra("nameOfBundle" , "start");
+        startActivity(intent);
     }
 }
