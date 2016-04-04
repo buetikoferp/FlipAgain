@@ -5,6 +5,8 @@ import com.team.flipagain.server.domain.DBManager;
 import com.team.flipagain.server.domain.DomainInterface;
 import com.team.flipagain.server.domain.User;
 
+import java.sql.SQLException;
+
 /**
  * Created by Raffaele on 22.03.2016.
  */
@@ -14,7 +16,11 @@ public class LoginHandler {
 
     public static boolean getAuthorization(User u) {
 
-        di.getUser(u);
+        try {
+            di.getUser(u);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         return true;
