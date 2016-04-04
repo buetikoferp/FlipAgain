@@ -65,7 +65,7 @@
         <activity
             android:name=".client.gui.mainScreen.cardGetter.CardGetterActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.mainScreen.cardCreator.CardCreatorActivity"
+            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".client.gui.mainScreen.cardScreen.CardQuestionActivity"
