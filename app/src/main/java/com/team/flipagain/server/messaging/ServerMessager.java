@@ -25,12 +25,13 @@ public class ServerMessager {
     public Serializable receive(){
         try {
             ServerConsumer sc = new ServerConsumer("ServerConsumer");
-            sc.handleDelivery();
+
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

@@ -5,8 +5,26 @@ package com.team.flipagain.server.domain;
  */
 public class User {
 
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public boolean isAuthorized() {
+        return isAuthorized;
+    }
+
+    public void setIsAuthorized(boolean isAuthorized) {
+        this.isAuthorized = isAuthorized;
+    }
+
+    private int userid;
     private String username;
     private String password;
+    private boolean isAuthorized = false;
 
 
     public User(String username, String password){

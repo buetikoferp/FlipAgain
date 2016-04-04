@@ -10,24 +10,39 @@ import java.sql.Statement;
  * Created by Philipp on 31.03.2016.
  */
 public class DBManager implements DomainInterface{
+
     private Connection conn;
+
+
 
 
 
     @Override
     public User getUser(User user) throws SQLException {
-        //TODO SQL STATEMENT FÜR USER;
 
+        String username = user.getUsername();
+        String password = user.getPassword();
         Statement stmt = conn.createStatement();
+
         ResultSet rs = stmt.executeQuery("SELECT * FROM tbl_user");
         System.out.println(rs);
+        while (rs.next()) {
+
+            if (username.equals(rs.getString("username") )&& password.equals(rs.getString("password"))) {
+                user.setIsAuthorized(true);
+            }
+        }
+       return user;
+    }
+
+    public Connection getConnection()throws SQLException{
 
 
-        return null;
+        return conn;
     }
 
 
-    public static void main(String[] argv) throws SQLException {
+    public static void main(String[] argv)  {
 
         System.out.println("-------- PostgreSQL "
                 + "JDBC Connection Testing ------------");
@@ -62,16 +77,7 @@ public class DBManager implements DomainInterface{
         }
 
         if (connection != null) {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tbl_user");
 
-
-            while (rs.next()) {
-
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                System.out.println("Username: "+username+" Password: "+password);
-            }
 
             System.out.println("You made it, take control your database now!");
         } else {
