@@ -56,6 +56,10 @@ public class CardCreatorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(nameOfBundle.equals("start")){
                     Toast.makeText(save.getContext(), "Bitte wählen Sie ein Bundle", Toast.LENGTH_LONG).show();
+                    question.setEnabled(false);
+                    solution.setEnabled(false);
+                    question.setText("Wählen Sie zuerst ein Bundle oder erstellen Sie eines");
+                    solution.setText("Wählen Sie zuerst ein Bundle oder erste");
                 }
                 else if(question.getText().toString().isEmpty()){
                     Toast.makeText(save.getContext(), "Bitte geben Sie eine Frage ein", Toast.LENGTH_LONG).show();
