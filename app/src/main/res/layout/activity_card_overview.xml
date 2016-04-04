@@ -25,19 +25,30 @@
             android:enabled="false" />
 
         <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView2" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView2"
+            android:layout_above="@+id/cardOverview_btn_start"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cardOverview_txtV_title" />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cardOverview_list_bundles"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:choiceMode="singleChoice"
             android:layout_above="@+id/cardOverview_btn_start"
-            android:listSelector="@color/colorSelectedButton"/>
+            android:listSelector="@color/colorSelectedButton"
+            android:layout_below="@+id/cardOverview_txtV_title" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/cardOverview_txtV_title"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 </RelativeLayout>

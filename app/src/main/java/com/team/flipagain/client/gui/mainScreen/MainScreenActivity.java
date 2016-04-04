@@ -41,6 +41,7 @@ public class MainScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainScreenActivity.this, CardCreatorActivity.class);
+                intent.putExtra("nameOfBundle", "start");
                 startActivity(intent);
             }
         });
@@ -70,6 +71,7 @@ public class MainScreenActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

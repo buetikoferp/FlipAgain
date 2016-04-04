@@ -19,7 +19,7 @@ public class  CardQuestionActivity extends AppCompatActivity implements CardScre
         setContentView(R.layout.activity_card_question);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.cardQuestion_progressBar);
-        progressBar.setMax(CARD_HANDLER_INTERFACE.getCardMax());
+        progressBar.setMax(CARD_HANDLER_INTERFACE.getCardMax() -1);
         progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
 
 
