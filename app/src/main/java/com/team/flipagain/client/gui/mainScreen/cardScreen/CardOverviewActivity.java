@@ -61,6 +61,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
         switch (count) {
             case 1:
                 title.setText("Studiengänge:");
+                setTitle("Studiengänge");
                 cardOverviewListView.setAdapter(listHandlerInterface.getFieldOfStudyAdapter());
 
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,6 +76,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                 break;
             case 2:
                 title.setText("Module:");
+                setTitle(name);
                 cardOverviewListView.setAdapter(listHandlerInterface.getModuleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -87,6 +89,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                 });
                 break;
             case 3:
+                setTitle(name);
                 title.setText("Bundle:");
                 cardOverviewListView.setAdapter(listHandlerInterface.getBundleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
