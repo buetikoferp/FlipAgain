@@ -22,6 +22,12 @@ import java.util.concurrent.TimeoutException;
  *
  */
 public class ServerConsumer extends com.team.flipagain.server.messaging.EndPoint implements Runnable, Consumer{
+    private Object  object;
+
+    public Object getObect(){
+
+        return object;
+    }
 
     public ServerConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
@@ -48,10 +54,12 @@ public class ServerConsumer extends com.team.flipagain.server.messaging.EndPoint
      */
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
-        User u = (User)SerializationUtils.deserialize(body);
-        System.out.println("Name:  "+ u.getUsername()+ "PW: " + u.getPassword() + " received.");
+         object = (SerializationUtils.deserialize(body));
+
 
     }
+
+
 
     public void handleCancel(String consumerTag) {}
     public void handleCancelOk(String consumerTag) {}
