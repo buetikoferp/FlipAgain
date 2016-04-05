@@ -1,5 +1,7 @@
 package com.team.flipagain.client.domain;
 
+import android.os.Bundle;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
