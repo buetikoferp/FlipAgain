@@ -1,4 +1,5 @@
-import com.team.flipagain.client.domain.Card;
+package com.team.flipagain.client.domain;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
