@@ -1,9 +1,13 @@
 package com.team.flipagain.client.domain;
 
+import java.io.Serializable;
+
+
+
 /**
  * Created by Raffaele on 23.03.2016.
  */
-public class Card {
+public class Card implements Serializable{
     // ATTRIBUT
     private int cardId;
     private String question;
@@ -17,7 +21,7 @@ public class Card {
      * @param answer
      * @param rating
      */
-    Card(int cardId, String question, String answer, int rating){
+    public Card(int cardId, String question, String answer, int rating){
         this.cardId = cardId;
         this.question = question;
         this.answer = answer;
