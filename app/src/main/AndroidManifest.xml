@@ -82,7 +82,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".client.gui.mainScreen.cardCreator.SelectBundleActivity"></activity>
+        <activity android:name=".client.gui.mainScreen.cardCreator.SelectBundleActivity" />
+        <activity android:name=".client.gui.mainScreen.cardScreen.CardFlipperActivity"></activity>
     </application>
 
 </manifest>
