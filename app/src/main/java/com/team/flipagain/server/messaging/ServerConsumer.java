@@ -9,20 +9,20 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
 import com.team.flipagain.client.domain.User;
+import com.team.flipagain.server.application.LoginHandler;
 
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.concurrent.TimeoutException;
 
 
 /**
  * The endpoint that consumes messages off of the queue. Happens to be runnable.
- * @author syntx
- *
- */
+  */
 public class ServerConsumer extends com.team.flipagain.server.messaging.EndPoint implements Runnable, Consumer{
-
+    private ServerMessager serMes = new ServerMessager();
     public ServerConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
     }
@@ -46,12 +46,14 @@ public class ServerConsumer extends com.team.flipagain.server.messaging.EndPoint
     /**
      * Called when new message is available.
      */
-    public void handleDelivery(String consumerTag, Envelope env,
-                               BasicProperties props, byte[] body) throws IOException {
-        User u = (User)SerializationUtils.deserialize(body);
-        System.out.println("Name:  "+ u.getUsername()+ "PW: " + u.getPassword() + " received.");
+    public void handleDelivery(String consumerTag, Envelope env, BasicProperties props, byte[] body) throws IOException {
+        Object object = (SerializationUtils.deserialize(body));
+        serMes.recievedObject(object);
+
 
     }
+
+
 
     public void handleCancel(String consumerTag) {}
     public void handleCancelOk(String consumerTag) {}

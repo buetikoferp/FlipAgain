@@ -25,25 +25,15 @@ public class Card {
     }
 
     //GETTER SETTER
-
     public String getAnswer() {
         return answer;
     }
-
-
-
     public String getQuestion() {
         return question;
     }
-
-
-
     public int getCardId() {
         return cardId;
     }
-
-
-
     public int getRating() {
         return rating;
     }

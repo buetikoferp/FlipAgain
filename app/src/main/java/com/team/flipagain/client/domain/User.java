@@ -7,15 +7,13 @@ import java.util.ArrayList;
  * Created by Raffaele on 22.03.2016.
  */
 public class User implements Serializable{
+
     //ATTRIBUT
     private int userId;
     private String username;
     private String password;
     private String email;
     private ArrayList<Bundle> bundleList;
-
-
-
     private boolean isAuthorized = false;
 
 
