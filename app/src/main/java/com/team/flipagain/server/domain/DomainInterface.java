@@ -11,7 +11,7 @@ public interface DomainInterface {
      * @param user
      * @return
      */
-    public User getUser(User user) throws SQLException;
+    public User getUser(User user);
 
 
 

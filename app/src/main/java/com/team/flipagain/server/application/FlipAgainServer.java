@@ -1,7 +1,8 @@
 package com.team.flipagain.server.application;
 
-import com.team.flipagain.server.domain.DBManager;
+
 import com.team.flipagain.server.domain.DomainInterface;
+import com.team.flipagain.server.domain.User;
 import com.team.flipagain.server.messaging.ServerConsumer;
 import com.team.flipagain.server.messaging.ServerMessager;
 
@@ -19,9 +20,11 @@ public class FlipAgainServer {
 
 
 
-        ServerConsumer consumer = null;
+    ServerConsumer consumer = null;
+        //ServerProducer producer = null;
+
         try {
-            consumer = new ServerConsumer("flipagain");
+        consumer = new ServerConsumer("flipagain");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {
@@ -31,7 +34,7 @@ public class FlipAgainServer {
         Thread consumerThread = new Thread(consumer);
         consumerThread.start();
 
-        DomainInterface di = new DBManager();
+
 
 
 

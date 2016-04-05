@@ -1,6 +1,8 @@
 package com.team.flipagain.server.messaging;
 
 import com.rabbitmq.client.Envelope;
+import com.team.flipagain.server.application.LoginHandler;
+import com.team.flipagain.server.domain.User;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -9,29 +11,22 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by Philipp on 01.04.2016.
  */
-public class ServerMessager {
+public final class ServerMessager {
+    private Object messageObject;
 
-    public void send(Serializable obj){
-        try {
-            ServerProducer sp = new ServerProducer("ServerProducer");
-            sp.sendMessage(obj);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Serializable receive(){
-        try {
-            ServerConsumer sc = new ServerConsumer("ServerConsumer");
+    /**
+     * Übergibt das gesendete Objekt.
+     * @param messageObject
+     */
+        public void recievedObject(Object messageObject){
+        this.messageObject = messageObject;
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+
+        User u = (User) messageObject;
+            System.out.println(u.getUsername()+" | "+u.getPassword());
+
+        LoginHandler.getAuthorization(u);
     }
 }

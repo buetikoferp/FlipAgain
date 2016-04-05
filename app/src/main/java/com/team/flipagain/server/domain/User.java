@@ -5,6 +5,16 @@ package com.team.flipagain.server.domain;
  */
 public class User {
 
+    private int userid;
+    private String username;
+    private String password;
+    private boolean isAuthorized = false;
+
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
     public int getUserid() {
         return userid;
     }
@@ -21,17 +31,6 @@ public class User {
         this.isAuthorized = isAuthorized;
     }
 
-    private int userid;
-    private String username;
-    private String password;
-    private boolean isAuthorized = false;
-
-
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -40,10 +39,6 @@ public class User {
         this.password = password;
     }
 
-
-
-
-
     public String getUsername() {
         return username;
     }
@@ -51,7 +46,5 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
-
 
 }
