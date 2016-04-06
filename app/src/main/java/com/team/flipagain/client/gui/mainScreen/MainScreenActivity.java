@@ -13,6 +13,7 @@ import com.team.flipagain.R;
 import com.team.flipagain.client.gui.login.LoginActivity;
 import com.team.flipagain.client.gui.mainScreen.cardCreator.CardCreatorActivity;
 import com.team.flipagain.client.gui.mainScreen.cardGetter.CardGetterActivity;
+import com.team.flipagain.client.gui.mainScreen.cardScreen.CardFlipperActivity;
 import com.team.flipagain.client.gui.mainScreen.cardScreen.CardOverviewActivity;
 
 public class MainScreenActivity extends AppCompatActivity {
@@ -56,7 +57,16 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
-
+        // tEST BUTTON TO TEST FLIPPER
+        Button test = (Button) findViewById(R.id.mainScreen_btn_profile);
+        test.setEnabled(false);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainScreenActivity.this, CardFlipperActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
