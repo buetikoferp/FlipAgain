@@ -60,8 +60,8 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
 
         switch (count) {
             case 1:
+                setTitle("Navigation");
                 title.setText("Studiengänge:");
-                setTitle("Studiengänge");
                 cardOverviewListView.setAdapter(listHandlerInterface.getFieldOfStudyAdapter());
 
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +70,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                                             int position, long id) {
 
                         String name = parent.getAdapter().getItem(position).toString();
+
                         setListviewAdapter(2, name);
                     }
                 });

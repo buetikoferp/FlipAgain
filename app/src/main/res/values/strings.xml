@@ -20,7 +20,7 @@
 
     //Strings of Create Bundle Activity
 
-    <string name="createBundle_btn_save">Speichern</string>
+    <string name="createBundle_btn_save">Bundle hinzufügen</string>
     <string name="createBundle_spinner_fieldOfStudy">Wähle Studienrichtung</string>
     <string name="createBundle_spinner_modul">Wähle Modul</string>
     <string name="createBundle_txtF_bundle">Name des Bundles eingeben</string>

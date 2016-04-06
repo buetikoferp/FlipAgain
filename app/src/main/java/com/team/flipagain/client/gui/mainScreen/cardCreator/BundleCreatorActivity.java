@@ -37,13 +37,15 @@ public class BundleCreatorActivity extends AppCompatActivity {
         final Context list = findViewById(R.id.creatorBundle_listView).getContext();
         final ListHandlerInterface listHandlerInterface = new ListHandler(list);
         final ListView cardOverviewListView = (ListView) findViewById(R.id.creatorBundle_listView);
+        TextView textView = (TextView)findViewById(R.id.creatorBundle_textView_title);
 
         int count = numberOfCase;
 
         switch (count) {
             case 1:
+                textView.setText("Studiengänge");
                 Log.d(TAG,"reached case 1");
-
+                setTitle("Navigation");
                 cardOverviewListView.setAdapter(listHandlerInterface.getFieldOfStudyAdapter());
 
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,6 +59,8 @@ public class BundleCreatorActivity extends AppCompatActivity {
                 });
                 break;
             case 2:
+                textView.setText("Module:");
+                setTitle(name);
                 Log.d(TAG,"reached case 2");
                 cardOverviewListView.setAdapter(listHandlerInterface.getModuleAdapter(name));
                 cardOverviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +74,8 @@ public class BundleCreatorActivity extends AppCompatActivity {
                 });
                 break;
             case 3:
+                setTitle(name);
+                textView.setText("Bundleliste:");
                 Log.d(TAG,"reached case 3");
                 cardOverviewListView.setAdapter(listHandlerInterface.getBundleAdapter(name));
                 cardOverviewListView.setEnabled(false);

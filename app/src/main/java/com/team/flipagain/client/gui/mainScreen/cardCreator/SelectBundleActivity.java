@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.ListHandler;
@@ -30,6 +31,7 @@ public class SelectBundleActivity extends AppCompatActivity {
 
     private   void setListviewAdapter(final int numberOfCase, String name){
         final Context list = findViewById(R.id.selectBundle_listV).getContext();
+        TextView textView = (TextView)findViewById(R.id.selectBundle_textView_title);
         ListHandlerInterface listHandlerInterface = new ListHandler(list);
         final ListView selectBundleListView = (ListView) findViewById(R.id.selectBundle_listV);
 
@@ -37,6 +39,7 @@ public class SelectBundleActivity extends AppCompatActivity {
 
         switch (count) {
             case 1:
+                textView.setText("Studiengänge:");
                 selectBundleListView.setAdapter(listHandlerInterface.getFieldOfStudyAdapter());
 
                 selectBundleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -50,6 +53,8 @@ public class SelectBundleActivity extends AppCompatActivity {
                 });
                 break;
             case 2:
+                textView.setText("Module:");
+                setTitle(name);
                 selectBundleListView.setAdapter(listHandlerInterface.getModuleAdapter(name));
                 selectBundleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -62,6 +67,8 @@ public class SelectBundleActivity extends AppCompatActivity {
                 });
                 break;
             case 3:
+                textView.setText("Bundleliste:");
+                setTitle(name);
                 selectBundleListView.setAdapter(listHandlerInterface.getBundleAdapter(name));
                 selectBundleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
