@@ -33,7 +33,9 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_flipper);
-
+        /**
+         * AlertDialog : lässt sich noch mit jeweiligem user verknüpfen das diese Meldung pro User nur einmal aufploppt.
+         */
         new AlertDialog.Builder(this)
                 .setTitle("Navigationshilfe")
                 .setMessage("Lösung:\n\t\t- Klick auf die Karte\n\nNächste Karte:\n\t\t- Wisch die Karte in die\n\t\t\tentsprechende Richtung.")

@@ -9,6 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".client.gui.mainScreen.cardCreator.CardCreatorActivity">
 
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -16,17 +18,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:weightSum="1"
-            android:layout_weight="0.9">
+            android:layout_weight="0.5"
+            android:id="@+id/LinearLayout_title">
 
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wähle Bundle aus"
-                android:id="@+id/creatorCards_btn_selectBundle"
-                android:layout_weight="1" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/creatorCards_textV_title"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -88,31 +93,34 @@
 
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_gravity="bottom">
 
+                <View android:id="@+id/strut"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerHorizontal="true"/>
+
                 <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="@string/createCards_btn_save"
                     android:id="@+id/creatorCards_btn_save"
                     android:enabled="true"
-                    android:layout_weight="1"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/strut"
                     android:layout_alignParentTop="true" />
 
                 <Button
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/createCards_btn_newBundle"
-                    android:id="@+id/creatorCards_btn_newBundle"
-                    android:layout_weight="1"
-                    android:enabled="true"
-                    android:layout_below="@+id/creatorCards_btn_save"
-                    android:layout_alignParentStart="true" />
-
+                    android:text="fertigstellen"
+                    android:id="@+id/creatorCards_btn_finish"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@+id/strut" />
             </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -94,7 +94,7 @@ public class BundleCreatorActivity extends AppCompatActivity {
                             Toast.makeText(button.getContext() , "Geben Sie bitte den Namen des Bundles ein", Toast.LENGTH_LONG).show();
 
                         }else{
-                            listHandlerInterface.createNewBundle(save.getText().toString(),nameofModule);
+                            intent.putExtra("nameOfModule", nameofModule);
                             intent.putExtra("nameOfBundle" , save.getText().toString() );
                             startActivity(intent);
                         }

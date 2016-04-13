@@ -34,7 +34,7 @@ public class SelectBundleActivity extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.selectBundle_textView_title);
         ListHandlerInterface listHandlerInterface = new ListHandler(list);
         final ListView selectBundleListView = (ListView) findViewById(R.id.selectBundle_listV);
-
+        final String nameOfModule = name;
         int count = numberOfCase;
 
         switch (count) {
@@ -47,8 +47,8 @@ public class SelectBundleActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
 
-                        String name = parent.getAdapter().getItem(position).toString();
-                        setListviewAdapter(2, name);
+                        String nameofStudy = parent.getAdapter().getItem(position).toString();
+                        setListviewAdapter(2, nameofStudy);
                     }
                 });
                 break;
@@ -61,8 +61,8 @@ public class SelectBundleActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
 
-                        String name = parent.getAdapter().getItem(position).toString();
-                        setListviewAdapter(3, name);
+                        String nameOfModule = parent.getAdapter().getItem(position).toString();
+                        setListviewAdapter(3, nameOfModule);
                     }
                 });
                 break;
@@ -75,9 +75,11 @@ public class SelectBundleActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
 
-                        String name = parent.getAdapter().getItem(position).toString();
+                        final String nameofBundle = parent.getAdapter().getItem(position).toString();
                         Intent intent = new Intent(SelectBundleActivity.this, CardCreatorActivity.class );
-                        intent.putExtra("nameOfBundle", name);
+
+                        intent.putExtra("nameOfModule", nameOfModule);
+                        intent.putExtra("nameOfBundle", nameofBundle);
                         startActivity(intent);
                     }
                 });
