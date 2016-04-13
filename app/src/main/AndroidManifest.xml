@@ -66,15 +66,10 @@
             android:name=".client.gui.mainScreen.cardGetter.CardGetterActivity"
             android:configChanges="orientation"
             android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".client.gui.mainScreen.cardScreen.CardQuestionActivity"
-            android:parentActivityName=".client.gui.mainScreen.cardScreen.CardOverviewActivity" />
+            android:screenOrientation="portrait" /><![CDATA[
+
         />
-        <activity
-            android:name=".client.gui.mainScreen.cardScreen.CardSolutionActivity"
-            android:parentActivityName=".client.gui.mainScreen.cardScreen.CardOverviewActivity" />
-        <!--
+        ]]><!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->

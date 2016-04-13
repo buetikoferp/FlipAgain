@@ -57,16 +57,7 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
-        // tEST BUTTON TO TEST FLIPPER
-        Button test = (Button) findViewById(R.id.mainScreen_btn_profile);
-        test.setEnabled(true);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainScreenActivity.this, CardFlipperActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 

@@ -12,24 +12,24 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
+        android:text="Falsch"
+        android:id="@+id/cardFlipper_btn_wrong"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
+        android:text="Richtig"
+        android:id="@+id/cardFlipper_btn_right"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button3"
+        android:text="Unsicher"
+        android:id="@+id/cardFlipper_btn_unsure"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar"
         android:numStars="5"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/cardFlipper_btn_wrong"
         android:layout_centerHorizontal="true" />
     // ViewFlipper in ViewFlipper
 
@@ -66,21 +66,24 @@
             android:layout_height="365dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:background="#ffffff"
+            android:background="#60d0e3ff"
             android:clickable="false"
-            android:id="@+id/CardQuestion">
+            android:id="@+id/CardQuestion"
+            android:weightSum="1">
 
             <TextView
                 android:layout_marginTop="15dp"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="Frage"
                 android:textColor="#191975"
                 android:textSize="25dp"
                 android:textStyle="italic"
-                android:id="@+id/TextView_question">
+                android:id="@+id/TextView_question"
+                android:layout_weight="4.63">
 
             </TextView>
+
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +91,7 @@
             android:layout_height="365dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:background="#4dedd8"
+            android:background="#54c5f1dd"
             android:clickable="false"
             android:id="@+id/CardSolution">
 
@@ -110,7 +113,7 @@
             android:layout_height="365dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:background="#e6c925"
+            android:background="#60d0e3ff"
             android:clickable="false"
             android:id="@+id/CardChange">
 
@@ -132,7 +135,7 @@
             android:layout_height="365dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:background="#6c1c87"
+            android:background="#54c5f1dd"
             android:clickable="false"
             android:id="@+id/CardnextSolution">
 
