@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
     private float lastX;
     private TextView question, solution, questionNext, solutionNext;
     private ProgressBar progressBar;
+    private Button buttonSolution;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
         viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
 
         viewFlipper.setOnTouchListener(new View.OnTouchListener() {
-            private static final int MAX_CLICK_DURATION = 350;
+            private static final int MAX_CLICK_DURATION = 100;
             private long startClickTime;
 
             @Override
@@ -55,10 +57,11 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                     }
                     case MotionEvent.ACTION_UP: {
                         long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
-                        if(clickDuration < MAX_CLICK_DURATION) {
-                            AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
+
+                        if(clickDuration > MAX_CLICK_DURATION) {
+                            onTouchEvent(event, viewFlipper);
                         }else{
-                            onTouchEvent(event,viewFlipper);
+                            AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
                         }
                     }
                 }
@@ -155,6 +158,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                     switch(currentView.getId()){
                         case R.id.CardQuestion:{
                             if(CARD_HANDLER_INTERFACE.goBackToQuestion()){
+                                progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
                                 questionNext.setText(CARD_HANDLER_INTERFACE.getQuestion());
                                 solutionNext.setText(CARD_HANDLER_INTERFACE.getAnswer());
                                 viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.CardChange)));
@@ -163,6 +167,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                         }
                         case R.id.CardChange:{
                             if(CARD_HANDLER_INTERFACE.goBackToQuestion()){
+                                progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
                                 question.setText(CARD_HANDLER_INTERFACE.getQuestion());
                                 solution.setText(CARD_HANDLER_INTERFACE.getAnswer());
                                 viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.CardQuestion)));
