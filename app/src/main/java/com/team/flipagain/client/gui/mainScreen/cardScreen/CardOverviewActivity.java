@@ -28,25 +28,30 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_overview);
 
-        final Button cardQuestion = (Button) findViewById(R.id.cardOverview_btn_start);
+        final Button startbutton = (Button) findViewById(R.id.cardOverview_btn_start);
 
-        cardQuestion.setOnClickListener(new View.OnClickListener() {
+        startbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent question = new Intent(CardOverviewActivity.this, CardQuestionActivity.class);
+                Intent start = new Intent(CardOverviewActivity.this, CardFlipperActivity.class);
                 if (CARD_HANDLER_INTERFACE.bundleSelected()) {
 
-                    startActivity(question);
-                }else{
-                    Toast.makeText(cardQuestion.getContext(), "Leider beinhaltet dieses Bundle noch keine Karten", Toast.LENGTH_LONG).show();
+                    startActivity(start);
+                } else {
+                    Toast.makeText(startbutton.getContext(), "Leider beinhaltet dieses Bundle noch keine Karten", Toast.LENGTH_LONG).show();
                 }
             }
 
         });
 
         int numberOfCase = getIntent().getIntExtra("case", 1);
+        String nameOfListener = getIntent().getStringExtra("nameOfListener");
+        if(nameOfListener == null){
         Log.d(TAG,"numberOfCase = " + numberOfCase);
-        setListviewAdapter(numberOfCase, null);
+        setListviewAdapter(numberOfCase, null);}
+        else{
+            setListviewAdapter(numberOfCase,nameOfListener);
+        }
 
     }
     
@@ -70,8 +75,11 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
                                             int position, long id) {
 
                         String name = parent.getAdapter().getItem(position).toString();
-
-                        setListviewAdapter(2, name);
+                        Intent caseTwo = new Intent(CardOverviewActivity.this, CardOverviewActivity.class);
+                        caseTwo.putExtra("nameOfListener", name);
+                        caseTwo.putExtra("case", 2);
+                        startActivity(caseTwo);
+                        //setListviewAdapter(2, name);
                     }
                 });
                 break;

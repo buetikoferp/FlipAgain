@@ -48,6 +48,8 @@
         android:numStars="5"
         android:layout_above="@+id/button"
         android:layout_centerHorizontal="true" />
+    // ViewFlipper in ViewFlipper
+
 
     <ViewFlipper
         android:layout_width="fill_parent"
@@ -65,40 +67,86 @@
             android:gravity="center"
             android:orientation="vertical"
             android:background="#ffffff"
-            android:clickable="true">
+            android:clickable="false"
+            android:id="@+id/CardQuestion">
 
             <TextView
                 android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="Frage"
                 android:textColor="#191975"
                 android:textSize="25dp"
-                android:textStyle="italic">
+                android:textStyle="italic"
+                android:id="@+id/TextView_question">
 
             </TextView>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="365dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:weightSum="1"
-            android:background="#df2758"
-            android:clickable="true">
+            android:background="#4dedd8"
+            android:clickable="false"
+            android:id="@+id/CardSolution">
 
             <TextView
                 android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="Antwort"
                 android:textColor="#191975"
                 android:textSize="25dp"
                 android:textStyle="italic"
-                android:layout_gravity="center_horizontal">
-            </TextView>
+                android:id="@+id/TextView_Solution">
 
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="365dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="#e6c925"
+            android:clickable="false"
+            android:id="@+id/CardChange">
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="nächste Karte"
+                android:textColor="#191975"
+                android:textSize="25dp"
+                android:textStyle="italic"
+                android:id="@+id/TextView_questionNext">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="365dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="#6c1c87"
+            android:clickable="false"
+            android:id="@+id/CardnextSolution">
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="nächste Karte Antwort"
+                android:textColor="#191975"
+                android:textSize="25dp"
+                android:textStyle="italic"
+                android:id="@+id/TextView_solutionNext">
+
+            </TextView>
         </LinearLayout>
 
 

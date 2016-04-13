@@ -70,30 +70,19 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
 
     @Override
     public String getQuestion() {
-        Card card =(Card) cardList.get(cardNr);
-        return card.getQuestion();
+            Card card = (Card) cardList.get(cardNr);
+            return card.getQuestion();
     }
 
     @Override
     public String getAnswer() {
-
-        if(cardNr <= cardMax){
-            Card card = (Card) cardList.get(cardNr);
-            Log.d(TAG , "Antwort = " + card.getAnswer() + " cardMax = "  + cardMax + " cardNR = " + cardNr);
-            cardNr++;
-            return card.getAnswer();
-        }else{
-
-            /**
-             *  Möglichkeit einer Statistik o.ä.
-             */
-            return "fehler";
-        }
+        Card card = (Card) cardList.get(cardNr);
+        return card.getAnswer();
     }
 
     @Override
     public boolean isLastCard() {
-        if(cardMax == cardNr){
+        if(cardMax -1 == cardNr){
             try{
                 return true;
             }finally {
@@ -104,7 +93,14 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
         }
     }
 
-
+    public boolean goToNextQuestion(){
+        if(cardNr <= cardMax){
+            cardNr++;
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @Override
     public boolean goBackToQuestion() {

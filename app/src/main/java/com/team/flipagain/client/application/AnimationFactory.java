@@ -32,6 +32,8 @@ import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.ViewAnimator;
 
+import com.team.flipagain.R;
+
 /**
  * This class contains methods for creating {@link Animation} objects for some of the most common animation, including a 3D flip animation, {@link FlipAnimation}.
  * Furthermore, utility methods are provided for initiating fade-in-then-out and flip animations.
@@ -149,19 +151,41 @@ public class AnimationFactory {
 	 * @param dir the direction of flip
 	 */
 	public static void flipTransition(final ViewAnimator viewAnimator, FlipDirection dir) {   
-		
+
 		final View fromView = viewAnimator.getCurrentView();
 		final int currentIndex = viewAnimator.getDisplayedChild();
-		final int nextIndex = (currentIndex + 1)%viewAnimator.getChildCount();
-		
-		final View toView = viewAnimator.getChildAt(nextIndex);
+		final int nextIndex;
+		final View toView;
 
-		Animation[] animc = AnimationFactory.flipAnimation(fromView, toView, (nextIndex < currentIndex?dir.theOtherDirection():dir), 500, null);
+		switch(fromView.getId()){
+			case R.id.CardQuestion:
+				toView = viewAnimator.getChildAt(1);
+				nextIndex = 1;
+				break;
+			case R.id.CardSolution:
+				toView = viewAnimator.getChildAt(0);
+				nextIndex = 0;
+				break;
+			case R.id.CardChange:
+				toView = viewAnimator.getChildAt(3);
+				nextIndex = 3;
+				break;
+			case R.id.CardnextSolution:
+				toView = viewAnimator.getChildAt(2);
+				nextIndex = 2;
+				break;
+			default:
+				toView = null;
+				nextIndex = 0;
+				break;
+		}
+
+		Animation[] animc = AnimationFactory.flipAnimation(fromView, toView, (nextIndex == 0 || nextIndex == 2?dir.theOtherDirection():dir), 500, null);
   
 		viewAnimator.setOutAnimation(animc[0]);
 		viewAnimator.setInAnimation(animc[1]);
 		
-		viewAnimator.showNext();   
+		viewAnimator.setDisplayedChild(nextIndex);
 	}
 	
 	//////////////

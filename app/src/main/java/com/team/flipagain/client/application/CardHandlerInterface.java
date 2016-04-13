@@ -78,6 +78,7 @@ public interface CardHandlerInterface {
      * @param context
      */
     public void addNewCard(String bundle, String question, String solution, Context context);
+    public boolean goToNextQuestion();
 
 
 
