@@ -1,17 +1,17 @@
 package com.team.flipagain.client.gui.mainScreen.cardScreen;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.nfc.Tag;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -33,6 +33,17 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_flipper);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Navigationshilfe")
+                .setMessage("Lösung:\n\t\t- Klick auf die Karte\n\nNächste Karte:\n\t\t- Wisch die Karte in die\n\t\t\tentsprechende Richtung.")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         question = (TextView)findViewById(R.id.TextView_question);

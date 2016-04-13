@@ -3,6 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login_screen">LoginScreenActivity</string>
 
+    //POPUP
+    <string name="cardflipper_popup_navigation">Navigation: \nLösung: \t Klick kurz auf die Karte.\n Nächste Karte: \t Zieh die Karte nach links oder rechts. </string>
+
+
+
     //Strings of Card Solution Activity
 
     <string name="cardSolution_btn_nextQuestion">nächste Frage</string>

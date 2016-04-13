@@ -8,14 +8,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.team.flipagain.client.gui.mainScreen.cardScreen.CardFlipperActivity">
-
+    <View android:id="@+id/strut"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Falsch"
         android:id="@+id/cardFlipper_btn_wrong"
+        android:enabled="false"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/strut" />
 
     <Button
         android:layout_width="wrap_content"
@@ -23,15 +28,10 @@
         android:text="Richtig"
         android:id="@+id/cardFlipper_btn_right"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Unsicher"
-        android:id="@+id/cardFlipper_btn_unsure"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/strut" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

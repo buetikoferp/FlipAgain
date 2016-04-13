@@ -78,7 +78,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".client.gui.mainScreen.cardCreator.SelectBundleActivity" />
-        <activity android:name=".client.gui.mainScreen.cardScreen.CardFlipperActivity"></activity>
+        <activity
+            android:name=".client.gui.mainScreen.cardScreen.CardFlipperActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
