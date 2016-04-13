@@ -136,6 +136,43 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                             break;
                         }
                         case R.id.CardSolution:{
+
+                            if(CARD_HANDLER_INTERFACE.isLastCard()){
+                                Intent intent = new Intent(CardFlipperActivity.this, CardOverviewActivity.class);
+                                intent.putExtra("case", 1);
+                                startActivity(intent);
+                            } else {
+                                if(CARD_HANDLER_INTERFACE.goToNextQuestion()){
+                                    progressBar.setMax(CARD_HANDLER_INTERFACE.getCardMax() - 1);
+                                    progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
+
+                                    solution.setText(CARD_HANDLER_INTERFACE.getAnswer());
+                                    question.setText(CARD_HANDLER_INTERFACE.getQuestion());
+                                    viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.CardQuestion)));
+                                }
+
+                            }
+
+                            break;
+                        }
+                        case R.id.CardnextSolution:{
+
+                            if(CARD_HANDLER_INTERFACE.isLastCard()){
+                                Intent intent = new Intent(CardFlipperActivity.this, CardOverviewActivity.class);
+                                intent.putExtra("case", 1);
+                                startActivity(intent);
+                            } else {
+                                if(CARD_HANDLER_INTERFACE.goToNextQuestion()){
+                                    progressBar.setMax(CARD_HANDLER_INTERFACE.getCardMax() - 1);
+                                    progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
+
+                                    solution.setText(CARD_HANDLER_INTERFACE.getAnswer());
+                                    question.setText(CARD_HANDLER_INTERFACE.getQuestion());
+                                    viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.CardQuestion)));
+                                }
+
+                            }
+
                             break;
                         }
 
