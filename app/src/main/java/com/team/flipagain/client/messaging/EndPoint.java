@@ -29,7 +29,7 @@ public abstract class EndPoint{
         ConnectionFactory factory = new ConnectionFactory();
 
         //hostname of your rabbitmq server
-        factory.setHost("localhost");
+        factory.setHost("192.168.229.128");
 
         //getting a connection
         connection = factory.newConnection();

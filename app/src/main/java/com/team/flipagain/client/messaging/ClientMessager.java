@@ -24,8 +24,8 @@ public class ClientMessager{
     public Object receive(){
         Object obj = null;
         try {
-            ClientConsumer cc = new ClientConsumer("ClientConsumer");
-
+            ClientConsumer cc = new ClientConsumer("flipagain");
+            cc.run();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {

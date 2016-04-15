@@ -19,6 +19,8 @@ public class User implements Serializable{
     private boolean isAuthorized = false;
 
 
+
+
     //GETTER + SETTER
     public int getUserId() {
         return userId;

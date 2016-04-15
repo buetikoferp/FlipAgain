@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
+import com.team.flipagain.client.domain.User;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 
@@ -374,13 +375,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+                User delay = new User();
+           // for (String credential : DUMMY_CREDENTIALS) {
+           //     String[] pieces = credential.split(":");
+           //     if (pieces[0].equals(mEmail)) {
+           //         // Account exists, return true if the password matches.
+           //         return pieces[1].equals(mPassword);
+           //     }
+           // }
 
             // TODO: register the new account here.
             return false;
