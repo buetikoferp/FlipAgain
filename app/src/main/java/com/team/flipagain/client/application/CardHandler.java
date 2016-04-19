@@ -12,7 +12,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.team.flipagain.client.domain.Card;
 import com.team.flipagain.client.domain.DBManager;
 import com.team.flipagain.client.domain.DomainInterface;
-import com.team.flipagain.server.domain.User;
+import com.team.flipagain.client.domain.User;
+
 
 import java.util.ArrayList;
 

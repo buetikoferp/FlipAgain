@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 
-import com.team.flipagain.server.domain.User;
+import com.team.flipagain.client.domain.User;
 
 /**
  * Created by Raffaele on 23.03.2016.
