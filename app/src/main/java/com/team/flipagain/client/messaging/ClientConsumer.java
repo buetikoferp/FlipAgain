@@ -23,11 +23,14 @@ import java.util.concurrent.TimeoutException;
  */
 public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
+    User user;
+
     public ClientConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
     }
 
     public void run() {
+
         try {
             //start consuming messages. Auto acknowledge messages.
             channel.basicConsume(endPointName, true,this);
@@ -48,9 +51,13 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
      */
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
-        User u = (User)SerializationUtils.deserialize(body);
-        System.out.println("Name:  "+ u.getUsername()+ "PW: " + u.getPassword() + " received.");
+        user = (User)SerializationUtils.deserialize(body);
+        //  System.out.println("Name:  "+ u.getUsername()+ "PW: " + u.getPassword() + " received.");
 
+    }
+
+    public User getUser(){
+        return user;
     }
 
     public void handleCancel(String consumerTag) {}

@@ -3,23 +3,22 @@ package com.team.flipagain.client.gui.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,10 +32,13 @@ import android.widget.TextView;
 import com.team.flipagain.R;
 import com.team.flipagain.client.domain.User;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.client.messaging.ClientConsumer;
+import com.team.flipagain.client.messaging.ClientMessager;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    private final String TAG = "login";
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -82,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         setupActionBar();
 
-            // Button Listener temp_next
+        // Button Listener temp_next
         Button temp_next = (Button) findViewById(R.id.login_btn_temp_next);
         temp_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -355,36 +358,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        User user;
 
-       // private CardHandlerInterface login = new ClientSender();
+        // private CardHandlerInterface login = new ClientSender();
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
-          //  boolean a = login.getAuthorization(email, password);
+            //  boolean a = login.getAuthorization(email, password);
+            user = new User();
+            user.setUsername(email);
+            user.setPassword(password);
+            user.setIsAuthorized(false);
+            user.setUserId(1);
         }
 
         @Override
-        protected Boolean   doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
+        protected Boolean doInBackground(Void... params) {
+            ClientMessager cm = new ClientMessager();
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                ClientConsumer cc = new ClientConsumer("flipagain");
+                cm.send(user);
+                Thread consumerThread = new Thread(cc);
+                consumerThread.start();
+
+                while(cc.getUser()!=null && !cc.getUser().equals(null)){
+                    cm.receive();
+                }
+                // Log.e(TAG,cc.getUser().getUsername() );
+
+                return cc.getUser().isAuthorized();
+            } catch (IOException e) {
+                Log.e(TAG, "Exception", e);
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
             }
 
-                User delay = new User();
-           // for (String credential : DUMMY_CREDENTIALS) {
-           //     String[] pieces = credential.split(":");
-           //     if (pieces[0].equals(mEmail)) {
-           //         // Account exists, return true if the password matches.
-           //         return pieces[1].equals(mPassword);
-           //     }
-           // }
-
-            // TODO: register the new account here.
             return false;
         }
 

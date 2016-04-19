@@ -18,6 +18,16 @@ public class User implements Serializable{
     private ArrayList<Bundle> bundleList;
     private boolean isAuthorized = false;
 
+    public User(){
+
+    }
+
+    public User(String username, String password, int userId, boolean isAuthorized){
+        this.username = username;
+        this.password = password;
+        this.isAuthorized = isAuthorized;
+        this.userId = userId;
+    }
 
 
 
