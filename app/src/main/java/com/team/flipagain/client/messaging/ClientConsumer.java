@@ -23,7 +23,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
-    User user;
+    private User user;
 
     public ClientConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
@@ -51,14 +51,17 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
      */
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
-        user = (User)SerializationUtils.deserialize(body);
+        user = (SerializationUtils.deserialize(body));
         //  System.out.println("Name:  "+ u.getUsername()+ "PW: " + u.getPassword() + " received.");
+
 
     }
 
     public User getUser(){
         return user;
     }
+
+
 
     public void handleCancel(String consumerTag) {}
     public void handleCancelOk(String consumerTag) {}

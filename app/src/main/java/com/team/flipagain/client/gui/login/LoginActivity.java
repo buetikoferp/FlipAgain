@@ -379,22 +379,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 ClientConsumer cc = new ClientConsumer("flipagain");
                 cm.send(user);
-                Thread consumerThread = new Thread(cc);
-                consumerThread.start();
+                cc.run();
 
-                while(cc.getUser()!=null && !cc.getUser().equals(null)){
-                    cm.receive();
-                }
-                // Log.e(TAG,cc.getUser().getUsername() );
-
+                Thread thread = new Thread("sleep");
+                thread.sleep(5000);
+                Log.d(TAG, cc.getUser().getUsername() + " " + cc.getUser().getPassword() + " " + cc.getUser().isAuthorized());
                 return cc.getUser().isAuthorized();
             } catch (IOException e) {
                 Log.e(TAG, "Exception", e);
                 e.printStackTrace();
             } catch (TimeoutException e) {
                 e.printStackTrace();
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
             }
-
             return false;
         }
 

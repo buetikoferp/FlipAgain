@@ -1,5 +1,7 @@
 package com.team.flipagain.client.messaging;
 
+import com.team.flipagain.client.domain.User;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.TimeoutException;
@@ -8,6 +10,8 @@ import java.util.concurrent.TimeoutException;
  * Created by Philipp on 03.04.2016.
  */
 public class ClientMessager{
+    private Object recivedObject;
+
     public void send(Serializable obj){
         ClientProducer cp = null;
         try {
@@ -21,19 +25,12 @@ public class ClientMessager{
 
     }
 
-    public Object receive(){
-        Object obj = null;
-        try {
-            ClientConsumer cc = new ClientConsumer("flipagain");
-            cc.run();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-
-        return obj;
+    public void receive(Object recievedObject){
+        this.recivedObject = recievedObject;
     }
 
+    public Object getRecivedObject(){
+        return recivedObject;
+    }
 
 }
