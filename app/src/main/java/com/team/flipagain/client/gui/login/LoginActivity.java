@@ -383,19 +383,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 Thread thread = new Thread("sleep");
                 thread.sleep(5000);
-                Log.d(TAG, cc.getUser().getUsername() + " " + cc.getUser().getPassword() + " " + cc.getUser().isAuthorized());
+                Log.d(TAG, user.getUsername() + " " + user.getPassword() + " " + user.isAuthorized());
                 return cc.getUser().isAuthorized();
             } catch (IOException e) {
-                Log.e(TAG, "Exception", e);
                 e.printStackTrace();
+                return false;
             } catch (TimeoutException e) {
                 e.printStackTrace();
+                return false;
             }catch (InterruptedException e){
                 e.printStackTrace();
+                return false;
             }catch (Exception e){
                 e.printStackTrace();
+                return false;
             }
-            return false;
+
         }
 
         @Override
