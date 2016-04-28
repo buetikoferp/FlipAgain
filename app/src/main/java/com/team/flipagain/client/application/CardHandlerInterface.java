@@ -10,17 +10,12 @@ import com.team.flipagain.client.domain.User;
  * Created by Raffaele on 23.03.2016.
  */
 public interface CardHandlerInterface {
-    /**
-     * Check if user and password are correct.
-     * @param User
-     * @return
-     */
-   public boolean getAuthorization(User u);
+
 
 
 
     //Methoden der Klasse CardHandler
-
+    public void restartBundle();
     /**
      * Füllt die Karten des gewählten Bundles in eine Liste.
      * @param nameOfBundle
@@ -56,7 +51,7 @@ public interface CardHandlerInterface {
      * lässt den den zähler im Kartenhändler 1 zurückspringen
      * @return
      */
-    public boolean goBackToQuestion();
+    public boolean goToPreviousQuestion();
 
     /**
      * gibt die Anzahl Karten des Bundles zurück

@@ -23,7 +23,8 @@ import java.util.ArrayList;
 public class CardHandler extends AppCompatActivity implements CardHandlerInterface {
     private String TAG = "CARDHANDLER";
     private ArrayList<Object> cardList = new ArrayList<>();
-
+    private int cardMax;
+    private int cardNr = 0;
 
     public int getCardNr() {
         return cardNr;
@@ -35,17 +36,6 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
         domainInterface.insertCard(bundle,question,solution);
     }
 
-    public int getCardMax() {
-        return cardMax;
-    }
-
-    private int cardMax;
-    private int cardNr = 0;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     /**
      *
@@ -83,15 +73,16 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
 
     @Override
     public boolean isLastCard() {
-        if(cardMax -1 == cardNr){
-            try{
-                return true;
-            }finally {
-                cardNr = 0;
-            }
-        }else{
+        if(cardNr < cardMax -1){
             return false;
+        }else{
+            return true;
         }
+    }
+
+    @Override
+    public void restartBundle(){
+        cardNr = 0;
     }
 
     public boolean goToNextQuestion(){
@@ -104,7 +95,7 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
     }
 
     @Override
-    public boolean goBackToQuestion() {
+    public boolean goToPreviousQuestion() {
         if(cardNr > 0 ){
             cardNr--;
             return true;
@@ -113,58 +104,8 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
         }
     }
 
-
-    @Override
-    public boolean getAuthorization(User u) {
-        return false;
+    public int getCardMax() {
+        return cardMax;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "CardHandler Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.team.flipagain.client.application/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "CardHandler Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.team.flipagain.client.application/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 }

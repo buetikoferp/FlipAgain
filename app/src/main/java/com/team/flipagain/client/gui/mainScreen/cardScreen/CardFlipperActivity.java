@@ -110,6 +110,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                         case R.id.CardQuestion:{
 
                             if(CARD_HANDLER_INTERFACE.isLastCard()){
+                                CARD_HANDLER_INTERFACE.restartBundle();
                                 Intent intent = new Intent(CardFlipperActivity.this, CardOverviewActivity.class);
                                 intent.putExtra("case", 1);
                                 startActivity(intent);
@@ -207,7 +208,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                     // Display previous screen.
                     switch(currentView.getId()){
                         case R.id.CardQuestion:{
-                            if(CARD_HANDLER_INTERFACE.goBackToQuestion()){
+                            if(CARD_HANDLER_INTERFACE.goToPreviousQuestion()){
                                 progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
                                 questionNext.setText(CARD_HANDLER_INTERFACE.getQuestion());
                                 solutionNext.setText(CARD_HANDLER_INTERFACE.getAnswer());
@@ -216,7 +217,7 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                             break;
                         }
                         case R.id.CardChange:{
-                            if(CARD_HANDLER_INTERFACE.goBackToQuestion()){
+                            if(CARD_HANDLER_INTERFACE.goToPreviousQuestion()){
                                 progressBar.setProgress(CARD_HANDLER_INTERFACE.getCardNr());
                                 question.setText(CARD_HANDLER_INTERFACE.getQuestion());
                                 solution.setText(CARD_HANDLER_INTERFACE.getAnswer());
