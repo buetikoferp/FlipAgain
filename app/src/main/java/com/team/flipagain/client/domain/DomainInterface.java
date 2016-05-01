@@ -13,30 +13,24 @@ public interface DomainInterface {
 
 
     /**
-     * Returniert eine ArrayListe mit Obj der mitgegebenen DB Tabelle
+     * Returniert eine ArrayListe mit Obj der mitgegebenen DB Tabelle -----------Wird noch gelöscht
      * @param tableName
      * @param WHEREname
      * @return
      */
     public ArrayList<Object> getClassListofSelectedTable(String tableName, String WHEREname);
 
-    /**
-     * Sobald Server muss hier Bundle obj erstellt und gesendet werden.
-     * @param bundleName
-     * @param moduleName
-     */
-    public void insertBundle(String bundleName , String moduleName);
 
-    /**
-     * Sobald Server muss hier Card obj erstellt und gesendet werden.
-     * @param nameOfBundle
-     * @param question
-     * @param solution
-     */
+
+    //LOKAL
+    public void insertBundle(String bundleName , String moduleName);
     public void insertCard(String nameOfBundle, String question, String solution);
     public ArrayList<FieldOfStudy> getListOfStudy();
     public HashSet<Module> getListOfModlue(String WhereStatement);
     public ArrayList<Bundle> getListOfBundle(String WhereStatement);
     public ArrayList<Card> getListofCard(String WhereStatement);
+
+    //SERVER
+    public ArrayList<Bundle> getServerListofBundle(String nameOfModule);
 
 }

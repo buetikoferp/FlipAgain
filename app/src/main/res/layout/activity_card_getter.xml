@@ -19,7 +19,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/getCards_btn_getBundle"
-            android:id="@+id/cardOverview_btn_start"
+            android:id="@+id/cardGetter_btn_download"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:enabled="false" />
@@ -31,7 +31,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:choiceMode="singleChoice"
-            android:layout_above="@+id/cardOverview_btn_start" />
+            android:layout_above="@+id/cardOverview_btn_start"
+            android:listSelector="@color/colorSelectedButton"/>
 
     </RelativeLayout>
 

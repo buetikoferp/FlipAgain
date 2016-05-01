@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -25,27 +26,28 @@ import java.util.Set;
  */
 public class ListHandlerV1 implements  ListHandlerInterfaceV1{
     private String TAG = "listhandler";
-    private String selectedFieldOfStudy;
-    private String selectedModule;
-    private String selectedBundle;
 
     private ArrayAdapter fieldofStudyAdapter;
     private ArrayAdapter moduleAdapter;
     private ArrayAdapter bundleAdapter;
     private int state = 1;
-    private boolean isReseted = true;
+
+    private String moduleNameForDownload;
+    private String bundleNameForDownload;
 
     private ListView listView;
 
     private Context context;
     private DomainInterface dbManager;
     private Activity activity;
+    private Button downloadButton;
 
-    public ListHandlerV1(Context context, ListView listView, Activity activity){
+    public ListHandlerV1(Context context, ListView listView, Activity activity, Button downloadButton){
         this.activity = activity;
         this.context = context;
         this.listView = listView;
         fieldofStudyAdapter = getFieldOfStudyAdapter();
+        this.downloadButton = downloadButton;
     }
 
     public void setFirstList(){
@@ -54,7 +56,7 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
     }
 
     public void setNextListView(String selected){
-        if(state < 3){
+        if(state < 4){
             state++;
         }
         Log.d(TAG, "state: " + state);
@@ -63,22 +65,24 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
                 listView.setAdapter(fieldofStudyAdapter);
                 break;
             case 2:
-                if(isReseted){
-                    moduleAdapter = getModuleAdapter(selected);
-                    ListView reset = (ListView) this.activity.findViewById(R.id.cardGetter_list_bundles);
-                    reset.setAdapter(moduleAdapter);
-                    isReseted = false;
-                }else {
-                    ArrayAdapter moduleAdapterv1 = getModuleAdapter(selected);
-                    listView.setAdapter(null);
-                    listView.setAdapter(moduleAdapterv1);
-                    isReseted = true;
-                }
+                moduleAdapter = getModuleAdapter(selected);
+                listView.setAdapter(moduleAdapter);
                 break;
             case 3:
-                listView.setAdapter(null);
-                bundleAdapter = getBundleAdapter(selected);
-                listView.setAdapter(bundleAdapter);
+                moduleNameForDownload = selected;
+                if(activity.getLocalClassName().equals("client.gui.mainScreen.cardGetter.CardGetterActivity")){
+                    bundleAdapter = getBundleAdapter(selected);
+                    listView.setAdapter(bundleAdapter);
+                }else{
+                    bundleAdapter = getBundleAdapter(selected);
+                    listView.setAdapter(bundleAdapter);
+                }
+                break;
+            case 4:
+                bundleNameForDownload = selected;
+                downloadButton.setEnabled(true);
+
+                Log.d(TAG, "activity" + activity.getLocalClassName());
                 break;
         }
     }
@@ -89,18 +93,20 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
             case 2:
                 listView.setAdapter(fieldofStudyAdapter);
                 state--;
-                Log.d( TAG, "state: " + state );
                 return true;
             case 3:
                 listView.setAdapter(moduleAdapter);
                 state--;
-                Log.d( TAG, "state: " + state );
+                return true;
+            case 4:
+                state = 2;
                 return true;
             default:
                 return false;
         }
     }
 
+    //LOKAL
     private ArrayAdapter getFieldOfStudyAdapter(){
         dbManager = new DBManager(context);
         List<String> ListOfFOSname = new ArrayList<>();
@@ -155,5 +161,23 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
 
         return adapter;
 
+    }
+    //Server
+    private ArrayAdapter getBundleAdapterOfServer(String moduleNameForDownload){
+        dbManager = new DBManager(context);
+        List<String> ListOfBundleName = new ArrayList<>();
+        ArrayList<Bundle> ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
+
+        for(Bundle bundle : ListOfBundle ){
+            ListOfBundleName.add(bundle.getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                context,
+                R.layout.list_item_card_overview,
+                R.id.list_item_card_overview_textview,
+                ListOfBundleName);
+
+        return adapter;
     }
 }

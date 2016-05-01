@@ -13,6 +13,12 @@ public class Bundle implements Serializable{
     private int userId;
     private ArrayList<Card> cardList;
 
+    /**
+     *
+     * @param bundleId
+     * @param name
+     * @param userId
+     */
     public Bundle(int bundleId, String name , int userId){
         this.bundleId = bundleId;
         this.name = name;

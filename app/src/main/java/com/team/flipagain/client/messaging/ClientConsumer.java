@@ -8,6 +8,8 @@ import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
+import com.team.flipagain.client.domain.Bundle;
+import com.team.flipagain.client.domain.Module;
 import com.team.flipagain.client.domain.User;
 
 import org.apache.commons.lang3.SerializationUtils;
@@ -24,6 +26,10 @@ import java.util.concurrent.TimeoutException;
 public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
     private User user;
+
+
+    private Module module;
+    private Bundle bundle;
 
     public ClientConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
@@ -43,7 +49,7 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
      * Called when consumer is registered.
      */
     public void handleConsumeOk(String consumerTag) {
-        System.out.println("Consumer "+consumerTag +" registered");
+        System.out.println("Consumer " + consumerTag + " registered");
     }
 
     /**
@@ -51,8 +57,16 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
      */
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
-        user = (SerializationUtils.deserialize(body));
-        //  System.out.println("Name:  "+ u.getUsername()+ "PW: " + u.getPassword() + " received.");
+
+        if((SerializationUtils.deserialize(body)) instanceof User){
+            user = (SerializationUtils.deserialize(body));
+        }
+        if((SerializationUtils.deserialize(body)) instanceof Module){
+            module = (SerializationUtils.deserialize(body));
+        }
+        if((SerializationUtils.deserialize(body)) instanceof Bundle){
+            bundle =(SerializationUtils.deserialize(body));
+        }
 
 
     }
@@ -60,6 +74,16 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
     public User getUser(){
         return user;
     }
+
+    public Bundle getBundle() {
+        return bundle;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+
 
 
 

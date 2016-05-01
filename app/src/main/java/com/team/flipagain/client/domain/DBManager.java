@@ -6,9 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.team.flipagain.client.messaging.ClientConsumer;
+import com.team.flipagain.client.messaging.ClientMessager;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Raffaele on 23.03.2016.
@@ -42,60 +47,9 @@ public class DBManager implements DomainInterface{
     private DBManager(){}
 
 
-
-    public void insertBundle(String bundleName , String moduleName){
-        final SQLiteDatabase dbCon = db.getWritableDatabase();
-        Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + " WHERE " + TBL_Module.getRowName() + " = " + "'" + moduleName + "'", null);
-        int moduleID;
-        try {
-            cursor.moveToFirst();
-            moduleID = cursor.getInt(cursor.getColumnIndex(TBL_Module.getRowModuleID()));
-
-
-            final ContentValues data = new ContentValues();
-            data.put(TBL_Bundle.getName(), bundleName);
-            //data.put(TBL_Bundle.getUserID(), USERID!!!);                                                  Hier muss dann noch die UserID hiinzugefügt werden
-            data.put(TBL_Bundle.getModuleID(), moduleID);
-
-            final long id = dbCon.insertOrThrow(TBL_Bundle.getTableName(),null, data);
-            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
-        }finally {
-            dbCon.close();
-            cursor.close();
-        }
-    }
-
-    @Override
-    public void insertCard(String nameOfBundle, String question, String solution) {
-        final SQLiteDatabase dbCon = db.getWritableDatabase();
-        Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + " WHERE " + TBL_Bundle.getName() + " = " + "'" + nameOfBundle + "'", null);
-        int bundleID;
-        try {
-            cursor.moveToFirst();
-            bundleID = cursor.getInt(cursor.getColumnIndex(TBL_Bundle.getBundleID()));
-
-
-            final ContentValues data = new ContentValues();
-            data.put(TBL_Card.getQuestion(), question);
-            data.put(TBL_Card.getAnswer(), solution);
-            data.put(TBL_Card.getBundleID(), bundleID);
-
-            /**
-             * HIER MUSS NOCH EIN CARD Obj erstellt werden und dem Server geschickt werden.
-             */
-
-            final long id = dbCon.insertOrThrow(TBL_Card.getTableName(),null, data);
-            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
-        }finally {
-            dbCon.close();
-            cursor.close();
-        }
-    }
-
-
     private void open() {
         db.getReadableDatabase();
-        Log.d(TAG,"Datenbank FlipAgain geoeffnet");
+        Log.d(TAG, "Datenbank FlipAgain geoeffnet");
 
     }
 
@@ -104,6 +58,59 @@ public class DBManager implements DomainInterface{
         Log.d(TAG, "Datenbank FlipAgain geschlossen");
     }
 
+
+
+
+
+    /*
+        SERVER
+    */
+
+    public ArrayList<Bundle> getServerListofBundle(String nameOfModule){
+        Module module = new Module(nameOfModule);
+
+
+        ClientMessager cm = new ClientMessager();
+        try {
+            ClientConsumer cc = new ClientConsumer("flipagain");
+            cm.send(module);
+            cc.run();
+
+            Thread thread = new Thread("sleep");
+            thread.sleep(5000);
+
+
+            module = cc.getModule();
+
+            return module.getListOfBundle();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /*
+   LOKALE DATENBANK
+    */
 
     public ArrayList<FieldOfStudy> getListOfStudy(){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
@@ -179,6 +186,56 @@ public class DBManager implements DomainInterface{
 
         return ListOfCard;
     }
+
+    public void insertBundle(String bundleName , String moduleName){
+        final SQLiteDatabase dbCon = db.getWritableDatabase();
+        Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + " WHERE " + TBL_Module.getRowName() + " = " + "'" + moduleName + "'", null);
+        int moduleID;
+        try {
+            cursor.moveToFirst();
+            moduleID = cursor.getInt(cursor.getColumnIndex(TBL_Module.getRowModuleID()));
+
+
+            final ContentValues data = new ContentValues();
+            data.put(TBL_Bundle.getName(), bundleName);
+            //data.put(TBL_Bundle.getUserID(), USERID!!!);                                                  Hier muss dann noch die UserID hiinzugefügt werden
+            data.put(TBL_Bundle.getModuleID(), moduleID);
+
+            final long id = dbCon.insertOrThrow(TBL_Bundle.getTableName(),null, data);
+            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+        }finally {
+            dbCon.close();
+            cursor.close();
+        }
+    }
+
+    @Override
+    public void insertCard(String nameOfBundle, String question, String solution) {
+        final SQLiteDatabase dbCon = db.getWritableDatabase();
+        Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + " WHERE " + TBL_Bundle.getName() + " = " + "'" + nameOfBundle + "'", null);
+        int bundleID;
+        try {
+            cursor.moveToFirst();
+            bundleID = cursor.getInt(cursor.getColumnIndex(TBL_Bundle.getBundleID()));
+
+
+            final ContentValues data = new ContentValues();
+            data.put(TBL_Card.getQuestion(), question);
+            data.put(TBL_Card.getAnswer(), solution);
+            data.put(TBL_Card.getBundleID(), bundleID);
+
+            /**
+             * HIER MUSS NOCH EIN CARD Obj erstellt werden und dem Server geschickt werden.
+             */
+
+            final long id = dbCon.insertOrThrow(TBL_Card.getTableName(),null, data);
+            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+        }finally {
+            dbCon.close();
+            cursor.close();
+        }
+    }
+
     /**
      * Noch unfertige Methode soll später eine Liste von Objekten einer Tabelle zurückgeben.
      * @param tableName
