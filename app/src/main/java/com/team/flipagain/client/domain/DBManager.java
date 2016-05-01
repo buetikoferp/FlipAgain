@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Raffaele on 23.03.2016.
@@ -20,7 +22,7 @@ public class DBManager implements DomainInterface{
 
     //new ArrayList for correct Code
     private ArrayList<FieldOfStudy> ListOfFieldOfStudy = new ArrayList<>();
-    private ArrayList<Module> ListOfModule = new ArrayList<>();
+    private HashSet<Module> SetOfModule = new HashSet<>();
     private ArrayList<Bundle> ListOfBundle = new ArrayList<>();
     private ArrayList<Card> ListOfCard = new ArrayList<>();
     // DBMANAGER
@@ -114,27 +116,29 @@ public class DBManager implements DomainInterface{
             }
         } finally {
             dbCon.close();
+            close();
             a.close();
         }
 
         return ListOfFieldOfStudy;
     }
 
-    public ArrayList<Module> getListOfModlue(String WhereStatement){
+    public HashSet<Module> getListOfModlue(String WhereStatement){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
         Cursor b = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + ", fieldofstudy" + " WHERE fieldofstudy.nameofstudy  =" + "'" + WhereStatement + "'  AND fieldofstudy.rowStudyID =" + TBL_Module.getTableName() + ".rowStudyID", null);
         try {
             while (b.moveToNext()) {
                 int moduleID = b.getInt(b.getColumnIndex(TBL_Module.getRowModuleID()));
                 String name = b.getString(b.getColumnIndex(TBL_Module.getRowName()));
-                ListOfModule.add(new Module(moduleID, name));
+                SetOfModule.add(new Module(moduleID, name));
             }
         } finally {
             dbCon.close();
             b.close();
+            close();
         }
 
-        return ListOfModule;
+        return SetOfModule;
     }
 
     public ArrayList<Bundle> getListOfBundle(String WhereStatement){
@@ -150,6 +154,7 @@ public class DBManager implements DomainInterface{
         } finally {
             dbCon.close();
             c.close();
+            close();
         }
 
         return ListOfBundle;

@@ -1,5 +1,6 @@
 package com.team.flipagain.client.application;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.team.flipagain.client.domain.Module;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Anthony Delay on 28.04.2016.
@@ -31,21 +33,23 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
     private ArrayAdapter moduleAdapter;
     private ArrayAdapter bundleAdapter;
     private int state = 1;
+    private boolean isReseted = true;
 
     private ListView listView;
 
     private Context context;
     private DomainInterface dbManager;
+    private Activity activity;
 
-    public ListHandlerV1(Context context, ListView listView){
+    public ListHandlerV1(Context context, ListView listView, Activity activity){
+        this.activity = activity;
         this.context = context;
         this.listView = listView;
-        dbManager = new DBManager(context);
         fieldofStudyAdapter = getFieldOfStudyAdapter();
     }
 
     public void setFirstList(){
-        Log.d( TAG, "state of FirstList: " + state );
+        Log.d(TAG, "state of FirstList: " + state);
         listView.setAdapter(fieldofStudyAdapter);
     }
 
@@ -59,9 +63,17 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
                 listView.setAdapter(fieldofStudyAdapter);
                 break;
             case 2:
-                listView.setAdapter(null);
-                moduleAdapter = getModuleAdapter(selected);
-                listView.setAdapter(moduleAdapter);
+                if(isReseted){
+                    moduleAdapter = getModuleAdapter(selected);
+                    ListView reset = (ListView) this.activity.findViewById(R.id.cardGetter_list_bundles);
+                    reset.setAdapter(moduleAdapter);
+                    isReseted = false;
+                }else {
+                    ArrayAdapter moduleAdapterv1 = getModuleAdapter(selected);
+                    listView.setAdapter(null);
+                    listView.setAdapter(moduleAdapterv1);
+                    isReseted = true;
+                }
                 break;
             case 3:
                 listView.setAdapter(null);
@@ -88,18 +100,9 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
                 return false;
         }
     }
-    private void resetModuleAdapter(){
-        if(moduleAdapter != null){
-            moduleAdapter = null;
-        }
-    }
 
-    private void resetBundleAdapter(){
-        if (bundleAdapter != null){
-            bundleAdapter = null;
-        }
-    }
     private ArrayAdapter getFieldOfStudyAdapter(){
+        dbManager = new DBManager(context);
         List<String> ListOfFOSname = new ArrayList<>();
         ArrayList<FieldOfStudy> fosList = dbManager.getListOfStudy();
 
@@ -117,8 +120,9 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
 
     }
     private ArrayAdapter getModuleAdapter(String fieldOfStudyName){
+        dbManager = new DBManager(context);
         List<String> ListOfModuleName = new ArrayList<>();
-        ArrayList<Module> ListOfModule = dbManager.getListOfModlue(fieldOfStudyName);
+        Set<Module> ListOfModule = dbManager.getListOfModlue(fieldOfStudyName);
 
         for(Module module : ListOfModule ){
             ListOfModuleName.add(module.getModuleName());
@@ -135,6 +139,7 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
     }
 
     private ArrayAdapter getBundleAdapter(String moduleName){
+        dbManager = new DBManager(context);
         List<String> ListOfBundleName = new ArrayList<>();
         ArrayList<Bundle> ListOfBundle = dbManager.getListOfBundle(moduleName);
 

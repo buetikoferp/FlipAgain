@@ -28,7 +28,7 @@ public class CardGetterActivity extends AppCompatActivity {
 
         listView =(ListView) findViewById(R.id.cardGetter_list_bundles);
         context = listView.getContext();
-        listHandler = new ListHandlerV1(context, listView);
+        listHandler = new ListHandlerV1(context, listView, this);
         listHandler.setFirstList();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
