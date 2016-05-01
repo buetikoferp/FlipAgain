@@ -5,10 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by Raffaele on 23.03.2016.
@@ -20,6 +18,11 @@ public class DBManager implements DomainInterface{
     private ArrayList<Object> bundleList = new ArrayList<>();
     private ArrayList<Object> cardList = new ArrayList<>();
 
+    //new ArrayList for correct Code
+    private ArrayList<FieldOfStudy> ListOfFieldOfStudy = new ArrayList<>();
+    private ArrayList<Module> ListOfModule = new ArrayList<>();
+    private ArrayList<Bundle> ListOfBundle = new ArrayList<>();
+    private ArrayList<Card> ListOfCard = new ArrayList<>();
     // DBMANAGER
     private Database db;
 
@@ -99,6 +102,78 @@ public class DBManager implements DomainInterface{
         Log.d(TAG, "Datenbank FlipAgain geschlossen");
     }
 
+
+    public ArrayList<FieldOfStudy> getListOfStudy(){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+        Cursor a = dbCon.rawQuery("SELECT " + TBL_FOStudy.getRowNameOfStudy() + "," + TBL_FOStudy.getRowStudyID() + " FROM " + TBL_FOStudy.getTableName(), null);
+        try {
+            while (a.moveToNext()) {
+                int studyID = a.getInt(a.getColumnIndex(TBL_FOStudy.getRowStudyID()));
+                String name = a.getString(a.getColumnIndex(TBL_FOStudy.getRowNameOfStudy()));
+                ListOfFieldOfStudy.add(new FieldOfStudy(studyID, name));
+            }
+        } finally {
+            dbCon.close();
+            a.close();
+        }
+
+        return ListOfFieldOfStudy;
+    }
+
+    public ArrayList<Module> getListOfModlue(String WhereStatement){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+        Cursor b = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + ", fieldofstudy" + " WHERE fieldofstudy.nameofstudy  =" + "'" + WhereStatement + "'  AND fieldofstudy.rowStudyID =" + TBL_Module.getTableName() + ".rowStudyID", null);
+        try {
+            while (b.moveToNext()) {
+                int moduleID = b.getInt(b.getColumnIndex(TBL_Module.getRowModuleID()));
+                String name = b.getString(b.getColumnIndex(TBL_Module.getRowName()));
+                ListOfModule.add(new Module(moduleID, name));
+            }
+        } finally {
+            dbCon.close();
+            b.close();
+        }
+
+        return ListOfModule;
+    }
+
+    public ArrayList<Bundle> getListOfBundle(String WhereStatement){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+        Cursor c = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + ", module" + " WHERE module.rowName  =" + "'" + WhereStatement + "'  AND module.rowModuleID =" + TBL_Bundle.getTableName() + ".moduleID", null);
+        try {
+            while (c.moveToNext()) {
+                int bundleID = c.getInt(c.getColumnIndex( TBL_Bundle.getBundleID()));
+                String name = c.getString(c.getColumnIndex(TBL_Bundle.getName()));
+                Log.d(TAG, " created name " + name + "   created id " + bundleID);
+                ListOfBundle.add(new Bundle(bundleID, name, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
+            }
+        } finally {
+            dbCon.close();
+            c.close();
+        }
+
+        return ListOfBundle;
+    }
+
+    public ArrayList<Card> getListofCard(String WhereStatement){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+        Cursor d = dbCon.rawQuery("SELECT " + TBL_Card.getAnswer() + "," + TBL_Card.getQuestion() + ", "+ TBL_Card.getCardID()+ ", " + TBL_Card.getRating()+ " FROM " + TBL_Card.getTableName() + ", bundle" + " WHERE bundle.name  =" + "'" + WhereStatement + "'  AND bundle.bundleID =" + TBL_Card.getTableName() + ".bundleID", null);
+        try {
+            while (d.moveToNext()) {
+                int cardID = d.getInt(d.getColumnIndex(TBL_Card.getCardID()));
+                String question = d.getString(d.getColumnIndex(TBL_Card.getQuestion()));
+                String answer = d.getString(d.getColumnIndex(TBL_Card.getAnswer()));
+                int rating = d.getInt(d.getColumnIndex(TBL_Card.getRating()));
+
+                ListOfCard.add(new Card(cardID, question ,answer , rating));
+            }
+        } finally {
+            dbCon.close();
+            d.close();
+        }
+
+        return ListOfCard;
+    }
     /**
      * Noch unfertige Methode soll später eine Liste von Objekten einer Tabelle zurückgeben.
      * @param tableName

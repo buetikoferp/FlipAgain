@@ -33,6 +33,9 @@ public interface DomainInterface {
      * @param solution
      */
     public void insertCard(String nameOfBundle, String question, String solution);
-
+    public ArrayList<FieldOfStudy> getListOfStudy();
+    public ArrayList<Module> getListOfModlue(String WhereStatement);
+    public ArrayList<Bundle> getListOfBundle(String WhereStatement);
+    public ArrayList<Card> getListofCard(String WhereStatement);
 
 }
