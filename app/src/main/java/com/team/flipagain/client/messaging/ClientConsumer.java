@@ -57,7 +57,7 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
      */
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
-
+        //provisorisch wird noch durch passende methoden ersetzt
         if((SerializationUtils.deserialize(body)) instanceof User){
             user = (SerializationUtils.deserialize(body));
         }
