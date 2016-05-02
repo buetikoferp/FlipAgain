@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.CardHandler;
@@ -18,18 +19,25 @@ import com.team.flipagain.client.application.ListHandlerV1;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 public class CardGetterActivity extends AppCompatActivity {
-    ListView listView;
-    ListHandlerInterfaceV1 listHandler;
-    Context context;
-    Button button;
+
+    private ListView listView;
+    private ListHandlerInterfaceV1 listHandler;
+    private Context context;
+    private Button button;
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_getter);
+
+
         button = (Button) findViewById(R.id.cardGetter_btn_download);
         listView =(ListView) findViewById(R.id.cardGetter_list_bundles);
         context = listView.getContext();
-        listHandler = new ListHandlerV1(context, listView, this, button);
+        textView = (TextView)findViewById(R.id.cardGetter_textView_title);
+
+        listHandler = new ListHandlerV1(context, listView, this, button, textView);
         listHandler.setFirstList();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -43,6 +51,9 @@ public class CardGetterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               //  downloadNewBundle()
+                if(button.getText().equals("Neu laden")){
+                    listHandler.setState(3);
+                }
 
             }
         });

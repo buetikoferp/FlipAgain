@@ -15,21 +15,27 @@ import android.widget.Toast;
 import com.team.flipagain.R;
 import com.team.flipagain.client.application.ListHandler;
 import com.team.flipagain.client.application.ListHandlerInterface;
+import com.team.flipagain.client.application.ListHandlerInterfaceV1;
 import com.team.flipagain.client.domain.DBManager;
 import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
 
 public class BundleCreatorActivity extends AppCompatActivity {
+
     public String TAG = "BUNDLECREATOR";
+    private ListView listView;
+    private ListHandlerInterfaceV1 listHandler;
+    private Context context;
+    private Button button;
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creator_bundle);
 
+        listView = (ListView) findViewById(R.id.creatorBundle_listView);
 
 
-        int numberOfCase = getIntent().getIntExtra("case", 1);
-        Log.d(TAG, "numberOfCase = " + numberOfCase);
-        setListviewAdapter(numberOfCase, null);
 
     }
 

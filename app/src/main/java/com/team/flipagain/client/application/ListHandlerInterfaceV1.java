@@ -11,4 +11,6 @@ public interface ListHandlerInterfaceV1 {
     public void setNextListView(String selected);
     public boolean setPreviousListView();
     public void setFirstList();
+    public void setState(int state);
+    public void setCardHandler(CardHandlerInterface cardHandler);
 }
