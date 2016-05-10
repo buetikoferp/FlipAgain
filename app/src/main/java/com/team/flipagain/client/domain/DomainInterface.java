@@ -1,7 +1,5 @@
 package com.team.flipagain.client.domain;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -32,5 +30,12 @@ public interface DomainInterface {
 
     //SERVER
     public ArrayList<Bundle> getServerListofBundle(String nameOfModule);
+
+    /**
+     * Speichert heruntergeladenes Bundle in lokale Datenbank
+     * @param bundle
+     */
+    public void saveBundle(Bundle bundle);
+
 
 }

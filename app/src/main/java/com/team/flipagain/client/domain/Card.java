@@ -10,9 +10,11 @@ import java.io.Serializable;
 public class Card implements Serializable{
     // ATTRIBUT
     private int cardId;
+    private int userId;
     private String question;
     private String answer;
     private int rating;
+    private int bundleId;
 
     /**
      *
@@ -21,11 +23,13 @@ public class Card implements Serializable{
      * @param answer
      * @param rating
      */
-    public Card(int cardId, String question, String answer, int rating){
+    public Card(int cardId, int userId, String question, String answer, int rating, int bundleId){
         this.cardId = cardId;
+        this.userId = userId;
         this.question = question;
         this.answer = answer;
         this.rating = rating;
+        this.bundleId = bundleId;
     }
 
     //GETTER SETTER
@@ -40,5 +44,27 @@ public class Card implements Serializable{
     }
     public int getRating() {
         return rating;
+    }
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int getBundleId() {
+        return bundleId;
+    }
+
+    public void setBundleId(int bundleId) {
+        this.bundleId = bundleId;
     }
 }

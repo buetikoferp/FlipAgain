@@ -12,7 +12,6 @@ import com.team.flipagain.client.messaging.ClientMessager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -93,6 +92,11 @@ public class DBManager implements DomainInterface{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void saveBundle(Bundle bundle) {
+
     }
 
 

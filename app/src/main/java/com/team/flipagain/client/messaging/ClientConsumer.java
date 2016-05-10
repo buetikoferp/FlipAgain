@@ -75,9 +75,7 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
         return user;
     }
 
-    public Bundle getBundle() {
-        return bundle;
-    }
+    public Bundle getBundle() {return bundle;}
 
     public Module getModule() {
         return module;

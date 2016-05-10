@@ -19,6 +19,5 @@ public class ClientProducer extends EndPoint{
 
     public void sendMessage(Serializable object) throws IOException {
         channel.basicPublish("",endPointName, null, SerializationUtils.serialize(object));
-
     }
 }
