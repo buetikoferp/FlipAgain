@@ -28,11 +28,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cardGetter_list_bundles"
+            android:choiceMode="singleChoice"
+            android:listSelector="@color/colorSelectedButton"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cardGetter_textView_title"
+            android:layout_above="@+id/cardGetter_btn_download" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/cardGetter_textView_title"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:choiceMode="singleChoice"
-            android:layout_above="@+id/cardOverview_btn_start"
-            android:listSelector="@color/colorSelectedButton"/>
+            android:textSize="18dp" />
 
     </RelativeLayout>
 

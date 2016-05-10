@@ -2,11 +2,11 @@ package com.team.flipagain.client.application;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.team.flipagain.R;
@@ -30,28 +30,48 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
     private ArrayAdapter fieldofStudyAdapter;
     private ArrayAdapter moduleAdapter;
     private ArrayAdapter bundleAdapter;
+
+
+
     private int state = 1;
 
     private String moduleNameForDownload;
     private String bundleNameForDownload;
+
+    private String fos;
+    private String module;
 
     private ListView listView;
 
     private Context context;
     private DomainInterface dbManager;
     private Activity activity;
-    private Button downloadButton;
+    private Button button;
+    private CardHandlerInterface cardHandler;
+    private TextView textView;
 
-    public ListHandlerV1(Context context, ListView listView, Activity activity, Button downloadButton){
+    public ListHandlerV1(Context context, ListView listView, Activity activity, Button button, TextView textView){
         this.activity = activity;
         this.context = context;
         this.listView = listView;
         fieldofStudyAdapter = getFieldOfStudyAdapter();
-        this.downloadButton = downloadButton;
+        this.button = button;
+        this.textView = textView;
     }
+
+    public void setCardHandler(CardHandlerInterface cardHandler){
+        this.cardHandler = cardHandler;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+
 
     public void setFirstList(){
         Log.d(TAG, "state of FirstList: " + state);
+        textView.setText("Wähle einen Studiengang:");
         listView.setAdapter(fieldofStudyAdapter);
     }
 
@@ -62,51 +82,78 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
         Log.d(TAG, "state: " + state);
         switch (state){
             case 1:
+                textView.setText("Wähle einen Studiengang:");
                 listView.setAdapter(fieldofStudyAdapter);
                 break;
             case 2:
+                fos = selected;
+                textView.setText(selected + "\\");
                 moduleAdapter = getModuleAdapter(selected);
                 listView.setAdapter(moduleAdapter);
                 break;
             case 3:
+                module = selected;
+                textView.setText(fos +"\\" + selected);
                 moduleNameForDownload = selected;
+                // SERVER LISTE --> Bundles
                 if(activity.getLocalClassName().equals("client.gui.mainScreen.cardGetter.CardGetterActivity")){
-                    bundleAdapter = getBundleAdapter(selected);
-                    listView.setAdapter(bundleAdapter);
+                    bundleAdapter = getBundleAdapterOfServer(moduleNameForDownload);
+                    if(bundleAdapter.isEmpty()){
+                        listView.setEnabled(false);
+                        bundleAdapter.add("...Serververbindung fehlgeschlagen...");
+                        listView.setAdapter(bundleAdapter);
+                        button.setEnabled(true);
+                        button.setText("Neu laden");
+                    }else{
+                        listView.setAdapter(bundleAdapter);
+                    }
+                // LOKALE LISTE --> Bundles
                 }else{
                     bundleAdapter = getBundleAdapter(selected);
                     listView.setAdapter(bundleAdapter);
                 }
                 break;
             case 4:
+                textView.setText(fos +"\\" + module + "\\" + selected);
                 bundleNameForDownload = selected;
-                downloadButton.setEnabled(true);
-
-                Log.d(TAG, "activity" + activity.getLocalClassName());
+                // SERVER LISTE
+                if(activity.getLocalClassName().equals("client.gui.mainScreen.cardGetter.CardGetterActivity")) {
+                    // Bei Selektiertem Bundle enable Download and send request getBundle
+                    button.setEnabled(true);
+                }
+                // LOKALE LISTE
+                if(activity.getLocalClassName().equals("client.gui.mainScreen.cardScreen.CardOverviewActivity")){
+                    cardHandler.fillUpList(selected, context);
+                    button.setEnabled(true);
+                }
                 break;
         }
     }
     public boolean setPreviousListView(){
+        listView.setEnabled(true);
         switch (state){
             case 1:
                 return false;
             case 2:
                 listView.setAdapter(fieldofStudyAdapter);
+                textView.setText("Wähle einen Studiengang:");
                 state--;
                 return true;
             case 3:
                 listView.setAdapter(moduleAdapter);
+                textView.setText(fos + "\\");
                 state--;
                 return true;
             case 4:
-                state = 2;
+                state = 3;
                 return true;
             default:
                 return false;
         }
     }
 
-    //LOKAL
+    /* -------------------------------LOKAL----------------------------------------------------------------------------*/
+
     private ArrayAdapter getFieldOfStudyAdapter(){
         dbManager = new DBManager(context);
         List<String> ListOfFOSname = new ArrayList<>();
@@ -162,15 +209,20 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
         return adapter;
 
     }
-    //Server
+
+   /* -------------------------------SERVER----------------------------------------------------------------------------*/
+
     private ArrayAdapter getBundleAdapterOfServer(String moduleNameForDownload){
         dbManager = new DBManager(context);
         List<String> ListOfBundleName = new ArrayList<>();
         ArrayList<Bundle> ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
 
-        for(Bundle bundle : ListOfBundle ){
-            ListOfBundleName.add(bundle.getName());
+        if(ListOfBundle != null){
+            for(Bundle bundle : ListOfBundle ){
+                ListOfBundleName.add(bundle.getName());
+            }
         }
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context,

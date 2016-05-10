@@ -71,6 +71,8 @@ public class DBManager implements DomainInterface{
 
         ClientMessager cm = new ClientMessager();
         try {
+
+            // WIRD NOCH MIT INTERFACE gelöst
             ClientConsumer cc = new ClientConsumer("flipagain");
             cm.send(module);
             cc.run();
