@@ -23,7 +23,7 @@ public class Card implements Serializable{
      * @param answer
      * @param rating
      */
-    public Card(int cardId, int userId, String question, String answer, int rating, int bundleId){
+    public Card(int cardId, int userId, String question, String answer, int bundleId){
         this.cardId = cardId;
         this.userId = userId;
         this.question = question;

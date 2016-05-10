@@ -39,13 +39,6 @@ public class DBManager implements DomainInterface{
 
     }
 
-    /**
-     * Erzeugung ohne Context nicht moeglich Singleton!
-     */
-    @SuppressWarnings("nope unused")
-    private DBManager(){}
-
-
     private void open() {
         db.getReadableDatabase();
         Log.d(TAG, "Datenbank FlipAgain geoeffnet");
@@ -183,7 +176,7 @@ public class DBManager implements DomainInterface{
                 String answer = d.getString(d.getColumnIndex(TBL_Card.getAnswer()));
                 int rating = d.getInt(d.getColumnIndex(TBL_Card.getRating()));
 
-                ListOfCard.add(new Card(cardID, question ,answer , rating));
+                ListOfCard.add(new Card(cardID,0 , question ,answer ,  1));
             }
         } finally {
             dbCon.close();
@@ -311,7 +304,7 @@ public class DBManager implements DomainInterface{
                         String answer = d.getString(d.getColumnIndex(TBL_Card.getAnswer()));
                         int rating = d.getInt(d.getColumnIndex(TBL_Card.getRating()));
 
-                        cardList.add(new Card(cardID, question ,answer , rating));
+                        cardList.add(new Card(cardID, 1, question ,answer , 1));
                     }
                 } finally {
                     dbCon.close();
