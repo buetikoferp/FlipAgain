@@ -1,4 +1,4 @@
-package com.team.flipagain.client.domain;
+package com.team.flipagain.domain;
 
 import android.os.Bundle;
 
@@ -17,15 +17,11 @@ public class User implements Serializable{
     private String email;
     private ArrayList<Bundle> bundleList;
     private boolean isAuthorized = false;
+    private boolean isNewUser = true;
 
-    public User(){
-
-    }
-
-    public User(String username, String password, int userId, boolean isAuthorized){
+    public User( int userId, String username, String password){
         this.username = username;
         this.password = password;
-        this.isAuthorized = isAuthorized;
         this.userId = userId;
     }
 
