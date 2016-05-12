@@ -1,10 +1,9 @@
-package com.team.flipagain.client.gui.mainScreen.cardScreen;
+package com.team.flipagain.gui.mainScreen.cardScreen;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,12 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.ListHandler;
-import com.team.flipagain.client.application.ListHandlerInterface;
-import com.team.flipagain.client.application.ListHandlerInterfaceV1;
-import com.team.flipagain.client.application.ListHandlerV1;
-import com.team.flipagain.client.domain.DBManager;
-import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.application.ListHandlerInterfaceV1;
+import com.team.flipagain.application.ListHandlerV1;
+import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 
 public class CardOverviewActivity extends AppCompatActivity implements CardScreenInterface{
 

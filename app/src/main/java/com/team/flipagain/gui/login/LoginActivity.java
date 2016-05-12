@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui.login;
+package com.team.flipagain.gui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -18,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,10 +29,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.domain.User;
-import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
-import com.team.flipagain.client.messaging.ClientConsumer;
-import com.team.flipagain.client.messaging.ClientMessager;
+import com.team.flipagain.domain.User;
+import com.team.flipagain.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.messaging.ClientMessager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -360,38 +358,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
         User user;
 
-        // private CardHandlerInterface login = new ClientSender();
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
-            //  boolean a = login.getAuthorization(email, password);
-            user = new User();
-            user.setUsername(email);
-            user.setPassword(password);
-            user.setIsAuthorized(false);
-            user.setUserId(1);
-        }
+            user = new User(1, email, password);
+    }
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            try{
             ClientMessager cm = new ClientMessager();
-            try {
-                ClientConsumer cc = new ClientConsumer("flipagain");
-                cm.send(user);
-                cc.run();
-
-                Thread thread = new Thread("sleep");
-                thread.sleep(5000);
-                Log.d(TAG, user.getUsername() + " " + user.getPassword() + " " + user.isAuthorized());
-                return cc.getUser().isAuthorized();
+            return cm.validateUser(user);
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
             } catch (TimeoutException e) {
-                e.printStackTrace();
-                return false;
-            }catch (InterruptedException e){
                 e.printStackTrace();
                 return false;
             }catch (Exception e){

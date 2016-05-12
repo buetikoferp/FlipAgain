@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui.mainScreen.cardGetter;
+package com.team.flipagain.gui.mainScreen.cardGetter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.CardHandler;
-import com.team.flipagain.client.application.CardHandlerInterface;
-import com.team.flipagain.client.application.ListHandlerInterface;
-import com.team.flipagain.client.application.ListHandlerInterfaceV1;
-import com.team.flipagain.client.application.ListHandlerV1;
-import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.application.ListHandlerInterfaceV1;
+import com.team.flipagain.application.ListHandlerV1;
+import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 
 public class CardGetterActivity extends AppCompatActivity {
 

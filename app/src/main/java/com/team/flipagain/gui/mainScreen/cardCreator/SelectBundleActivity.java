@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui.mainScreen.cardCreator;
+package com.team.flipagain.gui.mainScreen.cardCreator;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.ListHandler;
-import com.team.flipagain.client.application.ListHandlerInterface;
-import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.application.ListHandler;
+import com.team.flipagain.application.ListHandlerInterface;
 
 public class SelectBundleActivity extends AppCompatActivity {
     private String TAG = "SELECTBUNDLE";

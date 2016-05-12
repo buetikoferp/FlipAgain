@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui.mainScreen;
+package com.team.flipagain.gui.mainScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.gui.login.LoginActivity;
-import com.team.flipagain.client.gui.mainScreen.cardCreator.CardCreatorActivity;
-import com.team.flipagain.client.gui.mainScreen.cardGetter.CardGetterActivity;
-import com.team.flipagain.client.gui.mainScreen.cardScreen.CardFlipperActivity;
-import com.team.flipagain.client.gui.mainScreen.cardScreen.CardOverviewActivity;
+import com.team.flipagain.gui.login.LoginActivity;
+import com.team.flipagain.gui.mainScreen.cardCreator.CardCreatorActivity;
+import com.team.flipagain.gui.mainScreen.cardGetter.CardGetterActivity;
+import com.team.flipagain.gui.mainScreen.cardScreen.CardOverviewActivity;
 
 public class MainScreenActivity extends AppCompatActivity {
 

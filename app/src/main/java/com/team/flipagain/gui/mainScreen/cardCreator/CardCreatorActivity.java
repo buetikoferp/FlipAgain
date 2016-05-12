@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui.mainScreen.cardCreator;
+package com.team.flipagain.gui.mainScreen.cardCreator;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,12 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.CardHandler;
-import com.team.flipagain.client.application.CardHandlerInterface;
-import com.team.flipagain.client.application.ListHandler;
-import com.team.flipagain.client.application.ListHandlerInterface;
-import com.team.flipagain.client.domain.Card;
-import com.team.flipagain.client.gui.mainScreen.MainScreenActivity;
+import com.team.flipagain.application.CardHandler;
+import com.team.flipagain.application.CardHandlerInterface;
+import com.team.flipagain.application.ListHandler;
+import com.team.flipagain.application.ListHandlerInterface;
+import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 
 import java.util.ArrayList;
 

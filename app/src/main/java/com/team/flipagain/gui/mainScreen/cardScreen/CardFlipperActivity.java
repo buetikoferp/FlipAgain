@@ -1,4 +1,4 @@
-package com.team.flipagain.client.gui.mainScreen.cardScreen;
+package com.team.flipagain.gui.mainScreen.cardScreen;
 
 
 import android.app.AlertDialog;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.application.AnimationFactory;
+import com.team.flipagain.application.AnimationFactory;
 
 import java.util.Calendar;
 
