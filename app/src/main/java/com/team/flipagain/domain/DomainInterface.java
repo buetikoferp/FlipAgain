@@ -1,4 +1,4 @@
-package com.team.flipagain.client.domain;
+package com.team.flipagain.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;

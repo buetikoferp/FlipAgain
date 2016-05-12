@@ -1,4 +1,4 @@
-package com.team.flipagain.client.domain;
+package com.team.flipagain.domain;
 
 /**
  * Created by delay on 27.03.2016.

@@ -10,14 +10,14 @@ import java.util.ArrayList;
  */
 public class User implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     //ATTRIBUT
     private int userId;
     private String username;
     private String password;
-    private String email;
-    private ArrayList<Bundle> bundleList;
+    private ArrayList<Bundle> personalBundleList;
     private boolean isAuthorized = false;
-    private boolean isNewUser = true;
+    private boolean isNewUser = false;
 
     public User( int userId, String username, String password){
         this.username = username;
@@ -52,20 +52,12 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public ArrayList<Bundle> getPersonalBundleList() {
+        return personalBundleList;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public ArrayList<Bundle> getBundleList() {
-        return bundleList;
-    }
-
-    public void setBundleList(ArrayList<Bundle> bundleList) {
-        this.bundleList = bundleList;
+    public void setPersonalBundleList(ArrayList<Bundle> personalBundleList) {
+        this.personalBundleList = personalBundleList;
     }
 
     public boolean isAuthorized() {
@@ -74,5 +66,13 @@ public class User implements Serializable{
 
     public void setIsAuthorized(boolean isAuthorized) {
         this.isAuthorized = isAuthorized;
+    }
+
+    public boolean isNewUser() {
+        return isNewUser;
+    }
+
+    public void setIsNewUser(boolean isNewUser) {
+        this.isNewUser = isNewUser;
     }
 }

@@ -1,4 +1,4 @@
-package com.team.flipagain.client.domain;
+package com.team.flipagain.domain;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,13 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.team.flipagain.client.messaging.ClientConsumer;
-import com.team.flipagain.client.messaging.ClientMessager;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Raffaele on 23.03.2016.
@@ -39,6 +34,9 @@ public class DBManager implements DomainInterface{
 
     }
 
+    //Konstruktor für Einhaltung des Singleton
+    private DBManager(){}
+
     private void open() {
         db.getReadableDatabase();
         Log.d(TAG, "Datenbank FlipAgain geoeffnet");
@@ -58,7 +56,7 @@ public class DBManager implements DomainInterface{
         SERVER
     */
 
-    public ArrayList<Bundle> getServerListofBundle(String nameOfModule){
+   /** public ArrayList<Bundle> getServerListofBundle(String nameOfModule){
         Module module = new Module(nameOfModule);
 
 
@@ -88,7 +86,7 @@ public class DBManager implements DomainInterface{
         }
         return null;
     }
-
+**/
     @Override
     public void saveBundle(Bundle bundle) {
 
@@ -184,6 +182,11 @@ public class DBManager implements DomainInterface{
         }
 
         return ListOfCard;
+    }
+
+    @Override
+    public ArrayList<Bundle> getServerListofBundle(String nameOfModule) {
+        return null;
     }
 
     public void insertBundle(String bundleName , String moduleName){
