@@ -1,10 +1,6 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 import android.content.Context;
-import android.content.Intent;
-import android.widget.ArrayAdapter;
-
-import com.team.flipagain.client.domain.User;
 
 /**
  * Created by Raffaele on 23.03.2016.

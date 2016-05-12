@@ -19,7 +19,7 @@
  *  @author Ephraim A. Tekle
  *
  */
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;

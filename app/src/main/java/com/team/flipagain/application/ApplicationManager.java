@@ -1,6 +1,6 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
-import com.team.flipagain.client.messaging.ClientMessager;
+import com.team.flipagain.messaging.ClientMessager;
 
 import java.io.Serializable;
 

@@ -1,21 +1,20 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.domain.Bundle;
-import com.team.flipagain.client.domain.DBManager;
-import com.team.flipagain.client.domain.DomainInterface;
-import com.team.flipagain.client.domain.FieldOfStudy;
-import com.team.flipagain.client.domain.Module;
-import com.team.flipagain.client.domain.TBL_Bundle;
-import com.team.flipagain.client.domain.TBL_FOStudy;
-import com.team.flipagain.client.domain.TBL_Module;
+import com.team.flipagain.domain.Bundle;
+import com.team.flipagain.domain.DBManager;
+import com.team.flipagain.domain.DomainInterface;
+import com.team.flipagain.domain.FieldOfStudy;
+import com.team.flipagain.domain.Module;
+import com.team.flipagain.domain.TBL_Bundle;
+import com.team.flipagain.domain.TBL_FOStudy;
+import com.team.flipagain.domain.TBL_Module;
 
 import java.util.ArrayList;
 import java.util.List;

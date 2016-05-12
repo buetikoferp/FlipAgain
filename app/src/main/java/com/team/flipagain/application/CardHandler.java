@@ -1,18 +1,11 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.team.flipagain.client.domain.Card;
-import com.team.flipagain.client.domain.DBManager;
-import com.team.flipagain.client.domain.DomainInterface;
-import com.team.flipagain.client.domain.User;
+import com.team.flipagain.domain.Card;
+import com.team.flipagain.domain.DBManager;
+import com.team.flipagain.domain.DomainInterface;
 
 
 import java.util.ArrayList;

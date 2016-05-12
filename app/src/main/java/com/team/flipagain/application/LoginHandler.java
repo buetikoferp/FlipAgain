@@ -1,4 +1,4 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 /**
  * Created by Philipp on 05.04.2016.

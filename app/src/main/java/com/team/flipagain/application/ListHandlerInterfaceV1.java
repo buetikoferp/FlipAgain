@@ -1,8 +1,4 @@
-package com.team.flipagain.client.application;
-
-import android.content.Context;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+package com.team.flipagain.application;
 
 /**
  * Created by Anthony Delay on 28.04.2016.

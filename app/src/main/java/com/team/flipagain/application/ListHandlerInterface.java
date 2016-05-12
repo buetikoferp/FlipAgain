@@ -1,4 +1,4 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 import android.widget.ArrayAdapter;
 

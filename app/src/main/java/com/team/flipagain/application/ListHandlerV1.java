@@ -1,4 +1,4 @@
-package com.team.flipagain.client.application;
+package com.team.flipagain.application;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 
 import com.team.flipagain.R;
-import com.team.flipagain.client.domain.Bundle;
-import com.team.flipagain.client.domain.DBManager;
-import com.team.flipagain.client.domain.DomainInterface;
-import com.team.flipagain.client.domain.FieldOfStudy;
-import com.team.flipagain.client.domain.Module;
+import com.team.flipagain.domain.Bundle;
+import com.team.flipagain.domain.DBManager;
+import com.team.flipagain.domain.DomainInterface;
+import com.team.flipagain.domain.FieldOfStudy;
+import com.team.flipagain.domain.Module;
 
 
 import java.util.ArrayList;
