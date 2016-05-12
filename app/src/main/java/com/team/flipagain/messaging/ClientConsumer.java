@@ -1,4 +1,4 @@
-package com.team.flipagain.client.messaging;
+package com.team.flipagain.messaging;
 
 /**
  * Created by Philipp on 01.04.2016.
@@ -8,9 +8,9 @@ import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
-import com.team.flipagain.client.domain.Bundle;
-import com.team.flipagain.client.domain.Module;
-import com.team.flipagain.client.domain.User;
+import com.team.flipagain.domain.Bundle;
+import com.team.flipagain.domain.Module;
+import com.team.flipagain.domain.User;
 
 import org.apache.commons.lang3.SerializationUtils;
 

@@ -1,9 +1,9 @@
-package com.team.flipagain.client.messaging;
+package com.team.flipagain.messaging;
 
-import com.team.flipagain.client.domain.Bundle;
-import com.team.flipagain.client.domain.FieldOfStudy;
-import com.team.flipagain.client.domain.Module;
-import com.team.flipagain.client.domain.User;
+import com.team.flipagain.domain.Bundle;
+import com.team.flipagain.domain.FieldOfStudy;
+import com.team.flipagain.domain.Module;
+import com.team.flipagain.domain.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,8 +14,7 @@ import java.util.concurrent.TimeoutException;
  */
 public interface ServerRequest {
 
-    public User addUser(User user) throws IOException, TimeoutException;
-    public User validateUser(User user) throws IOException, TimeoutException;
+    public boolean validateUser(User user) throws IOException, TimeoutException;
     public ArrayList<FieldOfStudy> getFieldOfStudyByName();
     public ArrayList<Module> getModuleByName();
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException;

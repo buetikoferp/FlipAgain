@@ -1,9 +1,9 @@
-package com.team.flipagain.client.messaging;
+package com.team.flipagain.messaging;
 
-import com.team.flipagain.client.domain.Bundle;
-import com.team.flipagain.client.domain.FieldOfStudy;
-import com.team.flipagain.client.domain.Module;
-import com.team.flipagain.client.domain.User;
+import com.team.flipagain.domain.Bundle;
+import com.team.flipagain.domain.FieldOfStudy;
+import com.team.flipagain.domain.Module;
+import com.team.flipagain.domain.User;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,6 +17,7 @@ public class ClientMessager implements ServerRequest{
     private Object recivedObject;
     private ClientProducer clientProducer;
     private ClientConsumer clientConsumer;
+    private Thread consumerThread;
 
     public void send(Serializable obj){
         try {
@@ -30,11 +31,6 @@ public class ClientMessager implements ServerRequest{
 
     }
 
-    public void receivingLoop() throws IOException, TimeoutException {
-        clientConsumer = new ClientConsumer("flipagain");
-        Thread consumerThread = new Thread(clientConsumer);
-        consumerThread.run();
-    }
 
     public void receive(Object recievedObject){
         this.recivedObject = recievedObject;
@@ -45,17 +41,13 @@ public class ClientMessager implements ServerRequest{
     }
 
     @Override
-    public User addUser(User user) throws IOException, TimeoutException {
+    public boolean validateUser(User user) throws IOException, TimeoutException {
+        clientConsumer = new ClientConsumer("flipiagain");
+        consumerThread = new Thread(clientConsumer);
         send(user);
-        receivingLoop();
-        return clientConsumer.getUser();
-    }
+        consumerThread.start();
 
-    @Override
-    public User validateUser(User user) throws IOException, TimeoutException {
-        send(user);
-        receivingLoop();
-        return clientConsumer.getUser();
+        return clientConsumer.getUser().isAuthorized();
     }
 
     @Override
@@ -70,8 +62,6 @@ public class ClientMessager implements ServerRequest{
 
     @Override
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException {
-        send(bundleName);
-        receivingLoop();
-        return clientConsumer.getBundle();
+        return null;
     }
 }
