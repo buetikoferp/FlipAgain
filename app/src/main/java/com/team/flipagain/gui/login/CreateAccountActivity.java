@@ -78,12 +78,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 finish();
                 Intent myIntent = new Intent(CreateAccountActivity.this, MainScreenActivity.class);
                 CreateAccountActivity.this.startActivity(myIntent);
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
             }
         }
-
         @Override
         protected void onCancelled() {
             mAuthTask = null;

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".client.gui.login.LoginActivity"
+            android:name=".gui.login.LoginActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -27,45 +27,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".client.gui.mainScreen.MainScreenActivity"
+            android:name=".gui.mainScreen.MainScreenActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".client.gui.mainScreen.MainScreenActivity" />
+                android:value=".gui.mainScreen.MainScreenActivity" />
         </activity>
         <activity
-            android:name=".client.gui.login.CreateAccountActivity"
+            android:name=".gui.login.CreateAccountActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.login.LoginActivity"
+            android:parentActivityName=".gui.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.login.ResetPasswordActivity"
+            android:name=".gui.login.ResetPasswordActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.login.LoginActivity"
+            android:parentActivityName=".gui.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.mainScreen.cardScreen.CardOverviewActivity"
+            android:name=".gui.mainScreen.cardScreen.CardOverviewActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:parentActivityName=".gui.mainScreen.MainScreenActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.mainScreen.cardCreator.CardCreatorActivity"
+            android:name=".gui.mainScreen.cardCreator.CardCreatorActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:parentActivityName=".gui.mainScreen.MainScreenActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".client.gui.mainScreen.cardCreator.BundleCreatorActivity"
+            android:name=".gui.mainScreen.cardCreator.BundleCreatorActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:parentActivityName=".gui.mainScreen.MainScreenActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".client.gui.mainScreen.cardGetter.CardGetterActivity"
+            android:name=".gui.mainScreen.cardGetter.CardGetterActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".client.gui.mainScreen.MainScreenActivity"
+            android:parentActivityName=".gui.mainScreen.MainScreenActivity"
             android:screenOrientation="portrait" /><![CDATA[
 
         />
@@ -77,9 +77,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".client.gui.mainScreen.cardCreator.SelectBundleActivity" />
+        <activity android:name=".gui.mainScreen.cardCreator.SelectBundleActivity" />
         <activity
-            android:name=".client.gui.mainScreen.cardScreen.CardFlipperActivity"
+            android:name=".gui.mainScreen.cardScreen.CardFlipperActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 

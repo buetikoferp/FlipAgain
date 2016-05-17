@@ -1,9 +1,11 @@
 package com.team.flipagain.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by delay on 30.03.2016.
  */
-public class FieldOfStudy {
+public class FieldOfStudy implements Serializable{
     //ATTRIBUTE
     private int studyID;
     private String name;
