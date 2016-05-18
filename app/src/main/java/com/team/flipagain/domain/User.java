@@ -1,7 +1,5 @@
 package com.team.flipagain.domain;
 
-import android.os.Bundle;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -52,7 +50,7 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public ArrayList<Bundle> getPersonalBundleList() {
+    public ArrayList<com.team.flipagain.domain.Bundle> getPersonalBundleList() {
         return personalBundleList;
     }
 

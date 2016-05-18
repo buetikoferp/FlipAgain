@@ -14,11 +14,21 @@ import com.team.flipagain.gui.login.LoginActivity;
 import com.team.flipagain.gui.mainScreen.cardCreator.CardCreatorActivity;
 import com.team.flipagain.gui.mainScreen.cardGetter.CardGetterActivity;
 import com.team.flipagain.gui.mainScreen.cardScreen.CardOverviewActivity;
+import com.team.flipagain.messaging.ClientMessager;
+import com.team.flipagain.messaging.ServerRequest;
 
 public class MainScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        /**
+         * Synchronisation bzw. Updates der Bundles des Users
+         */
+
+        ServerRequest sr = new ClientMessager();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -44,7 +54,9 @@ public class MainScreenActivity extends AppCompatActivity {
                 intent.putExtra("nameOfBundle", "start");
                 startActivity(intent);
             }
-        });
+        }
+
+        );
 
         // Button Listener to Get Cards Activity
         Button getCards = (Button) findViewById(R.id.mainScreen_btn_getNewCards);

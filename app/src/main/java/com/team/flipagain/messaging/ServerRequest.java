@@ -25,5 +25,6 @@ public interface ServerRequest {
     public ArrayList<FieldOfStudy> getFieldOfStudyByName();
     public ArrayList<Module> getModuleByName();
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException;
+    public ArrayList<com.team.flipagain.domain.Bundle> synchronize(User user) throws IOException, TimeoutException;
 
     }

@@ -64,4 +64,14 @@ public class ClientMessager implements ServerRequest{
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException {
         return null;
     }
+
+    @Override
+    public ArrayList<Bundle> synchronize(User user) throws IOException, TimeoutException {
+        clientConsumer = new ClientConsumer("flipiagain");
+        consumerThread = new Thread(clientConsumer);
+        send(user);
+        consumerThread.start();
+        ArrayList<Bundle> synchronizedList = user.getPersonalBundleList();
+        return synchronizedList;
+    }
 }
