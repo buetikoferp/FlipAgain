@@ -1,6 +1,7 @@
 package com.team.flipagain.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by delay on 30.03.2016.
@@ -9,6 +10,7 @@ public class FieldOfStudy implements Serializable{
     //ATTRIBUTE
     private int studyID;
     private String name;
+    private ArrayList<Module> moduleList;
 
 
     // Constructor
@@ -34,6 +36,14 @@ public class FieldOfStudy implements Serializable{
         this.name = name;
     }
 
+
+    public ArrayList<Module> getModuleList() {
+        return moduleList;
+    }
+
+    public void setModuleList(ArrayList<Module> moduleList) {
+        this.moduleList = moduleList;
+    }
 
 
 }

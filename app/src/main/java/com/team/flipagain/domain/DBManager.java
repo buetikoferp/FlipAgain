@@ -37,18 +37,12 @@ public class DBManager implements DomainInterface{
     //Konstruktor für Einhaltung des Singleton
     private DBManager(){}
 
-    /**
-     * Öffnet die Verbindung zur gerätlokalen DB auf
-     */
     private void open() {
         db.getReadableDatabase();
         Log.d(TAG, "Datenbank FlipAgain geoeffnet");
 
     }
 
-    /*
-     * Schliesst die Verbindung zur DB
-     */
     private void close(){
         db.close();
         Log.d(TAG, "Datenbank FlipAgain geschlossen");
@@ -62,37 +56,37 @@ public class DBManager implements DomainInterface{
         SERVER
     */
 
-   /** public ArrayList<Bundle> getServerListofBundle(String nameOfModule){
-        Module module = new Module(nameOfModule);
+    /** public ArrayList<Bundle> getServerListofBundle(String nameOfModule){
+     Module module = new Module(nameOfModule);
 
 
-        ClientMessager cm = new ClientMessager();
-        try {
+     ClientMessager cm = new ClientMessager();
+     try {
 
-            // WIRD NOCH MIT INTERFACE gelöst
-            ClientConsumer cc = new ClientConsumer("flipagain");
-            cm.send(module);
-            cc.run();
+     // WIRD NOCH MIT INTERFACE gelöst
+     ClientConsumer cc = new ClientConsumer("flipagain");
+     cm.send(module);
+     cc.run();
 
-            Thread thread = new Thread("sleep");
-            thread.sleep(5000);
+     Thread thread = new Thread("sleep");
+     thread.sleep(5000);
 
 
-            module = cc.getModule();
+     module = cc.getModule();
 
-            return module.getListOfBundle();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-**/
+     return module.getListOfBundle();
+     } catch (IOException e) {
+     e.printStackTrace();
+     } catch (TimeoutException e) {
+     e.printStackTrace();
+     }catch (InterruptedException e){
+     e.printStackTrace();
+     }catch (Exception e){
+     e.printStackTrace();
+     }
+     return null;
+     }
+     **/
     @Override
     public void saveBundle(Bundle bundle) {
 
@@ -107,18 +101,10 @@ public class DBManager implements DomainInterface{
 
 
 
-
-
-
-
    /*
    LOKALE DATENBANK
     */
 
-    /**
-     * Gibt eine Liste mit allen FoS zurück
-     * @return
-     */
     public ArrayList<FieldOfStudy> getListOfStudy(){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
         Cursor a = dbCon.rawQuery("SELECT " + TBL_FOStudy.getRowNameOfStudy() + "," + TBL_FOStudy.getRowStudyID() + " FROM " + TBL_FOStudy.getTableName(), null);
@@ -137,14 +123,9 @@ public class DBManager implements DomainInterface{
         return ListOfFieldOfStudy;
     }
 
-    /**
-     * Liefert eine Liste mit allen Modulen de übergebenen FoS zurück
-     * @param fosName
-     * @return
-     */
-    public HashSet<Module> getListOfModlue(String fosName){
+    public HashSet<Module> getListOfModule(String WhereStatement){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
-        Cursor b = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + ", fieldofstudy" + " WHERE fieldofstudy.nameofstudy  =" + "'" + fosName + "'  AND fieldofstudy.rowStudyID =" + TBL_Module.getTableName() + ".rowStudyID", null);
+        Cursor b = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + ", fieldofstudy" + " WHERE fieldofstudy.nameofstudy  =" + "'" + WhereStatement + "'  AND fieldofstudy.rowStudyID =" + TBL_Module.getTableName() + ".rowStudyID", null);
         try {
             while (b.moveToNext()) {
                 int moduleID = b.getInt(b.getColumnIndex(TBL_Module.getRowModuleID()));
@@ -160,14 +141,9 @@ public class DBManager implements DomainInterface{
         return SetOfModule;
     }
 
-    /**
-     * Liefert eine List mit allen Bundles des übergebenen Moduls zurück
-     * @param moduleName
-     * @return
-     */
-    public ArrayList<Bundle> getListOfBundle(String moduleName){
+    public ArrayList<Bundle> getListOfBundle(String WhereStatement){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
-        Cursor c = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + ", module" + " WHERE module.rowName  =" + "'" + moduleName + "'  AND module.rowModuleID =" + TBL_Bundle.getTableName() + ".moduleID", null);
+        Cursor c = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + ", module" + " WHERE module.rowName  =" + "'" + WhereStatement + "'  AND module.rowModuleID =" + TBL_Bundle.getTableName() + ".moduleID", null);
         try {
             while (c.moveToNext()) {
                 int bundleID = c.getInt(c.getColumnIndex( TBL_Bundle.getBundleID()));
@@ -184,14 +160,31 @@ public class DBManager implements DomainInterface{
         return ListOfBundle;
     }
 
-    /**
-     * Füllt das Modul-Objekt mit den dazugehörigen Karten
-     * @param bundleName
-     * @return
-     */
-    public ArrayList<Card> getListofCard(String bundleName){
+    public ArrayList<Bundle> getListOfBundleFromUser(String WhereStatement){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
-        Cursor d = dbCon.rawQuery("SELECT " + TBL_Card.getAnswer() + "," + TBL_Card.getQuestion() + ", "+ TBL_Card.getCardID()+ ", " + TBL_Card.getRating()+ " FROM " + TBL_Card.getTableName() + ", bundle" + " WHERE bundle.name  =" + "'" + bundleName + "'  AND bundle.bundleID =" + TBL_Card.getTableName() + ".bundleID", null);
+        String user = "1";
+        Cursor c = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + ", module" + " WHERE module.rowName  =" + "'" + WhereStatement + "'  AND module.rowModuleID =" + TBL_Bundle.getTableName() + ".moduleID" + " AND bundle.userID =" + user, null);
+        try {
+            while (c.moveToNext()) {
+                int bundleID = c.getInt(c.getColumnIndex( TBL_Bundle.getBundleID()));
+                String name = c.getString(c.getColumnIndex(TBL_Bundle.getName()));
+                Log.d(TAG, " created name " + name + "   created id " + bundleID);
+                ListOfBundle.add(new Bundle(bundleID, name, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
+            }
+        } finally {
+            dbCon.close();
+            c.close();
+            close();
+        }
+
+        return ListOfBundle;
+    }
+
+
+
+    public ArrayList<Card> getListofCard(String WhereStatement){
+        final SQLiteDatabase dbCon = db.getReadableDatabase();
+        Cursor d = dbCon.rawQuery("SELECT " + TBL_Card.getAnswer() + "," + TBL_Card.getQuestion() + ", "+ TBL_Card.getCardID()+ ", " + TBL_Card.getRating()+ " FROM " + TBL_Card.getTableName() + ", bundle" + " WHERE bundle.name  =" + "'" + WhereStatement + "'  AND bundle.bundleID =" + TBL_Card.getTableName() + ".bundleID", null);
         try {
             while (d.moveToNext()) {
                 int cardID = d.getInt(d.getColumnIndex(TBL_Card.getCardID()));
@@ -209,19 +202,6 @@ public class DBManager implements DomainInterface{
         return ListOfCard;
     }
 
-    @Override
-    public ArrayList<Bundle> getServerListofBundle(String nameOfModule) {
-        return null;
-    }
-
-    /**
-     * Speichert das neu erstellt Bundle in die gerätlokale Datenbank
-     * @param bundleName
-     * @param moduleName
-     */
-
-
-    //Bundle muss hier übergeben werden!!!!!
     public void insertBundle(String bundleName , String moduleName){
         final SQLiteDatabase dbCon = db.getWritableDatabase();
         Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + " WHERE " + TBL_Module.getRowName() + " = " + "'" + moduleName + "'", null);
@@ -233,6 +213,7 @@ public class DBManager implements DomainInterface{
 
             final ContentValues data = new ContentValues();
             data.put(TBL_Bundle.getName(), bundleName);
+            //data.put(TBL_Bundle.getUserID(), USERID!!!);                                                  Hier muss dann noch die UserID hiinzugefügt werden
             data.put(TBL_Bundle.getModuleID(), moduleID);
 
             final long id = dbCon.insertOrThrow(TBL_Bundle.getTableName(),null, data);
@@ -243,8 +224,6 @@ public class DBManager implements DomainInterface{
         }
     }
 
-
-    //Muss in insertBundle() aufgerufen werden!!
     @Override
     public void insertCard(String nameOfBundle, String question, String solution) {
         final SQLiteDatabase dbCon = db.getWritableDatabase();
@@ -262,7 +241,6 @@ public class DBManager implements DomainInterface{
 
             /**
              * HIER MUSS NOCH EIN CARD Obj erstellt werden und dem Server geschickt werden.
-             * Wieso?
              */
 
             final long id = dbCon.insertOrThrow(TBL_Card.getTableName(),null, data);
