@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class CardHandler extends AppCompatActivity implements CardHandlerInterface {
     private String TAG = "CARDHANDLER";
-    private ArrayList<Object> cardList = new ArrayList<>();
+    private ArrayList<Card> cardList = new ArrayList<>();
     private int cardMax;
     private int cardNr = 0;
 
@@ -34,7 +34,7 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
      */
     public void fillUpList(String nameOfBundle, Context context) {
         DomainInterface domainInterface = new DBManager(context);
-        //cardList = domainInterface.getClassListofSelectedTable("card", nameOfBundle);
+        cardList = domainInterface.getListofCard(nameOfBundle);
         cardMax = cardList.size();
         cardNr = 0;
     }
