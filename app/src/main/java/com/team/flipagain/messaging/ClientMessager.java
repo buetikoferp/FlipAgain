@@ -63,7 +63,7 @@ public class ClientMessager implements ServerRequest{
         consumerThread = new Thread(clientConsumer);
         send(fieldOfStudy);
         consumerThread.start();
-        return null;
+        return clientConsumer.getModuleList();
     }
 
     @Override

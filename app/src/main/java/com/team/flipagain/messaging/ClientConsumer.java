@@ -9,12 +9,14 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
 import com.team.flipagain.domain.Bundle;
+import com.team.flipagain.domain.FieldOfStudy;
 import com.team.flipagain.domain.Module;
 import com.team.flipagain.domain.User;
 
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 
 
@@ -26,10 +28,9 @@ import java.util.concurrent.TimeoutException;
 public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
     private User user;
-
-
     private Module module;
     private Bundle bundle;
+    private FieldOfStudy fos;
 
     public ClientConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
@@ -67,7 +68,9 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
         if((SerializationUtils.deserialize(body)) instanceof Bundle){
             bundle =(SerializationUtils.deserialize(body));
         }
-
+        if((SerializationUtils.deserialize(body)) instanceof FieldOfStudy){
+            fos = (SerializationUtils.deserialize(body));
+        }
 
     }
 
@@ -80,6 +83,8 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
     public Module getModule() {
         return module;
     }
+
+    public ArrayList<Module> getModuleList(){return fos.getModuleList();}
 
 
 
