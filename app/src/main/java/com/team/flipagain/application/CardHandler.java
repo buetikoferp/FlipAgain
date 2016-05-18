@@ -8,6 +8,7 @@ import com.team.flipagain.domain.DBManager;
 import com.team.flipagain.domain.DomainInterface;
 
 
+
 import java.util.ArrayList;
 
 /**
@@ -23,11 +24,7 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
         return cardNr;
     }
 
-    @Override
-    public void addNewCard(String bundle, String question, String solution, Context context) {
-        DomainInterface domainInterface = new DBManager(context);
-        domainInterface.insertCard(bundle,question,solution);
-    }
+
 
 
     /**
@@ -37,7 +34,7 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
      */
     public void fillUpList(String nameOfBundle, Context context) {
         DomainInterface domainInterface = new DBManager(context);
-        cardList = domainInterface.getClassListofSelectedTable("card", nameOfBundle);
+        //cardList = domainInterface.getClassListofSelectedTable("card", nameOfBundle);
         cardMax = cardList.size();
         cardNr = 0;
     }
@@ -54,8 +51,8 @@ public class CardHandler extends AppCompatActivity implements CardHandlerInterfa
 
     @Override
     public String getQuestion() {
-            Card card = (Card) cardList.get(cardNr);
-            return card.getQuestion();
+        Card card = (Card) cardList.get(cardNr);
+        return card.getQuestion();
     }
 
     @Override

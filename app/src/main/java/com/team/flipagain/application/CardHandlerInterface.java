@@ -2,6 +2,8 @@ package com.team.flipagain.application;
 
 import android.content.Context;
 
+
+
 /**
  * Created by Raffaele on 23.03.2016.
  */
@@ -61,14 +63,6 @@ public interface CardHandlerInterface {
      */
     public int getCardNr();
 
-    /**
-     * Ruft DBManager auf.
-     * @param bundle
-     * @param question
-     * @param solution
-     * @param context
-     */
-    public void addNewCard(String bundle, String question, String solution, Context context);
     public boolean goToNextQuestion();
 
 
