@@ -14,6 +14,13 @@ import java.util.concurrent.TimeoutException;
  */
 public interface ServerRequest {
 
+    /**
+     * Implementiert die Methoden, welche Objekte vom Server zurückgeben.
+     * @param user
+     * @throws IOException
+     * @throws TimeoutException
+     */
+
     public boolean validateUser(User user) throws IOException, TimeoutException;
     public ArrayList<FieldOfStudy> getFieldOfStudyByName();
     public ArrayList<Module> getModuleByName();

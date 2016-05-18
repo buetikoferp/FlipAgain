@@ -152,7 +152,7 @@ public class ListHandlerV1 implements  ListHandlerInterfaceV1{
         }
     }
 
-    /* -------------------------------LOKAL----------------------------------------------------------------------------*/
+    /* -------------------------------Client----------------------------------------------------------------------------*/
 
     private ArrayAdapter getFieldOfStudyAdapter(){
         dbManager = new DBManager(context);
