@@ -85,6 +85,8 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
 
 
+
+
     public void handleCancel(String consumerTag) {}
     public void handleCancelOk(String consumerTag) {}
     public void handleRecoverOk(String consumerTag) {}

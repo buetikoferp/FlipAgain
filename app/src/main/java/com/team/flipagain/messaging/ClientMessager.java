@@ -52,17 +52,27 @@ public class ClientMessager implements ServerRequest{
 
     @Override
     public ArrayList<FieldOfStudy> getFieldOfStudyByName() {
+
+
         return null;
     }
 
     @Override
-    public ArrayList<Module> getModuleByName() {
+    public ArrayList<Module> getModuleByName(FieldOfStudy fieldOfStudy) throws TimeoutException, IOException {
+        clientConsumer = new ClientConsumer("flipagain");
+        consumerThread = new Thread(clientConsumer);
+        send(fieldOfStudy);
+        consumerThread.start();
         return null;
     }
 
     @Override
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException {
-        return null;
+        clientConsumer = new ClientConsumer("flipagain");
+        consumerThread = new Thread(clientConsumer);
+        send(bundleName);
+        consumerThread.start();
+        return clientConsumer.getBundle();
     }
 
     @Override
