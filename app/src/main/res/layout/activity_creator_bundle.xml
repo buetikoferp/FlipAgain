@@ -7,13 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".gui.mainScreen.cardCreator.BundleCreatorActivity">
+    tools:context=".client.gui.mainScreen.cardCreator.BundleCreatorActivity">
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/createBundle_btn_save"
-        android:id="@+id/creatorBundle_btn_save"
+        android:id="@+id/creatorBundle_btn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:clickable="false"
@@ -42,7 +42,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/creatorBundle_txtF_bundlename"
-        android:layout_above="@+id/creatorBundle_btn_save"
+        android:layout_above="@+id/creatorBundle_btn"
         android:layout_centerHorizontal="true"
         android:hint="@string/createBundle_txtF_bundle"/>
 
