@@ -13,10 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.flipagain.R;
+import com.team.flipagain.application.ApplicationManager;
 import com.team.flipagain.application.CardHandler;
 import com.team.flipagain.application.CardHandlerInterface;
-import com.team.flipagain.application.ListHandler;
-import com.team.flipagain.application.ListHandlerInterface;
 import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 
 import java.util.ArrayList;
@@ -28,6 +27,8 @@ public class CardCreatorActivity extends AppCompatActivity {
     private LinearLayout title;
     private ArrayList<String> questionList;
     private ArrayList<String> solutionList;
+    private boolean isNewBundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class CardCreatorActivity extends AppCompatActivity {
         solution = (EditText)findViewById(R.id.creatorCards_txtf_solution);
         selectedTitle = (TextView)findViewById(R.id.creatorCards_textV_title);
         title = (LinearLayout)findViewById(R.id.LinearLayout_title);
-
+        isNewBundle = getIntent().getBooleanExtra("isNewBundle", false);
 
         // Button Listener
         newComplete.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +69,7 @@ public class CardCreatorActivity extends AppCompatActivity {
         /**
          * STATUS -- BUNDLE Gewaehlt und bereit zur Speicherung von Karten
          */
-        if(!nameOfBundle.equals("start")){
+        if(nameOfBundle != null && !nameOfBundle.equals("start")){
             selectedTitle.setText(nameOfBundle);
             saveSelect.setText("Speichern");
             newComplete.setText("Fertigstellen");
@@ -107,12 +108,14 @@ public class CardCreatorActivity extends AppCompatActivity {
                                 .setMessage("Modul:\t\t\t " + nameofModule + "\nBundle:\t\t\t" + nameOfBundle + "\nAnzahl:\t\t\t" + solutionList.size())
                                 .setPositiveButton("Bestätigen", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        CardHandlerInterface cardHandlerInterface = new CardHandler();
-                                        ListHandlerInterface listHandlerInterface = new ListHandler(newComplete.getContext());
-                                        listHandlerInterface.createNewBundle(nameOfBundle, nameofModule);
+                                        ApplicationManager appManager = new ApplicationManager();
+                                        if(isNewBundle){
+                                            appManager.createNewBundle(nameOfBundle, nameofModule, newComplete.getContext());
+                                        }
+
 
                                         for(int i = 0; i < questionList.size() ; i++){
-                                            cardHandlerInterface.addNewCard(nameOfBundle, questionList.get(i), solutionList.get(i), newComplete.getContext());
+                                            appManager.addNewCard(nameOfBundle, questionList.get(i), solutionList.get(i), newComplete.getContext());
 
                                         }
                                         Intent intent = new Intent(CardCreatorActivity.this, MainScreenActivity.class);

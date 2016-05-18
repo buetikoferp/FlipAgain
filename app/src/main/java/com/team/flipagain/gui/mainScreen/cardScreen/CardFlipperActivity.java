@@ -97,8 +97,8 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                 if (lastX < currentX) {
 
                     // If there aren't any other children, just break.
-                   // if (viewFlipper.getDisplayedChild() == 0)
-                   // break;
+                    // if (viewFlipper.getDisplayedChild() == 0)
+                    // break;
 
                     // Next screen comes in from left.
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_left);
@@ -197,8 +197,8 @@ public class CardFlipperActivity extends AppCompatActivity implements CardScreen
                 if (lastX > currentX) {
 
                     // If there is a child (to the left), kust break.
-                  //  if (viewFlipper.getDisplayedChild() == 1)
-                  //  break;
+                    //  if (viewFlipper.getDisplayedChild() == 1)
+                    //  break;
 
                     // Next screen comes in from right.
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_right);

@@ -12,15 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.flipagain.R;
-import com.team.flipagain.application.ListHandlerInterfaceV1;
-import com.team.flipagain.application.ListHandlerV1;
+import com.team.flipagain.application.ListHandlerInterface;
+import com.team.flipagain.application.ListHandler;
 import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 
 public class CardOverviewActivity extends AppCompatActivity implements CardScreenInterface{
 
     private String TAG = "CARDOVERVIEW";
     private ListView listView;
-    private ListHandlerInterfaceV1 listHandler;
+    private ListHandlerInterface listHandler;
     private Context context;
     private Button button;
     private TextView textView;
@@ -36,7 +36,7 @@ public class CardOverviewActivity extends AppCompatActivity implements CardScree
         context = listView.getContext();
         textView = (TextView) findViewById(R.id.cardOverview_txtV_title);
 
-        listHandler = new ListHandlerV1(context, listView, this, button, textView);
+        listHandler = new ListHandler(context, listView, this, button, textView);
         listHandler.setFirstList();
         listHandler.setCardHandler(CARD_HANDLER_INTERFACE);
 

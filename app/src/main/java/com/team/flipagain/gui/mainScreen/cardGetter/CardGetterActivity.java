@@ -11,14 +11,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
-import com.team.flipagain.application.ListHandlerInterfaceV1;
-import com.team.flipagain.application.ListHandlerV1;
+import com.team.flipagain.application.ListHandlerInterface;
+import com.team.flipagain.application.ListHandler;
 import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 
 public class CardGetterActivity extends AppCompatActivity {
 
     private ListView listView;
-    private ListHandlerInterfaceV1 listHandler;
+    private ListHandlerInterface listHandler;
     private Context context;
     private Button button;
     private TextView textView;
@@ -34,7 +34,7 @@ public class CardGetterActivity extends AppCompatActivity {
         context = listView.getContext();
         textView = (TextView)findViewById(R.id.cardGetter_textView_title);
 
-        listHandler = new ListHandlerV1(context, listView, this, button, textView);
+        listHandler = new ListHandler(context, listView, this, button, textView);
         listHandler.setFirstList();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -47,7 +47,7 @@ public class CardGetterActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  downloadNewBundle()
+                //  downloadNewBundle()
                 if(button.getText().equals("Neu laden")){
                     listHandler.setState(3);
                 }
