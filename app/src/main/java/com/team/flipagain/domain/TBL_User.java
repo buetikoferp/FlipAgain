@@ -4,6 +4,22 @@ package com.team.flipagain.domain;
  * Created by delay on 28.03.2016.
  */
 public class TBL_User {
+    public static String getEmail() {
+        return email;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static String getUserID() {
+        return userID;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
+
     /**
      * Name der Datenbanktabelle
      */
@@ -17,6 +33,11 @@ public class TBL_User {
      * Attribute
      */
     private static final String name = "name";
+
+    public static String getName() {
+        return name;
+    }
+
     private static final String email = "email";
     private static final String password = "password";
     /**

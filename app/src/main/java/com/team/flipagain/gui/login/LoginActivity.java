@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
+import com.team.flipagain.application.ApplicationManager;
 import com.team.flipagain.domain.User;
 import com.team.flipagain.gui.mainScreen.MainScreenActivity;
 import com.team.flipagain.messaging.ClientMessager;
@@ -390,6 +391,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 finish();
+
+                ApplicationManager aM = new ApplicationManager();
+                aM.registerUser(user, mLoginFormView.getContext());
+
                 Intent myIntent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             } else {

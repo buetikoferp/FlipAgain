@@ -12,6 +12,8 @@ public interface DomainInterface {
 
 
     //LOKAL
+    public void registerUser(User user);
+    public User getUser();
     public void insertBundle(String bundleName , String moduleName);
     public void insertCard(String nameOfBundle, String question, String solution);
     public ArrayList<FieldOfStudy> getListOfStudy();

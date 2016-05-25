@@ -17,6 +17,12 @@ public class User implements Serializable{
     private boolean isAuthorized = false;
     private boolean isNewUser = false;
 
+    /**
+     *
+     * @param userId
+     * @param username
+     * @param password
+     */
     public User( int userId, String username, String password){
         this.username = username;
         this.password = password;
