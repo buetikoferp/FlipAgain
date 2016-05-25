@@ -94,4 +94,12 @@ public class ClientMessager implements ServerRequest{
         ArrayList<Bundle> bundleList = module.getListOfBundle();
         return bundleList;
     }
+
+    @Override
+    public void insertNewBundle(Bundle bundle) throws IOException, TimeoutException {
+        clientConsumer = new ClientConsumer("flipiagain");
+        consumerThread = new Thread(clientConsumer);
+        send(bundle);
+        consumerThread.start();
+    }
 }

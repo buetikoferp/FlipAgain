@@ -26,4 +26,5 @@ public interface ServerRequest {
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException;
     public ArrayList<Bundle> synchronize(User user) throws IOException, TimeoutException;
     public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException;
+    public void insertNewBundle(Bundle bundle) throws IOException, TimeoutException;
     }
