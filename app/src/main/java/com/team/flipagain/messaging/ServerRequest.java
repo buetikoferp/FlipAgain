@@ -25,5 +25,5 @@ public interface ServerRequest {
     public ArrayList<Module> getModuleByName(FieldOfStudy fieldOfStudy) throws IOException, TimeoutException;
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException;
     public ArrayList<Bundle> synchronize(User user) throws IOException, TimeoutException;
-    public ArrayList<Bundle> getBundleList(Module module);
+    public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException;
     }

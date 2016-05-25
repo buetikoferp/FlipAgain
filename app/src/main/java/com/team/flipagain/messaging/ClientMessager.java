@@ -84,4 +84,14 @@ public class ClientMessager implements ServerRequest{
         ArrayList<Bundle> synchronizedList = user.getPersonalBundleList();
         return synchronizedList;
     }
+
+    @Override
+    public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException {
+        clientConsumer = new ClientConsumer("flipiagain");
+        consumerThread = new Thread(clientConsumer);
+        send(module);
+        consumerThread.start();
+        ArrayList<Bundle> bundleList = module.getListOfBundle();
+        return bundleList;
+    }
 }
