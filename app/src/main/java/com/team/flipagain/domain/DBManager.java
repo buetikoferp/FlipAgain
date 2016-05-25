@@ -6,8 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.team.flipagain.messaging.ClientMessager;
+import com.team.flipagain.messaging.ServerRequest;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Raffaele on 23.03.2016.
@@ -43,9 +48,24 @@ public class DBManager implements DomainInterface{
         Log.d(TAG, "Datenbank FlipAgain geschlossen");
     }
 
+    /*--------------------------------------------------------Server-------------------------------------------*/
     @Override
     public void saveBundle(Bundle bundle) {
 
+    }
+
+    @Override
+    public ArrayList<Bundle> getServerListofBundle(String moduleName) {
+        ServerRequest serverRequest = new ClientMessager();
+        Module module = new Module(0 ,moduleName);
+        try {
+            ListOfBundle = serverRequest.getBundleList(module);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+        return ListOfBundle;
     }
 
 

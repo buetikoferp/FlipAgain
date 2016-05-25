@@ -276,7 +276,7 @@ public class ListHandler implements ListHandlerInterface {
     private ArrayAdapter getBundleAdapterOfServer(String moduleNameForDownload){
         dbManager = new DBManager(context);
         List<String> ListOfBundleName = new ArrayList<>();
-        /**ArrayList<Bundle> ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
+        ArrayList<Bundle> ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
 
         if(ListOfBundle != null){
             for(Bundle bundle : ListOfBundle ){
@@ -284,7 +284,7 @@ public class ListHandler implements ListHandlerInterface {
             }
 
         }
-         **/
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context,

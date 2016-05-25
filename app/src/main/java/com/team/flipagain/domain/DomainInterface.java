@@ -29,6 +29,6 @@ public interface DomainInterface {
      * @param bundle
      */
     public void saveBundle(Bundle bundle);
-
+    public ArrayList<Bundle> getServerListofBundle(String moduleName);
 
 }
