@@ -12,6 +12,11 @@ import com.team.flipagain.domain.User;
 public class ApplicationManager {
     private User user;
 
+    public void saveBundle(Context context, String module, String bundle){
+        DomainInterface domainInterface = new DBManager(context);
+        domainInterface.saveBundle(bundle, module);
+    }
+
     public void registerUser(User user, Context context){
         DomainInterface domain = new DBManager(context);
         domain.registerUser(user);

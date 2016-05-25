@@ -50,7 +50,27 @@ public class DBManager implements DomainInterface{
 
     /*--------------------------------------------------------Server-------------------------------------------*/
     @Override
-    public void saveBundle(Bundle bundle) {
+    public void saveBundle(String bundle, String module) {
+        ServerRequest serverRequest = new ClientMessager();
+        try {
+            Bundle downloadedBundle = serverRequest.downloadBundle(bundle);
+            insertBundle(downloadedBundle.getName(),module);
+            if(downloadedBundle.getCardList() != null){
+                for (Card card :downloadedBundle.getCardList()
+                        ) {
+                    insertCard(bundle, card.getQuestion(), card.getAnswer());
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+
+
+
+
 
     }
 
@@ -61,9 +81,8 @@ public class DBManager implements DomainInterface{
         try {
             ListOfBundle = serverRequest.getBundleList(module);
         } catch (IOException e) {
-            e.printStackTrace();
+
         } catch (TimeoutException e) {
-            e.printStackTrace();
         }
         return ListOfBundle;
     }

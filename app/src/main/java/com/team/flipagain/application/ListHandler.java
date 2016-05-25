@@ -150,8 +150,9 @@ public class ListHandler implements ListHandlerInterface {
                 bundle = selected;
                 // SERVER LISTE
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardGetter.CardGetterActivity")) {
-                    // Bei Selektiertem Bundle enable Download and send request getBundle
                     button.setEnabled(true);
+                    ApplicationManager aM = new ApplicationManager();
+                    aM.saveBundle(context,module,selected );
                 }
                 // LOKALE LISTE
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardScreen.CardOverviewActivity")){
