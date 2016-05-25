@@ -20,11 +20,10 @@ public interface ServerRequest {
      * @throws IOException
      * @throws TimeoutException
      */
-
     public boolean validateUser(User user) throws IOException, TimeoutException;
     public ArrayList<FieldOfStudy> getFieldOfStudyByName();
     public ArrayList<Module> getModuleByName(FieldOfStudy fieldOfStudy) throws IOException, TimeoutException;
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException;
     public ArrayList<Bundle> synchronize(User user) throws IOException, TimeoutException;
-
+    public ArrayList<Bundle> getBundleList(Module module);
     }
