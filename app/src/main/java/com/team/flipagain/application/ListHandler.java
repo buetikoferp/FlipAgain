@@ -2,6 +2,7 @@ package com.team.flipagain.application;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,7 @@ import java.util.Set;
 /**
  * Created by Anthony Delay on 28.04.2016.
  */
-public class ListHandler implements ListHandlerInterface {
+public class ListHandler  implements ListHandlerInterface {
     private String TAG = "listhandler";
 
     private ArrayAdapter fieldofStudyAdapter;
@@ -273,11 +274,14 @@ public class ListHandler implements ListHandlerInterface {
     }
 
    /* -------------------------------SERVER----------------------------------------------------------------------------*/
+    ArrayList<Bundle> ListOfBundle;
 
     private ArrayAdapter getBundleAdapterOfServer(String moduleNameForDownload){
         dbManager = new DBManager(context);
         List<String> ListOfBundleName = new ArrayList<>();
-        ArrayList<Bundle> ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
+        BundleList bundleList = new BundleList();
+        bundleList.execute(moduleNameForDownload);
+
 
         if(ListOfBundle != null){
             for(Bundle bundle : ListOfBundle ){
@@ -295,6 +299,20 @@ public class ListHandler implements ListHandlerInterface {
 
         return adapter;
     }
+    public class BundleList extends AsyncTask<String, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+            ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
+            if(ListOfBundle == null ){
+                Log.d("ListHandler", "ListofBundle ist null");
+            }
+            return null;
+        }
+    }
+
+
 
 
 }

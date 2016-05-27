@@ -23,6 +23,7 @@ public interface DomainInterface {
     public ArrayList<Bundle> getListOfBundleFromUser(String WhereStatement);
 
 
+
     //SERVER
      /**
      * Speichert heruntergeladenes Bundle in lokale Datenbank

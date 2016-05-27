@@ -31,6 +31,7 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
     private Module module;
     private Bundle bundle;
     private FieldOfStudy fos;
+    private ArrayList<Bundle> bundleList;
 
     public ClientConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
@@ -71,6 +72,9 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
         if((SerializationUtils.deserialize(body)) instanceof FieldOfStudy){
             fos = (SerializationUtils.deserialize(body));
         }
+        if((SerializationUtils.deserialize(body)) instanceof ArrayList){
+            bundleList = (SerializationUtils.deserialize(body));
+        }
 
     }
 
@@ -86,7 +90,7 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
     public ArrayList<Module> getModuleList(){return fos.getModuleList();}
 
-
+    public ArrayList<Bundle> getBundleList(){return bundleList;}
 
 
 

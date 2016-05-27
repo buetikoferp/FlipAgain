@@ -1,5 +1,7 @@
 package com.team.flipagain.messaging;
 
+import android.util.Log;
+
 import com.team.flipagain.domain.Bundle;
 import com.team.flipagain.domain.FieldOfStudy;
 import com.team.flipagain.domain.Module;
@@ -18,6 +20,28 @@ public class ClientMessager implements ServerRequest{
     private ClientProducer clientProducer;
     private ClientConsumer clientConsumer;
     private Thread consumerThread;
+
+
+
+    public ClientMessager getClientMessenger(){
+
+        return this;
+    }
+    public void startThread(){
+        try {
+            clientConsumer = new ClientConsumer("flipagain");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+        consumerThread = new Thread(clientConsumer);
+        consumerThread.start();
+    }
+    public ClientMessager() {
+        startThread();
+    }
+
 
     public void send(Serializable obj){
         try {
@@ -41,13 +65,18 @@ public class ClientMessager implements ServerRequest{
     }
 
     @Override
-    public boolean validateUser(User user) throws IOException, TimeoutException {
-        clientConsumer = new ClientConsumer("flipiagain");
-        consumerThread = new Thread(clientConsumer);
-        send(user);
-        consumerThread.start();
+    public User validateUser(User user) throws IOException, TimeoutException {
 
-        return clientConsumer.getUser().isAuthorized();
+        send(user);
+
+        try {
+            Thread.sleep(3000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return clientConsumer.getUser();
     }
 
     @Override
@@ -59,47 +88,70 @@ public class ClientMessager implements ServerRequest{
 
     @Override
     public ArrayList<Module> getModuleByName(FieldOfStudy fieldOfStudy) throws TimeoutException, IOException {
-        clientConsumer = new ClientConsumer("flipagain");
-        consumerThread = new Thread(clientConsumer);
+
         send(fieldOfStudy);
         consumerThread.start();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return clientConsumer.getModuleList();
     }
 
     @Override
     public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException {
-        clientConsumer = new ClientConsumer("flipagain");
-        consumerThread = new Thread(clientConsumer);
+
         send(bundleName);
         consumerThread.start();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return clientConsumer.getBundle();
     }
 
     @Override
     public ArrayList<Bundle> synchronize(User user) throws IOException, TimeoutException {
-        clientConsumer = new ClientConsumer("flipiagain");
-        consumerThread = new Thread(clientConsumer);
+
         send(user);
         consumerThread.start();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ArrayList<Bundle> synchronizedList = user.getPersonalBundleList();
         return synchronizedList;
     }
 
     @Override
     public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException {
-        clientConsumer = new ClientConsumer("flipiagain");
-        consumerThread = new Thread(clientConsumer);
+
         send(module);
-        consumerThread.start();
-        ArrayList<Bundle> bundleList = module.getListOfBundle();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
+        Module modul = clientConsumer.getModule();
+        ArrayList<Bundle> bundleList = modul.getBundlesOfModuleList();
+
         return bundleList;
     }
 
     @Override
     public void insertNewBundle(Bundle bundle) throws IOException, TimeoutException {
-        clientConsumer = new ClientConsumer("flipiagain");
-        consumerThread = new Thread(clientConsumer);
+
         send(bundle);
         consumerThread.start();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

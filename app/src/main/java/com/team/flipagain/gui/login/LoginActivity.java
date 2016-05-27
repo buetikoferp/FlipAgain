@@ -358,7 +358,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
         User user;
-
+        User successedUser;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -370,7 +370,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             try{
             ClientMessager cm = new ClientMessager();
-            return cm.validateUser(user);
+                successedUser = cm.validateUser(user);
+            return successedUser.isAuthorized();
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;

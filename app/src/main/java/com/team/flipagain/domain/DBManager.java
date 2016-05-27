@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.team.flipagain.messaging.ClientMessager;
@@ -17,8 +18,9 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by Raffaele on 23.03.2016.
  */
-public class DBManager implements DomainInterface{
+public class DBManager  implements DomainInterface{
     private String TAG = "DBMANAGER";
+
 
     private ArrayList<FieldOfStudy> ListOfFieldOfStudy = new ArrayList<>();
     private HashSet<Module> SetOfModule = new HashSet<>();
@@ -37,6 +39,8 @@ public class DBManager implements DomainInterface{
     //Konstruktor für Einhaltung des Singleton
     private DBManager(){}
 
+
+
     private void open() {
         db.getReadableDatabase();
         Log.d(TAG, "Datenbank FlipAgain geoeffnet");
@@ -51,8 +55,9 @@ public class DBManager implements DomainInterface{
     /*--------------------------------------------------------Server-------------------------------------------*/
     @Override
     public void saveBundle(String bundle, String module) {
-        ServerRequest serverRequest = new ClientMessager();
+
         try {
+            ServerRequest serverRequest = new ClientMessager();
             Bundle downloadedBundle = serverRequest.downloadBundle(bundle);
             insertBundle(downloadedBundle.getName(),module);
             if(downloadedBundle.getCardList() != null){
@@ -76,16 +81,19 @@ public class DBManager implements DomainInterface{
 
     @Override
     public ArrayList<Bundle> getServerListofBundle(String moduleName) {
-        ServerRequest serverRequest = new ClientMessager();
+
         Module module = new Module(0 ,moduleName);
         try {
+            ServerRequest serverRequest = new ClientMessager();
             ListOfBundle = serverRequest.getBundleList(module);
         } catch (IOException e) {
-
+            e.printStackTrace();
         } catch (TimeoutException e) {
+            e.printStackTrace();
         }
         return ListOfBundle;
     }
+
 
 
    /*
@@ -219,7 +227,7 @@ public class DBManager implements DomainInterface{
             data.put(TBL_User.getEmail(), user.getUsername());
             data.put(TBL_User.getUserID(), user.getUserId());
             data.put(TBL_User.getPassword(),user.getPassword());
-            dbCon.insertOrThrow(TBL_User.getTableName(),null,data);
+            dbCon.insertOrThrow(TBL_User.getTableName(), null, data);
         }finally {
             dbCon.close();
             cursor.close();
@@ -269,13 +277,15 @@ public class DBManager implements DomainInterface{
              * HIER MUSS NOCH EIN CARD Obj erstellt werden und dem Server geschickt werden.
              */
 
-            final long id = dbCon.insertOrThrow(TBL_Card.getTableName(),null, data);
+            final long id = dbCon.insertOrThrow(TBL_Card.getTableName(), null, data);
             Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
         }finally {
             dbCon.close();
             cursor.close();
         }
     }
+
+
 
 
 

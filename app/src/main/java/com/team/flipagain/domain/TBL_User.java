@@ -45,9 +45,9 @@ public class TBL_User {
      */
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
             userID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-            name + " TEXT NOT NULL UNIQUE," +
-            email + " TEXT NOT NULL UNIQUE," +
-            password + " TEXT NOT NULL" +
+            name + " TEXT ," +
+            email + " TEXT ," +
+            password + " TEXT " +
             ")";
 
     /**

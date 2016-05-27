@@ -52,10 +52,10 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            ClientMessager cm = new ClientMessager();
+           /*
             try {
                 ClientMessager clientMessenger = new ClientMessager();
-                return cm.validateUser(user);
+                return false;
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,7 +67,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 e.printStackTrace();
                 return false;
             }
-
+*/      return false;
         }
 
         @Override

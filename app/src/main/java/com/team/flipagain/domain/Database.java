@@ -48,7 +48,7 @@ public class Database extends SQLiteOpenHelper {
 
         db.execSQL(TBL_FOStudy.SQL_CREATE);
         Log.d(TAG, " Created FOS");
-       //db.execSQL(TBL_User.SQL_CREATE);
+        db.execSQL(TBL_User.SQL_CREATE);
         Log.d(TAG, " Created USER");
         db.execSQL(TBL_Module.SQL_CREATE);
         Log.d(TAG, " Created Module");
