@@ -84,8 +84,8 @@ public class DBManager  implements DomainInterface{
 
         Module module = new Module(0 ,moduleName);
         try {
-            ServerRequest serverRequest = new ClientMessager();
-            ListOfBundle = serverRequest.getBundleList(module);
+            ClientMessager clientMessager = new ClientMessager();
+            ListOfBundle = clientMessager.getBundleList(module);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {
@@ -144,7 +144,7 @@ public class DBManager  implements DomainInterface{
                 int bundleID = c.getInt(c.getColumnIndex( TBL_Bundle.getBundleID()));
                 String name = c.getString(c.getColumnIndex(TBL_Bundle.getName()));
                 Log.d(TAG, " created name " + name + "   created id " + bundleID);
-                ListOfBundle.add(new Bundle(bundleID, name, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
+                ListOfBundle.add(new Bundle(bundleID, name, 0, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
             }
         } finally {
             dbCon.close();
@@ -164,7 +164,7 @@ public class DBManager  implements DomainInterface{
                 int bundleID = c.getInt(c.getColumnIndex(TBL_Bundle.getBundleID()));
                 String name = c.getString(c.getColumnIndex(TBL_Bundle.getName()));
                 Log.d(TAG, " created name " + name + "   created id " + bundleID);
-                ListOfBundle.add(new Bundle(bundleID, name, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
+                ListOfBundle.add(new Bundle(bundleID, name, 0, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
             }
         } finally {
             dbCon.close();

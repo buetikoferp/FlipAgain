@@ -128,18 +128,27 @@ public class ClientMessager implements ServerRequest{
 
     @Override
     public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException {
-
         send(module);
+
         try {
-            Thread.sleep(3000);
+            Thread.sleep(800);
         } catch (InterruptedException e) {
             e.printStackTrace();
 
         }
 
         Module modul = clientConsumer.getModule();
+        if(modul == null ){
+            Log.d("ListHandler", "Module ist null" );
+        }else{
+            Log.d("ListHandler", "Module ist nicht null"+ modul.getModuleName());
+        }
         ArrayList<Bundle> bundleList = modul.getBundlesOfModuleList();
-
+        if(bundleList == null ){
+            Log.d("ListHandler", "ListofBundle ist null"  );
+        }else{
+            Log.d("ListHandler", "ListofBundle ist nicht null" + bundleList.get(0).getName());
+        }
         return bundleList;
     }
 

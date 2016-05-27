@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -32,7 +33,7 @@ public class ListHandler  implements ListHandlerInterface {
     private ArrayAdapter fieldofStudyAdapter;
     private ArrayAdapter moduleAdapter;
     private ArrayAdapter bundleAdapter;
-
+    private BundleList bundleListClass = null;
 
 
     private int state = 1;
@@ -114,16 +115,23 @@ public class ListHandler  implements ListHandlerInterface {
 
                 /* --------------------------------------------- SERVER LISTE --> Bundles --------------------------------------------*/
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardGetter.CardGetterActivity")){
-                    bundleAdapter = getBundleAdapterOfServer(moduleNameForDownload);
-                    if(bundleAdapter.isEmpty()){
+                    bundleListClass = new BundleList(context);
+                    bundleListClass.execute((Void) null);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    bundleAdapter = bundleListClass.getBundleAdapterOfServer();
+                   /* if(bundleAdapter.isEmpty()){
                         listView.setEnabled(false);
                         bundleAdapter.add("...Serververbindung fehlgeschlagen...");
                         listView.setAdapter(bundleAdapter);
                         button.setEnabled(true);
                         button.setText("Neu laden");
-                    }else{
+                    }else{ */
                         listView.setAdapter(bundleAdapter);
-                    }
+
                 }
 
 
@@ -273,43 +281,49 @@ public class ListHandler  implements ListHandlerInterface {
         return adapter;
     }
 
-   /* -------------------------------SERVER----------------------------------------------------------------------------*/
-    ArrayList<Bundle> ListOfBundle;
-
-    private ArrayAdapter getBundleAdapterOfServer(String moduleNameForDownload){
-        dbManager = new DBManager(context);
-        List<String> ListOfBundleName = new ArrayList<>();
-        BundleList bundleList = new BundleList();
-        bundleList.execute(moduleNameForDownload);
 
 
-        if(ListOfBundle != null){
-            for(Bundle bundle : ListOfBundle ){
-                ListOfBundleName.add(bundle.getName());
-            }
 
+
+    public class BundleList extends AsyncTask<Void, Void, ArrayList<Bundle>> {
+
+        private List<String> ListOfBundleName = new ArrayList<>();
+        private DomainInterface dbManager;
+
+        BundleList(Context context){
+            dbManager = new DBManager(context);
         }
 
+        private ArrayAdapter getBundleAdapterOfServer(){
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                context,
-                R.layout.list_item_card_overview,
-                R.id.list_item_card_overview_textview,
-                ListOfBundleName);
 
-        return adapter;
-    }
-    public class BundleList extends AsyncTask<String, Void, Void> {
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    context,
+                    R.layout.list_item_card_overview,
+                    R.id.list_item_card_overview_textview,
+                    ListOfBundleName);
+
+            return adapter;
+        }
+
 
 
         @Override
-        protected Void doInBackground(String... params) {
-            ListOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
-            if(ListOfBundle == null ){
-                Log.d("ListHandler", "ListofBundle ist null");
-            }
-            return null;
+        protected ArrayList<Bundle> doInBackground(Void... params) {
+
+            ArrayList<Bundle> listOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
+            Log.d(TAG, "ListHandler: test im doinBackground " + listOfBundle.get(0).getName());
+            for(Bundle bundle : listOfBundle ){
+                ListOfBundleName.add(bundle.getName());}
+
+            return listOfBundle;
         }
+
+
+
+
+
     }
 
 

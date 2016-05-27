@@ -4,6 +4,8 @@ package com.team.flipagain.messaging;
  * Created by Philipp on 01.04.2016.
  */
 
+import android.util.Log;
+
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
@@ -59,12 +61,12 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
      */
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
-        //provisorisch wird noch durch passende methoden ersetzt
-        if((SerializationUtils.deserialize(body)) instanceof User){
-            user = (SerializationUtils.deserialize(body));
-        }
+        Log.d("ClientConsumer", "Abfrage ClientConsumer:  " + SerializationUtils.deserialize(body).toString());
         if((SerializationUtils.deserialize(body)) instanceof Module){
             module = (SerializationUtils.deserialize(body));
+        }
+        if((SerializationUtils.deserialize(body)) instanceof User){
+            user = (SerializationUtils.deserialize(body));
         }
         if((SerializationUtils.deserialize(body)) instanceof Bundle){
             bundle =(SerializationUtils.deserialize(body));

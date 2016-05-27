@@ -2,12 +2,15 @@ package com.team.flipagain.domain;
 
 import java.io.Serializable;
 
-
-
 /**
  * Created by Raffaele on 23.03.2016.
  */
 public class Card implements Serializable{
+
+    /**
+     *
+     */
+
     // ATTRIBUT
     private int cardId;
     private int userId;
@@ -28,7 +31,14 @@ public class Card implements Serializable{
         this.userId = userId;
         this.question = question;
         this.answer = answer;
-        this.rating = rating;
+        this.bundleId = bundleId;
+    }
+
+    public int getBundleId() {
+        return bundleId;
+    }
+
+    public void setBundleId(int bundleId) {
         this.bundleId = bundleId;
     }
 
@@ -45,9 +55,18 @@ public class Card implements Serializable{
     public int getRating() {
         return rating;
     }
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public void setCardId(int cardId) {
         this.cardId = cardId;
     }
+
     public void setQuestion(String question) {
         this.question = question;
     }
@@ -58,13 +77,5 @@ public class Card implements Serializable{
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public int getBundleId() {
-        return bundleId;
-    }
-
-    public void setBundleId(int bundleId) {
-        this.bundleId = bundleId;
     }
 }
