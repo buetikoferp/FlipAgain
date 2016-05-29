@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         setupActionBar();
 
+
         // Button Listener temp_next
         Button temp_next = (Button) findViewById(R.id.login_btn_temp_next);
         temp_next.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +115,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-
+        ApplicationManager applicationManager = new ApplicationManager();
+        applicationManager.resetUser(resetPw.getContext());
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();

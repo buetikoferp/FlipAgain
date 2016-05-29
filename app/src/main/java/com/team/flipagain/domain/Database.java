@@ -43,9 +43,7 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String TABLE_NAME = "test";
-        String moduleID = "testID";
-        String name = "name";
+
 
 
         db.execSQL(TBL_FOStudy.SQL_CREATE);

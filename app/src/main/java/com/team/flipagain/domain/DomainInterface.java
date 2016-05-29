@@ -32,4 +32,5 @@ public interface DomainInterface {
      public void saveBundle(Bundle bundle, String module);
     public ArrayList<Bundle> getServerListofBundle(String moduleName);
 
+    void resetUser();
 }

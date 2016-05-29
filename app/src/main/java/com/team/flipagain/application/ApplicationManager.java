@@ -15,7 +15,7 @@ public class ApplicationManager {
     private Context context;
     private String module;
     private String bundle;
-
+    private DomainInterface dbManager;
 
     public void registerUser(User user, Context context){
         DomainInterface domain = new DBManager(context);
@@ -28,16 +28,19 @@ public class ApplicationManager {
     }
 
     public void createNewBundle(String nameOfBundle,String nameofModule, Context context){
-        DomainInterface dbManager = new DBManager(context);
+        dbManager = new DBManager(context);
         dbManager.insertBundle(nameOfBundle, nameofModule);
     }
 
 
     public void addNewCard(String bundle, String question, String solution, Context context) {
-        DomainInterface domainInterface = new DBManager(context);
-        domainInterface.insertCard(bundle, question, solution);
+        dbManager= new DBManager(context);
+        dbManager.insertCard(bundle, question, solution);
     }
 
 
-
+    public void resetUser(Context context) {
+        DomainInterface domainInterface = new DBManager(context);
+        domainInterface.resetUser();
+    }
 }

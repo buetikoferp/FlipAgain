@@ -155,7 +155,6 @@ public class ClientMessager implements ServerRequest{
     public void insertNewBundle(Bundle bundle) throws IOException, TimeoutException {
 
         send(bundle);
-        consumerThread.start();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
