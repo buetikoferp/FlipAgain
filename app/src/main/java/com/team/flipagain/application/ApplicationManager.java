@@ -1,6 +1,7 @@
 package com.team.flipagain.application;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.team.flipagain.domain.DBManager;
 import com.team.flipagain.domain.DomainInterface;
@@ -11,11 +12,10 @@ import com.team.flipagain.domain.User;
  */
 public class ApplicationManager {
     private User user;
+    private Context context;
+    private String module;
+    private String bundle;
 
-    public void saveBundle(Context context, String module, String bundle){
-        DomainInterface domainInterface = new DBManager(context);
-        domainInterface.saveBundle(bundle, module);
-    }
 
     public void registerUser(User user, Context context){
         DomainInterface domain = new DBManager(context);
@@ -37,6 +37,7 @@ public class ApplicationManager {
         DomainInterface domainInterface = new DBManager(context);
         domainInterface.insertCard(bundle, question, solution);
     }
+
 
 
 }

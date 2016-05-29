@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.team.flipagain.R;
+import com.team.flipagain.application.ApplicationManager;
 import com.team.flipagain.application.ListHandlerInterface;
 import com.team.flipagain.application.ListHandler;
 import com.team.flipagain.gui.mainScreen.MainScreenActivity;
@@ -47,10 +48,9 @@ public class CardGetterActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  downloadNewBundle()
-                if(button.getText().equals("Neu laden")){
-                    listHandler.setState(3);
-                }
+
+                listHandler.saveBundle();
+
 
             }
         });

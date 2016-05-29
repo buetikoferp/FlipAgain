@@ -29,7 +29,7 @@ public interface DomainInterface {
      * Speichert heruntergeladenes Bundle in lokale Datenbank
      * @param bundle
      */
-    public void saveBundle(String bundle, String Module);
+     public void saveBundle(Bundle bundle, String module);
     public ArrayList<Bundle> getServerListofBundle(String moduleName);
 
 }

@@ -54,27 +54,17 @@ public class DBManager  implements DomainInterface{
 
     /*--------------------------------------------------------Server-------------------------------------------*/
     @Override
-    public void saveBundle(String bundle, String module) {
+    public void saveBundle(Bundle bundle, String module) {
+            insertBundle(bundle.getName(),module);
 
-        try {
-            ServerRequest serverRequest = new ClientMessager();
-            Bundle downloadedBundle = serverRequest.downloadBundle(bundle);
-            insertBundle(downloadedBundle.getName(),module);
-            if(downloadedBundle.getCardList() != null){
-                for (Card card :downloadedBundle.getCardList()
-                        ) {
-                    insertCard(bundle, card.getQuestion(), card.getAnswer());
+        if(bundle.getCardList() != null){
+            Log.d(TAG, "GetCardList ist nicht gleich null! SizeofCardList: " + bundle.getCardList().size() + " Frage der Karte = " + bundle.getCardList().get(0).getQuestion() );
+
+                for (Card card : bundle.getCardList()) {
+                    Log.d(TAG, "Frage der Karte: "+card.getQuestion());
+                    insertCard(bundle.getName(), card.getQuestion(), card.getAnswer());
                 }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-
-
-
 
 
     }
@@ -251,7 +241,7 @@ public class DBManager  implements DomainInterface{
             data.put(TBL_Bundle.getModuleID(), moduleID);
 
             final long id = dbCon.insertOrThrow(TBL_Bundle.getTableName(),null, data);
-            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+
         }finally {
             dbCon.close();
             cursor.close();
@@ -278,7 +268,7 @@ public class DBManager  implements DomainInterface{
              */
 
             final long id = dbCon.insertOrThrow(TBL_Card.getTableName(), null, data);
-            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+
         }finally {
             dbCon.close();
             cursor.close();

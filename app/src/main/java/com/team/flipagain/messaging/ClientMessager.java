@@ -100,10 +100,9 @@ public class ClientMessager implements ServerRequest{
     }
 
     @Override
-    public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException {
+    public Bundle downloadBundle(Bundle bundle) throws IOException, TimeoutException {
 
-        send(bundleName);
-        consumerThread.start();
+        send(bundle);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
