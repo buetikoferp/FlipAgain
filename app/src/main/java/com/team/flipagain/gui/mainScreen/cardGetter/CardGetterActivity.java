@@ -50,7 +50,8 @@ public class CardGetterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 listHandler.saveBundle();
-
+                Intent intent = new Intent(CardGetterActivity.this,  MainScreenActivity.class);
+                startActivity(intent);
 
             }
         });

@@ -32,6 +32,7 @@ public class OfflineModeLearnExistingBundleTest {
 
     @Before
     public void setUpActivity(){
+        //start at LoginActivity
         loginActivity = LActivityRule.getActivity();
         onView(withText("Offline")).perform(click());
     }

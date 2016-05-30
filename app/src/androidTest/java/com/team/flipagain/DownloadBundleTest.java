@@ -4,8 +4,10 @@ import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.team.flipagain.gui.login.LoginActivity;
 import com.team.flipagain.gui.mainScreen.cardCreator.CardCreatorActivity;
 import com.team.flipagain.gui.mainScreen.cardCreator.SelectBundleActivity;
+import com.team.flipagain.gui.mainScreen.cardGetter.CardGetterActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,19 +31,38 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class DownloadBundleTest {
 
     @Rule
-    public ActivityTestRule<SelectBundleActivity> SBActivityRule = new ActivityTestRule<>(SelectBundleActivity.class);
-    private SelectBundleActivity selectBundleActivity;
+    public ActivityTestRule<LoginActivity> LActivityRule = new ActivityTestRule<>(LoginActivity.class);
+    private LoginActivity loginActivity;
 
     @Before
-    public void setUpActivity(){
-        //Start at CardCreatorActivity
-        selectBundleActivity = SBActivityRule.getActivity();
+    public void setUpActivity() {
+        //Start at LoginActivity
+        loginActivity = LActivityRule.getActivity();
     }
 
     @Test
     public void testDownloadBundle(){
-        onView(withText("Neue karten")).perform(click());
+
+        onView(withResourceName("email")).perform(typeText("bueti@hsr.ch"));
+        onView(withResourceName("password")).perform(typeText("123456"));
+        onView(withResourceName("email_sign_in_button")).perform(click());
+        //Navigation
+        onView(withResourceName("mainScreen_btn_getNewCards")).perform(click());
         onView(withText("Informatik")).perform(click());
         onView(withText("Informationsicherheit")).perform(click());
+        onView(withText("ServerTest one")).perform(click());
+        //Download Bundle
+        onView(withResourceName("cardGetter_btn_download")).perform(click());
+        //Is Bundle available
+        onView(withText("Lernen")).perform(click());
+        onView(withText("Informatik")).perform(click());
+        onView(withText("Informationsicherheit")).perform(click());
+        onView(withText("ServerTest one")).perform(click());
+        //Button Start
+        onView(withId(2131492988)).perform(click());
+        onView(withText("OK")).perform(click());
+
+        //assert first question displayed
+        onView(withResourceName("TextView_question")).check(matches(isDisplayed()));
     }
 }

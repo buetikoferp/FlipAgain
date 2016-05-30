@@ -32,7 +32,7 @@ public class LoginTest {
 
     @Before
     public void setUpActivity(){
-        //Start at CardCreatorActivity
+        //Start at LoginActivity
         loginActivity = LActivityRule.getActivity();
     }
 
