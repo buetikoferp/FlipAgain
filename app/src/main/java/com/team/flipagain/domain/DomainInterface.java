@@ -15,7 +15,7 @@ public interface DomainInterface {
     public void registerUser(User user);
     public User getUser();
     public void insertBundle(String bundleName , String moduleName);
-    public void insertCard(String nameOfBundle, String question, String solution);
+    public void insertCard(String nameOfBundle, String question, String solution, boolean isDownload);
     public ArrayList<FieldOfStudy> getListOfStudy();
     public HashSet<Module> getListOfModule(String WhereStatement);
     public ArrayList<Bundle> getListOfBundle(String WhereStatement);
@@ -33,4 +33,8 @@ public interface DomainInterface {
     public ArrayList<Bundle> getServerListofBundle(String moduleName);
 
     void resetUser();
+
+    Bundle getBundle();
+
+    void setBundle(Bundle bundle);
 }

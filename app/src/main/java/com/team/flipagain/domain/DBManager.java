@@ -41,7 +41,7 @@ public class DBManager  implements DomainInterface{
 
 
     private void open() {
-        db.getReadableDatabase();
+        db.getWritableDatabase();
         Log.d(TAG, "Datenbank FlipAgain geoeffnet");
 
     }
@@ -61,7 +61,7 @@ public class DBManager  implements DomainInterface{
 
                 for (Card card : bundle.getCardList()) {
                     Log.d(TAG, "Frage der Karte: "+card.getQuestion());
-                    insertCard(bundle.getName(), card.getQuestion(), card.getAnswer());
+                    insertCard(bundle.getName(), card.getQuestion(), card.getAnswer(), true);
                 }
             }
 
@@ -73,7 +73,7 @@ public class DBManager  implements DomainInterface{
 
         Module module = new Module(0 ,moduleName);
         try {
-            ClientMessager clientMessager = new ClientMessager();
+            ClientMessager clientMessager = new ClientMessager("listofbundle");
             ListOfBundle = clientMessager.getBundleList(module);
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,6 +87,16 @@ public class DBManager  implements DomainInterface{
     public void resetUser() {
         final SQLiteDatabase dbCon = db.getWritableDatabase();
         dbCon.execSQL(TBL_User.STMT_STUDY_DELETE);
+    }
+
+    @Override
+    public Bundle getBundle() {
+        return serverBundle;
+    }
+
+    @Override
+    public void setBundle(Bundle bundle) {
+        serverBundle = bundle;
     }
 
 
@@ -105,7 +115,7 @@ public class DBManager  implements DomainInterface{
                 ListOfFieldOfStudy.add(new FieldOfStudy(studyID, name));
             }
         } finally {
-            dbCon.close();
+
             a.close();
         }
 
@@ -122,7 +132,7 @@ public class DBManager  implements DomainInterface{
                 SetOfModule.add(new Module(moduleID, name));
             }
         } finally {
-            dbCon.close();
+
             b.close();
         }
 
@@ -140,7 +150,7 @@ public class DBManager  implements DomainInterface{
                 ListOfBundle.add(new Bundle(bundleID, name, getUser().getUserId(), 0));
             }
         } finally {
-            dbCon.close();
+
             c.close();
 
         }
@@ -160,7 +170,7 @@ public class DBManager  implements DomainInterface{
                 ListOfBundle.add(new Bundle(bundleID, name, 0, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
             }
         } finally {
-            dbCon.close();
+
             c.close();
 
         }
@@ -183,7 +193,7 @@ public class DBManager  implements DomainInterface{
                 ListOfCard.add(new Card(cardID,0 , question ,answer ,  1));
             }
         } finally {
-            dbCon.close();
+
             d.close();
         }
 
@@ -205,7 +215,7 @@ public class DBManager  implements DomainInterface{
         }finally {
             d.close();
 
-            dbCon.close();
+
         }
 
         return user;
@@ -223,17 +233,18 @@ public class DBManager  implements DomainInterface{
             data.put(TBL_User.getPassword(),user.getPassword());
             dbCon.insertOrThrow(TBL_User.getTableName(), null, data);
         }finally {
-            dbCon.close();
+
 
             cursor.close();
         }
     }
 
     private Bundle serverBundle;
-    private UploadBundle uploadBundle;
+    private UploadBundle uploadBundle = null;
 
     public void insertBundle(String bundleName , String moduleName){
-        final SQLiteDatabase dbCon = db.getWritableDatabase();
+
+        final SQLiteDatabase dbCon =  db.getWritableDatabase();
         Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + " WHERE " + TBL_Module.getRowName() + " = " + "'" + moduleName + "'", null);
         int moduleID;
         int userID = getUser().getUserId();
@@ -259,7 +270,7 @@ public class DBManager  implements DomainInterface{
     }
 
     @Override
-    public void insertCard(String nameOfBundle, String question, String solution) {
+    public void insertCard(String nameOfBundle, String question, String solution, boolean isDownload) {
         final SQLiteDatabase dbCon = db.getWritableDatabase();
         Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + " WHERE " + TBL_Bundle.getName() + " = " + "'" + nameOfBundle + "'", null);
         int bundleID;
@@ -276,9 +287,13 @@ public class DBManager  implements DomainInterface{
             final long id = dbCon.insertOrThrow(TBL_Card.getTableName(), null, data);
 
             serverBundle.getCardList().add(new Card((int) id + 100, getUser().getUserId(), question, solution, serverBundle.getBundleId()));
+            if(isDownload == false){
+                sendNewBundle();
+            }
+
 
         }finally {
-            dbCon.close();
+
             cursor.close();
         }
     }
@@ -292,7 +307,7 @@ public class DBManager  implements DomainInterface{
 
         @Override
         protected Void doInBackground(Void... params) {
-            ClientMessager clientMessager = new ClientMessager();
+            ClientMessager clientMessager = new ClientMessager("insertNewBundle");
 
             try {
                 clientMessager.insertNewBundle(serverBundle);

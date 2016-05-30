@@ -37,6 +37,8 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
 
     public ClientConsumer(String endPointName) throws IOException, TimeoutException{
         super(endPointName);
+        user = null;
+        module = null;
     }
 
     public void run() {
@@ -62,22 +64,22 @@ public class ClientConsumer extends EndPoint implements Runnable, Consumer{
     public void handleDelivery(String consumerTag, Envelope env,
                                BasicProperties props, byte[] body) throws IOException {
         Log.d("ClientConsumer", "Abfrage ClientConsumer:  " + SerializationUtils.deserialize(body).toString());
-        if((SerializationUtils.deserialize(body)) instanceof Module){
+        Object obj = SerializationUtils.deserialize(body);
+        if((obj) instanceof Module){
             module = (SerializationUtils.deserialize(body));
-        }
-        if((SerializationUtils.deserialize(body)) instanceof User){
+            Log.d("ClientConsumer", "Abfrage Module:  " + module.getModuleName());
+        }else if((obj) instanceof User){
             user = (SerializationUtils.deserialize(body));
-        }
-        if((SerializationUtils.deserialize(body)) instanceof Bundle){
+        }else if((obj) instanceof Bundle){
             bundle =(SerializationUtils.deserialize(body));
         }
-        if((SerializationUtils.deserialize(body)) instanceof FieldOfStudy){
-            fos = (SerializationUtils.deserialize(body));
-        }
-        if((SerializationUtils.deserialize(body)) instanceof ArrayList){
-            bundleList = (SerializationUtils.deserialize(body));
-        }
 
+        obj = null;
+        try {
+            super.close();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
     }
 
     public User getUser(){

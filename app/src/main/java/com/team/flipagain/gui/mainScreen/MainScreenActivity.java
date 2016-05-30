@@ -58,11 +58,11 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
-        ApplicationManager ap = new ApplicationManager();
+     /*   ApplicationManager ap = new ApplicationManager();
         if(ap.getUser(savedBundles.getContext()) == null){
             createCards.setEnabled(false);
             getCards.setEnabled(false);
-        }
+        }*/
 
 
 

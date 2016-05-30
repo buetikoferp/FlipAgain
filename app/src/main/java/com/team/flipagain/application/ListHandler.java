@@ -123,9 +123,10 @@ public class ListHandler  implements ListHandlerInterface {
                 /* --------------------------------------------- SERVER LISTE --> Bundles --------------------------------------------*/
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardGetter.CardGetterActivity")){
                     bundleListClass = new BundleList(context);
-                    bundleListClass.execute((Void) null);
+                    bundleListClass.executeOnExecutor(bundleListClass.THREAD_POOL_EXECUTOR, (Void) null);
+
                     try {
-                        Thread.sleep(1500);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -328,6 +329,11 @@ public class ListHandler  implements ListHandlerInterface {
         @Override
         protected void onCancelled() {
             bundleListClass = null;
+            try {
+                bundleListClass.finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
 
     }

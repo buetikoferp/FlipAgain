@@ -247,7 +247,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.executeOnExecutor(mAuthTask.THREAD_POOL_EXECUTOR, (Void) null);
         }
     }
 
@@ -361,6 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
         User user;
         User successedUser;
+        ClientMessager cm;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -370,8 +371,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            cm = new ClientMessager("UserLoginTask");
             try{
-            ClientMessager cm = new ClientMessager();
+
                 successedUser = cm.validateUser(user);
             return successedUser.isAuthorized();
             } catch (IOException e) {
@@ -380,7 +382,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (TimeoutException e) {
                 e.printStackTrace();
                 return false;
-            }catch (Exception e){
+            }catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
@@ -389,6 +391,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            mAuthTask.cancel(true);
             mAuthTask = null;
             showProgress(false);
 
