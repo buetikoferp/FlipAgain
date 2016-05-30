@@ -27,9 +27,10 @@ public class ClientMessager implements ServerRequest{
 
         return this;
     }
-    public void startThread(){
+    public void startThread(String consumer){
         try {
             clientConsumer = new ClientConsumer("flipagain");
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {
@@ -38,8 +39,14 @@ public class ClientMessager implements ServerRequest{
         consumerThread = new Thread(clientConsumer);
         consumerThread.start();
     }
-    public ClientMessager() {
-        startThread();
+
+    public void stopThread(){
+        consumerThread.stop();
+        consumerThread = null;
+    }
+
+    public ClientMessager(String consumer) {
+        startThread(consumer);
     }
 
 
@@ -71,12 +78,14 @@ public class ClientMessager implements ServerRequest{
 
         try {
             Thread.sleep(3000);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
         return clientConsumer.getUser();
+
+
     }
 
     @Override
@@ -100,10 +109,9 @@ public class ClientMessager implements ServerRequest{
     }
 
     @Override
-    public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException {
+    public Bundle downloadBundle(Bundle bundle) throws IOException, TimeoutException {
 
-        send(bundleName);
-        consumerThread.start();
+        send(bundle);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -130,12 +138,10 @@ public class ClientMessager implements ServerRequest{
     public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException {
         send(module);
 
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-
+        while (clientConsumer.getModule() == null){
+            Log.d("MESSAGE", "wait");
         }
+
 
         Module modul = clientConsumer.getModule();
         if(modul == null ){
@@ -156,7 +162,6 @@ public class ClientMessager implements ServerRequest{
     public void insertNewBundle(Bundle bundle) throws IOException, TimeoutException {
 
         send(bundle);
-        consumerThread.start();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

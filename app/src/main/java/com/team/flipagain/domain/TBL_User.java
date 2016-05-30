@@ -75,9 +75,8 @@ public class TBL_User {
     /**
      * SQL STATEMENT DELETE
      */
-    public static final String STMT_STUDY_DELETE_BY_NAME =
-            "DELETE " + TABLE_NAME +
-                    " WHERE name = ?";
+    public static final String STMT_STUDY_DELETE =
+            "DELETE FROM " + TABLE_NAME;
 
 
 

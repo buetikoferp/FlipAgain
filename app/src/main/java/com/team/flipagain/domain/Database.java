@@ -39,11 +39,11 @@ public class Database extends SQLiteOpenHelper {
                 DATABASE_VERSION);
     }
 
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String TABLE_NAME = "test";
-        String moduleID = "testID";
-        String name = "name";
+
 
 
         db.execSQL(TBL_FOStudy.SQL_CREATE);
@@ -56,6 +56,7 @@ public class Database extends SQLiteOpenHelper {
         Log.d(TAG, " Created Bundle");
         db.execSQL(TBL_Card.SQL_CREATE);
         Log.d(TAG, " Created Card");
+
 
         //insert default values
         db.execSQL(TBL_FOStudy.STMT_FieldOfStudyInsert("'Informatik'"));
@@ -135,11 +136,8 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(TBL_FOStudy.SQL_DROP);
+
         db.execSQL(TBL_User.SQL_DROP);
-        db.execSQL(TBL_Module.SQL_DROP);
-        db.execSQL(TBL_Bundle.SQL_DROP);
-        db.execSQL(TBL_Card.SQL_DROP);
         onCreate(db);
     }
 }

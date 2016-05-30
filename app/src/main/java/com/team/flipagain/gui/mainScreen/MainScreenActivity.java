@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.team.flipagain.R;
+import com.team.flipagain.application.ApplicationManager;
 import com.team.flipagain.gui.login.LoginActivity;
 import com.team.flipagain.gui.mainScreen.cardCreator.CardCreatorActivity;
 import com.team.flipagain.gui.mainScreen.cardGetter.CardGetterActivity;
@@ -23,6 +24,7 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         // Button Listener to CardOverviewActivity
         Button savedBundles = (Button) findViewById(R.id.mainScreen_btn_startLearning);
@@ -56,7 +58,11 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
-
+     /*   ApplicationManager ap = new ApplicationManager();
+        if(ap.getUser(savedBundles.getContext()) == null){
+            createCards.setEnabled(false);
+            getCards.setEnabled(false);
+        }*/
 
 
 

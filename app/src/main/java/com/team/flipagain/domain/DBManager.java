@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.team.flipagain.messaging.ClientMessager;
-import com.team.flipagain.messaging.ServerRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class DBManager  implements DomainInterface{
 
 
     private void open() {
-        db.getReadableDatabase();
+        db.getWritableDatabase();
         Log.d(TAG, "Datenbank FlipAgain geoeffnet");
 
     }
@@ -54,27 +53,17 @@ public class DBManager  implements DomainInterface{
 
     /*--------------------------------------------------------Server-------------------------------------------*/
     @Override
-    public void saveBundle(String bundle, String module) {
+    public void saveBundle(Bundle bundle, String module) {
+            insertBundle(bundle.getName(),module);
 
-        try {
-            ServerRequest serverRequest = new ClientMessager();
-            Bundle downloadedBundle = serverRequest.downloadBundle(bundle);
-            insertBundle(downloadedBundle.getName(),module);
-            if(downloadedBundle.getCardList() != null){
-                for (Card card :downloadedBundle.getCardList()
-                        ) {
-                    insertCard(bundle, card.getQuestion(), card.getAnswer());
+        if(bundle.getCardList() != null){
+            Log.d(TAG, "GetCardList ist nicht gleich null! SizeofCardList: " + bundle.getCardList().size() + " Frage der Karte = " + bundle.getCardList().get(0).getQuestion() );
+
+                for (Card card : bundle.getCardList()) {
+                    Log.d(TAG, "Frage der Karte: "+card.getQuestion());
+                    insertCard(bundle.getName(), card.getQuestion(), card.getAnswer(), true);
                 }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-
-
-
 
 
     }
@@ -84,7 +73,7 @@ public class DBManager  implements DomainInterface{
 
         Module module = new Module(0 ,moduleName);
         try {
-            ClientMessager clientMessager = new ClientMessager();
+            ClientMessager clientMessager = new ClientMessager("listofbundle");
             ListOfBundle = clientMessager.getBundleList(module);
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,6 +81,22 @@ public class DBManager  implements DomainInterface{
             e.printStackTrace();
         }
         return ListOfBundle;
+    }
+
+    @Override
+    public void resetUser() {
+        final SQLiteDatabase dbCon = db.getWritableDatabase();
+        dbCon.execSQL(TBL_User.STMT_STUDY_DELETE);
+    }
+
+    @Override
+    public Bundle getBundle() {
+        return serverBundle;
+    }
+
+    @Override
+    public void setBundle(Bundle bundle) {
+        serverBundle = bundle;
     }
 
 
@@ -110,8 +115,7 @@ public class DBManager  implements DomainInterface{
                 ListOfFieldOfStudy.add(new FieldOfStudy(studyID, name));
             }
         } finally {
-            dbCon.close();
-            close();
+
             a.close();
         }
 
@@ -128,9 +132,8 @@ public class DBManager  implements DomainInterface{
                 SetOfModule.add(new Module(moduleID, name));
             }
         } finally {
-            dbCon.close();
+
             b.close();
-            close();
         }
 
         return SetOfModule;
@@ -144,12 +147,12 @@ public class DBManager  implements DomainInterface{
                 int bundleID = c.getInt(c.getColumnIndex( TBL_Bundle.getBundleID()));
                 String name = c.getString(c.getColumnIndex(TBL_Bundle.getName()));
                 Log.d(TAG, " created name " + name + "   created id " + bundleID);
-                ListOfBundle.add(new Bundle(bundleID, name, 0, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
+                ListOfBundle.add(new Bundle(bundleID, name, getUser().getUserId(), 0));
             }
         } finally {
-            dbCon.close();
+
             c.close();
-            close();
+
         }
 
         return ListOfBundle;
@@ -157,8 +160,8 @@ public class DBManager  implements DomainInterface{
 
     public ArrayList<Bundle> getListOfBundleFromUser(String WhereStatement){
         final SQLiteDatabase dbCon = db.getReadableDatabase();
-        String user = "1";
-        Cursor c = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + ", module" + " WHERE module.rowName  =" + "'" + WhereStatement + "'  AND module.rowModuleID =" + TBL_Bundle.getTableName() + ".moduleID" + " AND bundle.userID =" + user, null);
+        int userID = getUser().getUserId();
+        Cursor c = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + ", module" + " WHERE module.rowName  =" + "'" + WhereStatement + "'  AND module.rowModuleID =" + TBL_Bundle.getTableName() + ".moduleID" + " AND bundle.userID ='" + userID+"'", null);
         try {
             while (c.moveToNext()) {
                 int bundleID = c.getInt(c.getColumnIndex(TBL_Bundle.getBundleID()));
@@ -167,9 +170,9 @@ public class DBManager  implements DomainInterface{
                 ListOfBundle.add(new Bundle(bundleID, name, 0, 0));                                                     // HIER MUSS NOCH USERID GEADDED WERDEN!
             }
         } finally {
-            dbCon.close();
+
             c.close();
-            close();
+
         }
 
         return ListOfBundle;
@@ -190,7 +193,7 @@ public class DBManager  implements DomainInterface{
                 ListOfCard.add(new Card(cardID,0 , question ,answer ,  1));
             }
         } finally {
-            dbCon.close();
+
             d.close();
         }
 
@@ -210,8 +213,9 @@ public class DBManager  implements DomainInterface{
                        d.getString(d.getColumnIndex(TBL_User.getPassword())));
             }
         }finally {
-            db.close();
-            dbCon.close();
+            d.close();
+
+
         }
 
         return user;
@@ -229,17 +233,21 @@ public class DBManager  implements DomainInterface{
             data.put(TBL_User.getPassword(),user.getPassword());
             dbCon.insertOrThrow(TBL_User.getTableName(), null, data);
         }finally {
-            dbCon.close();
+
+
             cursor.close();
         }
     }
 
-
+    private Bundle serverBundle;
+    private UploadBundle uploadBundle = null;
 
     public void insertBundle(String bundleName , String moduleName){
-        final SQLiteDatabase dbCon = db.getWritableDatabase();
+
+        final SQLiteDatabase dbCon =  db.getWritableDatabase();
         Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Module.getRowName() + "," + TBL_Module.getRowModuleID() + " FROM " + TBL_Module.getTableName() + " WHERE " + TBL_Module.getRowName() + " = " + "'" + moduleName + "'", null);
         int moduleID;
+        int userID = getUser().getUserId();
         try {
             cursor.moveToFirst();
             moduleID = cursor.getInt(cursor.getColumnIndex(TBL_Module.getRowModuleID()));
@@ -247,19 +255,22 @@ public class DBManager  implements DomainInterface{
 
             final ContentValues data = new ContentValues();
             data.put(TBL_Bundle.getName(), bundleName);
-            //data.put(TBL_Bundle.getUserID(), USERID!!!);                                                  Hier muss dann noch die UserID hiinzugefügt werden
+            data.put(TBL_Bundle.getUserID(), userID);
             data.put(TBL_Bundle.getModuleID(), moduleID);
 
+
+
             final long id = dbCon.insertOrThrow(TBL_Bundle.getTableName(),null, data);
-            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+            serverBundle = new Bundle((int)id + 100 , bundleName,userID, moduleID);
+
         }finally {
-            dbCon.close();
+
             cursor.close();
         }
     }
 
     @Override
-    public void insertCard(String nameOfBundle, String question, String solution) {
+    public void insertCard(String nameOfBundle, String question, String solution, boolean isDownload) {
         final SQLiteDatabase dbCon = db.getWritableDatabase();
         Cursor cursor = dbCon.rawQuery("SELECT " + TBL_Bundle.getName() + "," + TBL_Bundle.getBundleID() + " FROM " + TBL_Bundle.getTableName() + " WHERE " + TBL_Bundle.getName() + " = " + "'" + nameOfBundle + "'", null);
         int bundleID;
@@ -273,18 +284,42 @@ public class DBManager  implements DomainInterface{
             data.put(TBL_Card.getAnswer(), solution);
             data.put(TBL_Card.getBundleID(), bundleID);
 
-            /**
-             * HIER MUSS NOCH EIN CARD Obj erstellt werden und dem Server geschickt werden.
-             */
-
             final long id = dbCon.insertOrThrow(TBL_Card.getTableName(), null, data);
-            Log.i(TAG, "Field of Study mit id=" + id + " erzeugt.");
+
+            serverBundle.getCardList().add(new Card((int) id + 100, getUser().getUserId(), question, solution, serverBundle.getBundleId()));
+            if(isDownload == false){
+                sendNewBundle();
+            }
+
+
         }finally {
-            dbCon.close();
+
             cursor.close();
         }
     }
 
+    public void sendNewBundle(){
+        uploadBundle = new UploadBundle();
+        uploadBundle.execute((Void) null);
+    }
+
+    public class UploadBundle extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ClientMessager clientMessager = new ClientMessager("insertNewBundle");
+
+            try {
+                clientMessager.insertNewBundle(serverBundle);
+                Log.d(TAG, serverBundle.getName() + " wurde geschickt!!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 
 

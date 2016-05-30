@@ -115,7 +115,7 @@ public class CardCreatorActivity extends AppCompatActivity {
 
 
                                         for(int i = 0; i < questionList.size() ; i++){
-                                            appManager.addNewCard(nameOfBundle, questionList.get(i), solutionList.get(i), newComplete.getContext());
+                                            appManager.addNewCard(nameOfBundle, questionList.get(i), solutionList.get(i), saveSelect.getContext());
 
                                         }
                                         Intent intent = new Intent(CardCreatorActivity.this, MainScreenActivity.class);

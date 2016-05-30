@@ -34,6 +34,7 @@ public class ListHandler  implements ListHandlerInterface {
     private ArrayAdapter moduleAdapter;
     private ArrayAdapter bundleAdapter;
     private BundleList bundleListClass = null;
+    ArrayList<Bundle> listOfBundle;
 
 
     private int state = 1;
@@ -79,7 +80,13 @@ public class ListHandler  implements ListHandlerInterface {
         this.state = state;
     }
 
-
+    public void saveBundle(){
+        for(Bundle downloadedBundle : listOfBundle){
+            if(downloadedBundle.getName().equals(bundle)){
+                dbManager.saveBundle(downloadedBundle, module);
+            }
+        }
+    }
 
     public void setFirstList(){
         Log.d(TAG, "state of FirstList: " + state);
@@ -116,9 +123,10 @@ public class ListHandler  implements ListHandlerInterface {
                 /* --------------------------------------------- SERVER LISTE --> Bundles --------------------------------------------*/
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardGetter.CardGetterActivity")){
                     bundleListClass = new BundleList(context);
-                    bundleListClass.execute((Void) null);
+                    bundleListClass.executeOnExecutor(bundleListClass.THREAD_POOL_EXECUTOR, (Void) null);
+
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -160,8 +168,7 @@ public class ListHandler  implements ListHandlerInterface {
                 // SERVER LISTE
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardGetter.CardGetterActivity")) {
                     button.setEnabled(true);
-                    ApplicationManager aM = new ApplicationManager();
-                    aM.saveBundle(context,module,selected );
+
                 }
                 // LOKALE LISTE
                 if(activity.getLocalClassName().equals("gui.mainScreen.cardScreen.CardOverviewActivity")){
@@ -312,17 +319,22 @@ public class ListHandler  implements ListHandlerInterface {
         @Override
         protected ArrayList<Bundle> doInBackground(Void... params) {
 
-            ArrayList<Bundle> listOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
+            listOfBundle = dbManager.getServerListofBundle(moduleNameForDownload);
             Log.d(TAG, "ListHandler: test im doinBackground " + listOfBundle.get(0).getName());
             for(Bundle bundle : listOfBundle ){
                 ListOfBundleName.add(bundle.getName());}
 
             return listOfBundle;
         }
-
-
-
-
+        @Override
+        protected void onCancelled() {
+            bundleListClass = null;
+            try {
+                bundleListClass.finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
 
     }
 

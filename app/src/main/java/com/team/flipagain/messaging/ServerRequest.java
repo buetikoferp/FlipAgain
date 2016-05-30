@@ -1,5 +1,7 @@
 package com.team.flipagain.messaging;
 
+import android.widget.Button;
+
 import com.team.flipagain.domain.Bundle;
 import com.team.flipagain.domain.FieldOfStudy;
 import com.team.flipagain.domain.Module;
@@ -23,7 +25,7 @@ public interface ServerRequest {
     public User validateUser(User user) throws IOException, TimeoutException;
     public ArrayList<FieldOfStudy> getFieldOfStudyByName();
     public ArrayList<Module> getModuleByName(FieldOfStudy fieldOfStudy) throws IOException, TimeoutException;
-    public Bundle downloadBundle(String bundleName) throws IOException, TimeoutException;
+    public Bundle downloadBundle(Bundle bundle) throws IOException, TimeoutException;
     public ArrayList<Bundle> synchronize(User user) throws IOException, TimeoutException;
     public ArrayList<Bundle> getBundleList(Module module) throws IOException, TimeoutException;
     public void insertNewBundle(Bundle bundle) throws IOException, TimeoutException;
